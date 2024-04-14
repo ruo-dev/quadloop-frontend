@@ -7,12 +7,6 @@ module.exports = {
   theme: {
     extend: {
 
-      fontFamily: {
-        'agbalumo': ['Agbalumo', 'cursive'],
-        'jost': ['jost', 'sans-serif']
-      },
-
-
     },
   },
   plugins: [
