@@ -50,7 +50,11 @@ import {
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {  EnvelopeOpenFill, GeoAltFill, TelephoneFill } from "react-bootstrap-icons";
+import {
+  EnvelopeOpenFill,
+  GeoAltFill,
+  TelephoneFill,
+} from "react-bootstrap-icons";
 
 const Home = () => {
   const settings = {
@@ -451,7 +455,12 @@ const Home = () => {
             </div>
 
             <div className="p-8 space-y-8 my-auto">
-              <a href="https://www.google.com/maps/place/QuadLoop/@6.499162,3.3771986,17z/data=!3m1!4b1!4m5!3m4!1s0x103bede75f4c5e8d:0xa1cb0afbdb0b306e!8m2!3d6.4991567!4d3.3793873" target="_blank" rel="noopener noreferrer" className="flex space-x-4">
+              <a
+                href="https://www.google.com/maps/place/QuadLoop/@6.499162,3.3771986,17z/data=!3m1!4b1!4m5!3m4!1s0x103bede75f4c5e8d:0xa1cb0afbdb0b306e!8m2!3d6.4991567!4d3.3793873"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex space-x-4"
+              >
                 <GeoAltFill class="text-amber-500" size={24} />
                 <span>10 Hughes Avenue Alagomeji Yaba</span>
               </a>

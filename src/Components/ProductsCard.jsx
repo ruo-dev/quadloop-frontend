@@ -1,14 +1,10 @@
-import React from 'react'
+import React from "react";
 
-const ProductsCard = ({image, category, title, summary, link}) => {
+const ProductsCard = ({ image, category, title, summary, link }) => {
   return (
     <div>
-              <div className="overflow-hidden transition-shadow duration-300 border border-teal-600 rounded-2xl shadow-2xl shadow-black/30">
-        <img
-          src={image}
-          className="object-contain w-full h-64"
-          alt=""
-        />
+      <div className="overflow-hidden transition-shadow duration-300 border border-teal-600 rounded-2xl shadow-2xl shadow-black/30">
+        <img src={image} className="object-contain w-full h-64" alt="" />
         <div className="p-5 border border-t-0">
           <p className="mb-3 text-xs font-semibold tracking-wide uppercase">
             <a
@@ -24,9 +20,7 @@ const ProductsCard = ({image, category, title, summary, link}) => {
           >
             {title}
           </a>
-          <p className="mb-2 text-gray-700">
-            {summary}
-          </p>
+          <p className="mb-2 text-gray-700">{summary}</p>
           <a
             href={link}
             className="inline-flex items-center font-semibold transition-colors duration-200 text-teal-400 hover:text-teal-600"
@@ -36,7 +30,7 @@ const ProductsCard = ({image, category, title, summary, link}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductsCard
+export default ProductsCard;
