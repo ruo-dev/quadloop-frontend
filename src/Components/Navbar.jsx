@@ -79,9 +79,12 @@ const Navbar = () => {
                 );
               })}
               <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
-              <div className="space-y-3 items-center gap-x-6 md:flex md:space-y-0">
+              <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
                 <li>
                   <ButtonYellow link="#0" text="Shop"/>
+                </li>
+                <li>
+                  <ButtonYellow link="../login" text="Login"/>
                 </li>
               </div>
             </ul>

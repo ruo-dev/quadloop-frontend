@@ -44,7 +44,6 @@ import {
   ButtonYellow,
   Features,
   FeaturesNumber,
-  NewsCard,
   ProductsCard,
 } from "../Components";
 import Slider from "react-slick";
@@ -65,14 +64,14 @@ const Home = () => {
     <div>
       {/*Hero*/}
       <section
-        className=" bg-no-repeat bg-cover bg-center space-y-40 pt-60 pb-10 lg:py-60 "
+        className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
         style={{
           backgroundImage: `url(${hero})`,
         }}
       >
         <div className="flex flex-col lg:flex-row justify-center mx-4 lg:mx-20 xl:mx-48 ">
           <div className="lg:basis-10/12">
-            <h1 className="text-5xl text-gray-800 ">
+            <h1 className="text-3xl md:text-5xl text-gray-800 ">
               Pioneering{" "}
               <span className="text-teal-600 font-bold">innovative</span> ways
               to utilize Africa's ever-growing{" "}
@@ -85,7 +84,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="mx-4 lg:mx-24 pt-12 space-y-24">
+        <div className="mx-4 lg:mx-24 lg:pt-48 space-y-24">
           <div className="text-center lg:px-60 ">
             <h2 className="text-white font-bold text-3xl">
               Unlocking true socio economic environmental potential of e-waste
@@ -268,22 +267,22 @@ const Home = () => {
           <ProductsCard
             image={p1}
             category="Idunnu Exhibition"
-            title="Idunnu Exhibition"
-            summary="This is a short text to describe lorem ipsum"
+            title="Idunnu Solar Lamp"
+            summary=""
             link="../"
           />
           <ProductsCard
             image={IdunnuPro}
             category="Idunnu Exhibition"
-            title="Idunnu Exhibition"
-            summary="This is a short text to describe lorem ipsum"
+            title="Idunnu Pro"
+            summary=""
             link="../"
           />
           <ProductsCard
             image={PowerGenerator}
             category="Idunnu Exhibition"
-            title="Idunnu Exhibition"
-            summary="This is a short text to describe lorem ipsum"
+            title="Power Generator"
+            summary=""
             link="../"
           />
         </div>
@@ -349,35 +348,10 @@ const Home = () => {
         {/*News and Events*/}
         <div className=" " id="news">
           <h2 className="text-teal-600 font-bold text-4xl">News and Events</h2>
-        </div>
-
-        <div className="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-4">
-          <div className="hidden grid gap-8 md:grid-cols-2 lg:grid-cols-3 sm:max-w-sm sm:mx-auto md:max-w-full lg:max-w-full ">
-            <NewsCard
-              image={p1}
-              category="Idunnu Exhibition"
-              title="Idunnu Exhibition"
-              summary="This is a short text to describe lorem ipsum"
-              link="../"
-            />
-            <NewsCard
-              image={p1}
-              category="Idunnu Exhibition"
-              title="Idunnu Exhibition"
-              summary="This is a short text to describe lorem ipsum"
-              link="../"
-            />
-            <NewsCard
-              image={p1}
-              category="Idunnu Exhibition"
-              title="Idunnu Exhibition"
-              summary="This is a short text to describe lorem ipsum"
-              link="../"
-            />
-          </div>
+          <iframe title='instagram'src='https://371881b455594e5f9a575a2a8e27d4b6.elf.site' width='100%' height='460' frameborder='0'></iframe>
         </div>
         <div className="flex justify-center items-center mx-auto">
-          <ButtonYellow link="#0" text="View All" />
+          <ButtonYellow link="https://www.instagram.com/quadloopcreate/" text="View All" />
         </div>
 
         {/*Partners*/}
