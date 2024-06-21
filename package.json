@@ -2,6 +2,12 @@
      "name": "quadloop",
      "version": "0.1.0",
      "private": true,
+     "type": "module",
+     "scripts": {
+          "start": "vite",
+          "build": "vite build",
+          "preview": "vite preview"
+     },
      "dependencies": {
           "@heroicons/react": "^2.0.18",
           "@material-tailwind/react": "^2.0.0",
@@ -16,36 +22,14 @@
           "react-countup": "^6.5.0",
           "react-dom": "^18.2.0",
           "react-headless-accordion": "^1.0.2",
+          "react-icons": "^5.2.1",
           "react-router-dom": "^6.11.1",
           "react-slick": "^0.29.0",
           "slick-carousel": "^1.8.1",
           "web-vitals": "^2.1.4"
      },
-     "scripts": {
-          "start": "vite",
-          "build": "vite build"
-     },
-     "eslintConfig": {
-          "extends": [
-               "react-app",
-               "react-app/jest"
-          ]
-     },
-     "browserslist": {
-          "production": [
-               ">0.2%",
-               "not dead",
-               "not op_mini all"
-          ],
-          "development": [
-               "last 1 chrome version",
-               "last 1 firefox version",
-               "last 1 safari version"
-          ]
-     },
      "devDependencies": {
           "@vitejs/plugin-react": "^4.3.1",
-          "@vitejs/plugin-react-swc": "^3.7.0",
           "autoprefixer": "^10.4.19",
           "postcss": "^8.4.38",
           "tailwindcss": "^3.4.4",

@@ -1,27 +1,30 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { BackTop } from "antd";
-import { Home, NoPage } from "./Pages";
+import { Home, NoPage, Products } from "./Pages";
 import { Navbar, Footer } from "./Components";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Recover from "./Pages/Recover";
+import { ProductDetails } from "./Pages/Product";
 
 const App = () => {
      return (
           <div className=" bg-white ">
-               <BrowserRouter>
-                    <Navbar />
-                    <Routes>
-                         <Route path="/" element={<Home />} />
-                         <Route path="/login" element={<Login />} />
-                         <Route path="/register" element={<Register />} />
-                         <Route path="/recover" element={<Recover />} />
-                         <Route path="/*" element={<NoPage />} />
-                    </Routes>
-                    <Footer />
-               </BrowserRouter>
-
+               <Navbar />
+               <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/recover" element={<Recover />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route
+                         path="/products/:productId"
+                         element={<ProductDetails />}
+                    />
+                    <Route path="/*" element={<NoPage />} />
+               </Routes>
+               <Footer />
                <BackTop />
           </div>
      );
