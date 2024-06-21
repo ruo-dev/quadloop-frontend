@@ -57,6 +57,9 @@ export const ProductDetails = () => {
                          </div>
                     </div>
                </section>
+               <h1 className="text-3xl  max-w-screen-xl m-auto px-3">
+                    You might also like
+               </h1>
                <section className="grid items-center grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] justify-center gap-2 max-w-screen-xl my-10 mx-auto">
                     <ProductCard image={quadloop03} />
                     <ProductCard image={quadloop03} />
