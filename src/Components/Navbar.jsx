@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Logo } from "../Assets";
 import ButtonYellow from "./ButtonYellow";
+import { Cart } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
      const [state, setState] = useState(false);
@@ -81,8 +83,17 @@ const Navbar = () => {
                                              </li>
                                         );
                                    })}
+                                   <li>
+                                        <Link to={"../cart"}>
+                                             <Cart
+                                                  style={{
+                                                       fontSize: "1rem",
+                                                  }}
+                                             />
+                                        </Link>
+                                   </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
-                                   <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
+                                   <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0 h-full">
                                         <li>
                                              <ButtonYellow
                                                   link="../products"

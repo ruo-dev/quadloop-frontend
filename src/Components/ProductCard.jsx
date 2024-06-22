@@ -15,7 +15,11 @@ export const ProductCard = ({ image }) => {
                onMouseLeave={() => setIsHovered(false)}
           >
                <figure className="product-image relative">
-                    <img className="rounded-xl" src={image} alt="" />
+                    <img
+                         className="rounded-xl w-full aspect-square"
+                         src={image}
+                         alt=""
+                    />
                     <div className="absolute text-2xl py-4 px-4 rounded-full bg-gray-200 hover:bg-teal-600 hover:text-white right-4 bottom-6 grid place-items-center cursor-pointer">
                          <LiaCartPlusSolid />
                     </div>
