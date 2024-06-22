@@ -295,7 +295,7 @@ const Home = () => {
                     </div>
 
                     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 sm:max-w-sm sm:mx-auto md:max-w-full lg:max-w-full">
-                         <ProductsCard
+                         {/* <ProductsCard
                               image={p1}
                               category="Idunnu Exhibition"
                               title="Idunnu Solar Lamp"
@@ -315,7 +315,10 @@ const Home = () => {
                               title="Power Generator"
                               summary=""
                               link="../"
-                         />
+                         /> */}
+                         <ProductCard image={PowerGenerator} />
+                         <ProductCard image={IdunnuPro} />
+                         <ProductCard image={p1} />
                     </div>
 
                     <div className="flex justify-center items-center mx-auto">

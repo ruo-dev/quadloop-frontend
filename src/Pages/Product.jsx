@@ -51,7 +51,7 @@ export const ProductDetails = () => {
                               <h3>1</h3>
                          </div>
                          <div>
-                              <button className="w-full py-4 px-6 font-bold bg-teal-600 text-white">
+                              <button className="w-full py-4 px-6 font-bold bg-teal-600 text-white active:bg-teal-500">
                                    Add To Cart
                               </button>
                          </div>

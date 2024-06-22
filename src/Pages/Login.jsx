@@ -1,5 +1,6 @@
 import React from "react";
 import { hero } from "../Assets";
+import { Link } from "react-router-dom";
 
 const Login = () => {
      return (
@@ -20,12 +21,12 @@ const Login = () => {
                                         </h3>
                                         <p className="">
                                              Don't have an account?{" "}
-                                             <a
-                                                  href="../register"
+                                             <Link
+                                                  to="../register"
                                                   className="font-medium text-teal-600 hover:text-teal-700"
                                              >
                                                   Sign up
-                                             </a>
+                                             </Link>
                                         </p>
                                    </div>
                               </div>
@@ -95,12 +96,12 @@ const Login = () => {
                                    </button>
                               </div>
                               <div className="text-center">
-                                   <a
-                                        href="../recover"
+                                   <Link
+                                        to="../recover"
                                         className="text-teal-600 hover:text-teal-700"
                                    >
                                         Forgot password?
-                                   </a>
+                                   </Link>
                               </div>
                          </div>
                     </main>
