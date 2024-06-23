@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { LiaCartPlusSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 
-export const ProductCard = ({ image }) => {
+export const ProductCard = ({ image, style }) => {
      const [isHovered, setIsHovered] = useState(false);
      return (
           <div
+               style={{ ...style }}
                className={
                     isHovered
                          ? "shadow-md rounded-3xl p-3 bg-white"

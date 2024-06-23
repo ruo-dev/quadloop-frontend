@@ -3,7 +3,7 @@ import { Logo } from "../Assets";
 import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-
+import { HashLink } from "react-router-hash-link";
 const Navbar = () => {
      const [state, setState] = useState(false);
 
@@ -19,12 +19,12 @@ const Navbar = () => {
 
      return (
           <div>
-               <nav className="bg-opacity-0 -mb-32 w-full md:static md:border-none py-4 ">
+               <nav className="bg-opacity-0 -mb-32 w-full md:static md:border-none py-4 bg-white">
                     <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                          <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                              <a href="../">
+                              <Link to="../">
                                    <img src={Logo} width={200} alt="Quadloop" />
-                              </a>
+                              </Link>
                               <div className="md:hidden">
                                    <button
                                         className="text-gray-500 hover:text-gray-500"
@@ -66,24 +66,26 @@ const Navbar = () => {
                               className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
                                    state ? "block" : "hidden"
                               }`}
+                              s
                          >
-                              <ul className="justify-end items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+                              <ul className="md:justify-end items-start gap-3 flex flex-col md:flex-row md:items-center h-full">
                                    {navigation.map((item, idx) => {
                                         return (
                                              <li
                                                   key={idx}
                                                   className="text-gray-800 hover:text-gray-800 hover:border-b-2 hover:font-bold"
                                              >
-                                                  <a
-                                                       href={item.path}
+                                                  <HashLink
+                                                       smooth
+                                                       to={item.path}
                                                        className="block"
                                                   >
                                                        {item.title}
-                                                  </a>
+                                                  </HashLink>
                                              </li>
                                         );
                                    })}
-                                   <li>
+                                   <li className="my-3">
                                         <Link to={"../cart"}>
                                              <Cart
                                                   style={{
@@ -93,7 +95,10 @@ const Navbar = () => {
                                         </Link>
                                    </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
-                                   <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0 h-full">
+                                   <div
+                                        className="space-y-3 items-center gap-x-2 md:flex md:space-y-0"
+                                        // className="flex flex-col gap-2 md:flex-row md:justify-end w-full h-full"
+                                   >
                                         <li>
                                              <ButtonYellow
                                                   link="../products"
