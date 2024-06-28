@@ -6,42 +6,7 @@ import quadloop03 from "../Assets/products/quadlood03.jpeg";
 const Cart = () => {
      const { data, isLoading, error } = useGetAllCartItems();
      const { updateCartItem } = useUpdateCartItem();
-     const initialCartItems = data
-          ? data
-          : [
-                 {
-                      id: "0ca2cd7c-8545-40b5-82b7-587dba5226c6",
-                      user_id: "56de7194-bc69-4860-aaec-4a32c6904bb9",
-                      product_id: "53cfd7c3-6ac7-4477-8d6c-5b01bc3f91d7",
-                      createdAt: "2024-06-28T15:31:24.522Z",
-                      order_id: null,
-                      price: 3000,
-                      product: {
-                           id: "53cfd7c3-6ac7-4477-8d6c-5b01bc3f91d7",
-                           product_name: "Evergreen Lamp 1",
-                           product_description:
-                                "This is our Evergreen Lamp Holder",
-                           product_image_url: quadloop03,
-                           regular_price: 3000,
-                      },
-                 },
-                 {
-                      id: "1a3b4c5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
-                      user_id: "7890abc1-def2-3456-ghi7-jklmno890pqr",
-                      product_id: "ab1cd2ef-3gh4-ijkl-5mn6-opq7rst8uvw",
-                      createdAt: "2024-06-28T16:45:12.123Z",
-                      order_id: null,
-                      price: 4500,
-                      product: {
-                           id: "ab1cd2ef-3gh4-ijkl-5mn6-opq7rst8uvw",
-                           product_name: "Glowing Night Lamp",
-                           product_description:
-                                "Illuminate your room with this stylish lamp.",
-                           product_image_url: quadloop03,
-                           regular_price: 4500,
-                      },
-                 },
-            ];
+     const initialCartItems = data || [];
 
      const [cartItems, setCartItems] = useState(initialCartItems);
 
@@ -57,11 +22,7 @@ const Cart = () => {
 
      const getTotalPrice = () => {
           return cartItems
-               .reduce(
-                    (total, item) =>
-                         total + item.product.regular_price * item.quantity,
-                    0
-               )
+               .reduce((total, item) => total + item?.price * item?.quantity, 0)
                .toFixed(2);
      };
 
@@ -80,14 +41,14 @@ const Cart = () => {
                <h1 className="mt-[120px] text-2xl font-bold mb-4">
                     Shopping Cart
                </h1>
-               <div className="flex flex-col md:flex-row md:space-x-4">
+               <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row md:space-x-4">
                     <div className="w-full md:w-2/3">
                          {cartItems.length === 0 ? (
                               <p>Your cart is empty</p>
                          ) : (
                               cartItems.map((item) => (
                                    <div
-                                        key={item.id}
+                                        key={item?.id}
                                         className="flex items-center justify-between p-4 mb-4 border rounded-lg shadow-sm"
                                    >
                                         <div className="flex items-center space-x-4">
@@ -115,8 +76,8 @@ const Cart = () => {
                                                             className="px-2 py-1 border rounded"
                                                             onClick={() =>
                                                                  handleQuantityChange(
-                                                                      item.id,
-                                                                      item.quantity -
+                                                                      item?.id,
+                                                                      item?.quantity -
                                                                            1
                                                                  )
                                                             }
@@ -127,11 +88,11 @@ const Cart = () => {
                                                             type="number"
                                                             className="w-12 text-center border rounded"
                                                             value={
-                                                                 item.quantity
+                                                                 item?.quantity
                                                             }
                                                             onChange={(e) =>
                                                                  handleQuantityChange(
-                                                                      item.id,
+                                                                      item?.id,
                                                                       parseInt(
                                                                            e
                                                                                 .target
@@ -155,21 +116,18 @@ const Cart = () => {
                                                        </button>
                                                   </div>
                                                   <p className="text-sm">
-                                                       $
-                                                       {item.product.regular_price.toFixed(
-                                                            2
-                                                       )}
+                                                       NGN{" "}
+                                                       {item.price.toFixed(2)}
                                                   </p>
                                              </div>
                                         </div>
                                         <div>
                                              <p className="font-bold">
-                                                  $
-                                                  {(
-                                                       item?.product
-                                                            ?.regular_price *
+                                                  {`NGN 
+                                                  ${(
+                                                       item.price *
                                                        item.quantity
-                                                  ).toFixed(2)}
+                                                  ).toFixed(2)}`}
                                              </p>
                                         </div>
                                    </div>
@@ -180,7 +138,7 @@ const Cart = () => {
                          <h2 className="text-xl font-bold mb-4">Summary</h2>
                          <div className="flex justify-between mb-4">
                               <p>Total Price</p>
-                              <p className="font-bold">${getTotalPrice()}</p>
+                              <p className="font-bold">NGN {getTotalPrice()}</p>
                          </div>
                          <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
                               Checkout
