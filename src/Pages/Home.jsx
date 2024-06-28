@@ -71,8 +71,6 @@ const imageSources = [
      cv,
 ];
 
-const productImages = [quadlood01, quadlood02, quadlood03];
-
 const Home = () => {
      const settings = {
           dots: true,
@@ -83,6 +81,14 @@ const Home = () => {
      };
 
      const { data: products } = useGetAllProducts();
+     const productImages = (products ?? []).map((product) => ({
+          id: product?.id,
+          image: product?.product_image_url ?? quadlood01,
+     })) ?? [
+          { id: 1, image: quadlood01 },
+          { id: 2, image: quadlood02 },
+          { id: 3, image: quadlood03 },
+     ];
 
      return (
           <div>
@@ -314,15 +320,7 @@ const Home = () => {
                     </div>
 
                     <div className="">
-                         <ProductSlider
-                              images={
-                                   productImages ?? [
-                                        PowerGenerator,
-                                        IdunnuPro,
-                                        p1,
-                                   ]
-                              }
-                         />
+                         <ProductSlider images={productImages} />
                     </div>
 
                     <div className="flex justify-center items-center mx-auto">

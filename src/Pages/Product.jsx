@@ -18,7 +18,7 @@ export const ProductDetails = () => {
           quantity: 1,
           price: product?.discount_price
                ? product?.discount_price
-               : product?.regular_price,
+               : product?.regular_price ?? 0,
      };
 
      const productList = useMemo(() => {
