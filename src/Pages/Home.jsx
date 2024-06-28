@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useMemo } from "react";
 import {
      About1,
      About2,
@@ -40,12 +40,7 @@ import {
      solutionsbg,
      wef,
 } from "../Assets";
-import {
-     ButtonYellow,
-     Features,
-     FeaturesNumber,
-     ProductsCard,
-} from "../Components";
+import { ButtonYellow, Features, FeaturesNumber } from "../Components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -54,7 +49,29 @@ import {
      GeoAltFill,
      TelephoneFill,
 } from "react-bootstrap-icons";
-import { ProductCard } from "../Components/ProductCard";
+import AffiliateSlider from "../Components/AffiliateSlider";
+import ProductSlider from "../Components/ProductSlider";
+
+import quadlood01 from "../Assets/products/quadlood01.jpeg";
+import quadlood02 from "../Assets/products/quadlood02.jpeg";
+import quadlood03 from "../Assets/products/quadlood03.jpeg";
+import useGetAllProducts from "../hooks/Products/useGetAllProducts";
+
+const imageSources = [
+     hinckley,
+     fate,
+     qualcomm,
+     Footprint,
+     Mass,
+     nci,
+     ifair,
+     Startup,
+     nextexplo,
+     wef,
+     cv,
+];
+
+const productImages = [quadlood01, quadlood02, quadlood03];
 
 const Home = () => {
      const settings = {
@@ -64,6 +81,8 @@ const Home = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
      };
+
+     const { data: products } = useGetAllProducts();
 
      return (
           <div>
@@ -294,31 +313,16 @@ const Home = () => {
                          </h2>
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 sm:max-w-sm sm:mx-auto md:max-w-full lg:max-w-full">
-                         {/* <ProductsCard
-                              image={p1}
-                              category="Idunnu Exhibition"
-                              title="Idunnu Solar Lamp"
-                              summary=""
-                              link="../"
+                    <div className="">
+                         <ProductSlider
+                              images={
+                                   productImages ?? [
+                                        PowerGenerator,
+                                        IdunnuPro,
+                                        p1,
+                                   ]
+                              }
                          />
-                         <ProductsCard
-                              image={IdunnuPro}
-                              category="Idunnu Exhibition"
-                              title="Idunnu Pro"
-                              summary=""
-                              link="../"
-                         />
-                         <ProductsCard
-                              image={PowerGenerator}
-                              category="Idunnu Exhibition"
-                              title="Power Generator"
-                              summary=""
-                              link="../"
-                         /> */}
-                         <ProductCard image={PowerGenerator} />
-                         <ProductCard image={IdunnuPro} />
-                         <ProductCard image={p1} />
                     </div>
 
                     <div className="flex justify-center items-center mx-auto">
@@ -411,54 +415,8 @@ const Home = () => {
                          </h2>
                     </div>
 
-                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                         <img
-                              src={hinckley}
-                              alt="Hinckley Group"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={fate}
-                              alt="FATE Foundation"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={qualcomm}
-                              alt="qualcomm"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={Footprint}
-                              alt="Footprints Africa"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={Mass}
-                              alt="Mass Challenge"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={nci}
-                              alt="Nigeria Climate Innovation Centre"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={ifair}
-                              alt="i-fair"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={Startup}
-                              alt="Startup Bootcamp"
-                              className="w-24 lg:w-32"
-                         />
-                         <img
-                              src={nextexplo}
-                              alt="netexplo"
-                              className="w-24 lg:w-32"
-                         />
-                         <img src={wef} alt="wef" className="w-24 lg:w-32" />
-                         <img src={cv} alt="cv" className="w-24 lg:w-32" />
+                    <div className="">
+                         <AffiliateSlider images={imageSources} />
                     </div>
                </section>
 

@@ -4,8 +4,14 @@ import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import { useAuth } from "../hooks/Authentication";
+import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 const Navbar = () => {
      const [state, setState] = useState(false);
+     const { token, logout } = useAuth();
+     const { data } = useGetAllCartItems();
+
+     console.log("cart item", data);
 
      const navigation = [
           { title: "Home", path: "../" },
@@ -18,11 +24,11 @@ const Navbar = () => {
      ];
 
      return (
-          <div>
+          <>
                <nav className="bg-opacity-0 -mb-32 w-full md:static md:border-none py-4 bg-white">
                     <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                          <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                              <Link to="../">
+                              <Link to={"../"}>
                                    <img src={Logo} width={200} alt="Quadloop" />
                               </Link>
                               <div className="md:hidden">
@@ -66,13 +72,12 @@ const Navbar = () => {
                               className={`flex-1 pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
                                    state ? "block" : "hidden"
                               }`}
-                              s
                          >
                               <ul className="md:justify-end items-start gap-3 flex flex-col md:flex-row md:items-center h-full">
                                    {navigation.map((item, idx) => {
                                         return (
                                              <li
-                                                  key={idx}
+                                                  key={idx.toString()}
                                                   className="text-gray-800 hover:text-gray-800 hover:border-b-2 hover:font-bold"
                                              >
                                                   <HashLink
@@ -86,37 +91,56 @@ const Navbar = () => {
                                         );
                                    })}
                                    <li className="my-3">
-                                        <Link to={"../cart"}>
+                                        <Link
+                                             to={"../cart"}
+                                             className="inline-block relative"
+                                        >
                                              <Cart
                                                   style={{
                                                        fontSize: "1rem",
                                                   }}
                                              />
+                                             {data?.length !== 0 && (
+                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
+                                                       {data?.length === 0
+                                                            ? ""
+                                                            : data?.length}
+                                                  </small>
+                                             )}
                                         </Link>
                                    </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
-                                   <div
-                                        className="space-y-3 items-center gap-x-2 md:flex md:space-y-0"
-                                        // className="flex flex-col gap-2 md:flex-row md:justify-end w-full h-full"
-                                   >
-                                        <li>
-                                             <ButtonYellow
-                                                  link="../products"
-                                                  text="Shop"
-                                             />
-                                        </li>
-                                        <li>
-                                             <ButtonYellow
-                                                  link="../login"
-                                                  text="Login"
-                                             />
-                                        </li>
+                                   <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
+                                        {token ? (
+                                             <li>
+                                                  <ButtonYellow
+                                                       link="../"
+                                                       text="Logout"
+                                                       onClick={logout}
+                                                  />
+                                             </li>
+                                        ) : (
+                                             <>
+                                                  <li>
+                                                       <ButtonYellow
+                                                            link="../products"
+                                                            text="Shop"
+                                                       />
+                                                  </li>
+                                                  <li>
+                                                       <ButtonYellow
+                                                            link="../login"
+                                                            text="Login"
+                                                       />
+                                                  </li>
+                                             </>
+                                        )}
                                    </div>
                               </ul>
                          </div>
                     </div>
                </nav>
-          </div>
+          </>
      );
 };
 

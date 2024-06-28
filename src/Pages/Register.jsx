@@ -1,11 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { hero } from "../Assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ErrorBoundary from "../Components/ErrorBoundry";
+import { useRegister } from "../hooks/Authentication";
+import { ToastContainer } from "react-toastify";
 
 const Register = () => {
+     // const navigate = useNavigate();
+     const { register } = useRegister();
+     const [email, setEmail] = useState("");
+     const [password, setPassword] = useState("");
+     const [confirmPassword, setConfirmPassword] = useState("");
+
+     const payload = { email, password };
+
+     const onSubmit = async (e) => {
+          e.preventDefault();
+          try {
+               console.log("payload", payload);
+               await register(payload);
+          } catch (error) {
+               console.log({ error: error });
+          }
+     };
+
      return (
-          <div>
+          <ErrorBoundary>
                {/*Register*/}
+               <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+               />
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
                     style={{
@@ -30,9 +63,13 @@ const Register = () => {
                                         </p>
                                    </div>
                               </div>
-                              <form onSubmit={(e) => e.preventDefault()}>
+                              <form onSubmit={onSubmit}>
                                    <div>
                                         <input
+                                             value={email}
+                                             onChange={(e) => {
+                                                  setEmail(e.target.value);
+                                             }}
                                              type="email"
                                              required
                                              placeholder="Your email"
@@ -40,6 +77,10 @@ const Register = () => {
                                         />
 
                                         <input
+                                             value={password}
+                                             onChange={(e) => {
+                                                  setPassword(e.target.value);
+                                             }}
                                              type="password"
                                              required
                                              placeholder="Your Password"
@@ -47,6 +88,12 @@ const Register = () => {
                                         />
 
                                         <input
+                                             value={confirmPassword}
+                                             onChange={(e) => {
+                                                  setConfirmPassword(
+                                                       e.target.value
+                                                  );
+                                             }}
                                              type="password"
                                              required
                                              placeholder="Confirm Password"
@@ -113,7 +160,7 @@ const Register = () => {
                          </div>
                     </main>
                </section>
-          </div>
+          </ErrorBoundary>
      );
 };
 

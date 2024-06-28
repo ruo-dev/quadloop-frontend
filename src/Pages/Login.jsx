@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { hero } from "../Assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLogin from "../hooks/Authentication/useLogin";
+import { ToastContainer } from "react-toastify";
+import ErrorBoundary from "../Components/ErrorBoundry";
+import { useAuth } from "../hooks/Authentication";
 
 const Login = () => {
+     const { login } = useLogin();
+     const { save } = useAuth();
+     const navigate = useNavigate();
+     const [email, setEmail] = useState("");
+     const [password, setPassword] = useState("");
+
+     const payload = { email, password };
+
+     const onSubmit = async (e) => {
+          e.preventDefault();
+          try {
+               console.log("payload", payload);
+               const result = await login(payload);
+               if (result) {
+                    save(result, result?.token);
+                    console.log(result);
+                    setTimeout(() => navigate("/"), 3000);
+               }
+          } catch (error) {
+               console.log({ error: error });
+          }
+     };
+
      return (
-          <div>
-               {/*Login*/}
+          <ErrorBoundary>
+               <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+               />
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
                     style={{
@@ -30,9 +68,13 @@ const Login = () => {
                                         </p>
                                    </div>
                               </div>
-                              <form onSubmit={(e) => e.preventDefault()}>
+                              <form onSubmit={onSubmit}>
                                    <div>
                                         <input
+                                             value={email}
+                                             onChange={(e) => {
+                                                  setEmail(e.target.value);
+                                             }}
                                              type="email"
                                              required
                                              placeholder="Your email"
@@ -40,6 +82,10 @@ const Login = () => {
                                         />
 
                                         <input
+                                             value={password}
+                                             onChange={(e) => {
+                                                  setPassword(e.target.value);
+                                             }}
                                              type="password"
                                              required
                                              placeholder="Your Password"
@@ -106,7 +152,7 @@ const Login = () => {
                          </div>
                     </main>
                </section>
-          </div>
+          </ErrorBoundary>
      );
 };
 

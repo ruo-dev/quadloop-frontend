@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import { LiaCartPlusSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
+import useAddToCart from "../hooks/Cart/useAddToCart";
 
-export const ProductCard = ({ image, style }) => {
+export const ProductCard = ({ image, style, product }) => {
      const [isHovered, setIsHovered] = useState(false);
+     const { addToCart } = useAddToCart();
+
+     const payload = {
+          product_id: product?.id ?? "",
+          quantity: 1,
+          price: product?.discount_price
+               ? product?.discount_price
+               : product?.regular_price,
+     };
+
+     const addItemToCart = async () => {
+          await addToCart(payload);
+     };
+
      return (
           <div
+               key={product?.id}
                style={{ ...style }}
                className={
                     isHovered
@@ -18,16 +34,20 @@ export const ProductCard = ({ image, style }) => {
                <figure className="product-image relative">
                     <img
                          className="rounded-xl w-full aspect-square"
-                         src={image}
+                         src={product?.product_image_url ?? image}
                          alt=""
                     />
-                    <div className="absolute text-2xl py-4 px-4 rounded-full bg-gray-200 hover:bg-teal-600 hover:text-white right-4 bottom-6 grid place-items-center cursor-pointer">
+                    <button
+                         onClick={addItemToCart}
+                         className="absolute text-2xl py-4 px-4 rounded-full bg-gray-200 hover:bg-teal-600 hover:text-white right-4 bottom-6 grid place-items-center cursor-pointer"
+                    >
                          <LiaCartPlusSolid />
-                    </div>
+                    </button>
                </figure>
                <figcaption className="product-desc py-1">
                     <h2 className="my-2 text-gray-800">
-                         Gold color vintage Geometry
+                         {product?.product_name ??
+                              "Gold color vintage Geometry"}
                     </h2>
                     <ul className="my-1 flex text-gray-400">
                          <li>xxxxxx</li>
@@ -35,12 +55,12 @@ export const ProductCard = ({ image, style }) => {
                     </ul>
                     <div className="font-extrabold">
                          <small>NGN</small>
-                         1,485.87
+                         {product?.regular_price ?? "1,485.87"}
                     </div>
                </figcaption>
                <div className="flex items-center justify-center py-1">
                     <Link
-                         to={"/products/1"}
+                         to={`/products/${product?.id}`}
                          className={
                               isHovered
                                    ? "visible h-10 rounded-3xl w-full py-2 px-6 font-bold bg-teal-600 text-white"

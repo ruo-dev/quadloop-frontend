@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ButtonYellow = ({ link, text, style }) => {
+const ButtonYellow = ({ link, text, style, ...props }) => {
      return (
-          <div style={{ ...style }}>
+          <div style={{ ...style }} {...props}>
                <button>
                     <Link
                          to={link}
