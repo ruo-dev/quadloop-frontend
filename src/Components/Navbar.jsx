@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Logo } from "../Assets";
 import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useAuth } from "../hooks/Authentication";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
+import { defaultEnvOptions } from "../utils/defaultEnvOptions";
 const Navbar = () => {
      const [state, setState] = useState(false);
      const { token, logout } = useAuth();
      const { data } = useGetAllCartItems();
-
+     const env = defaultEnvOptions();
      console.log("cart item", data);
 
      const navigation = [
@@ -22,6 +23,10 @@ const Navbar = () => {
           { title: "Partners", path: "../#partners" },
           { title: "Contact", path: "../#contact" },
      ];
+
+     useEffect(() => {
+          console.log("component refreshed!");
+     }, [env.CART_URL]);
 
      return (
           <>

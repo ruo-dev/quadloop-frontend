@@ -22,7 +22,7 @@ const Cart = () => {
 
      const getTotalPrice = () => {
           return cartItems
-               .reduce((total, item) => total + item?.price * item?.quantity, 0)
+               .reduce((total, item) => total + item?.price, 0)
                .toFixed(2);
      };
 
@@ -117,17 +117,15 @@ const Cart = () => {
                                                   </div>
                                                   <p className="text-sm">
                                                        NGN{" "}
-                                                       {item.price.toFixed(2)}
+                                                       {item.product.regular_price.toFixed(
+                                                            2
+                                                       )}
                                                   </p>
                                              </div>
                                         </div>
                                         <div>
                                              <p className="font-bold">
-                                                  {`NGN 
-                                                  ${(
-                                                       item.price *
-                                                       item.quantity
-                                                  ).toFixed(2)}`}
+                                                  NGN {item.price.toFixed(2)}
                                              </p>
                                         </div>
                                    </div>
