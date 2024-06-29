@@ -100,7 +100,7 @@ const Navbar = () => {
                                                   }}
                                              />
                                              {data?.length > 0 && (
-                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full">
+                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
                                                        {data?.length}
                                                   </small>
                                              )}
