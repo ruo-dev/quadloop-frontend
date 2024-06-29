@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import quadlood01 from "../Assets/products/quadlood01.jpeg";
 
 const ProductSlider = ({ images, style }) => {
      const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,43 +20,45 @@ const ProductSlider = ({ images, style }) => {
           <div
                className="relative w-full max-w-[750px] mx-auto border"
                style={{ ...style }}
-          >
-               {images.map((item, index) => (
-                    <div className="overflow-hidden relative w-full h-[400px]">
+          > 
+               <div className="overflow-hidden relative w-full h-[400px]">
+                    {images.map((item, index) => (
                          <div
                               key={item.id}
                               className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                                   index === currentIndex
-                                        ? "opacity-100"
-                                        : "opacity-0"
+                                   index === currentIndex ? "opacity-100" : "opacity-0"
                               }`}
                          >
                               <img
-                                   src={item.image ?? quadlood01}
+                                   src={item.image}
                                    alt={`Product Image ${index + 1}`}
                                    className="w-full h-full aspect-video"
                               />
                          </div>
-                         <button
-                              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
-                              onClick={prevSlide}
-                         >
-                              ‹
-                         </button>
-                         <button
-                              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
-                              onClick={nextSlide}
-                         >
-                              ›
-                         </button>
+                    ))}
+
+                    <button
+                         className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
+                         onClick={prevSlide}
+                    >
+                         ‹
+                    </button>
+                    <button
+                         className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
+                         onClick={nextSlide}
+                    >
+                         ›
+                    </button>
+                    
+                    {images[currentIndex] && (
                          <Link
-                              to={`/products/${item.id}`}
+                              to={`/products/${images[currentIndex].id}`}
                               className="absolute left-1/2 bottom-4 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
                          >
                               Order Now
                          </Link>
-                    </div>
-               ))}
+                    )}
+               </div>
           </div>
      );
 };

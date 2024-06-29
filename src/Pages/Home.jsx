@@ -83,14 +83,19 @@ const Home = () => {
      };
 
      const { data: products } = useGetAllProducts();
-     const productImages = (products ?? []).map((product) => ({
-          id: product?.id,
-          image: product?.product_image_url ?? quadlood01,
-     })) ?? [
+
+     const testProducts = [
           { id: 1, image: quadlood01 },
           { id: 2, image: quadlood02 },
           { id: 3, image: quadlood03 },
-     ];
+     ]
+
+     const productImages =  (products ?? testProducts).map((product) => ({
+          id: product?.id,
+          image: !products? product.image : product?.product_image_url
+     })) 
+
+     console.log({productImages})
 
      return (
           <div>
@@ -328,7 +333,7 @@ const Home = () => {
                     </div>
 
                     <div className="">
-                         <ProductSlider images={productImages} />
+                         <ProductSlider images={productImages.length > 0 ? productImages : testProducts} />
                     </div>
 
                     <div className="flex justify-center items-center mx-auto">
