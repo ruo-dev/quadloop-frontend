@@ -64,7 +64,7 @@ const Cart = () => {
                     Shopping Cart
                </h1>
                <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row md:space-x-4">
-                    <div className="w-full md:w-2/3">
+                    <div className="w-full md:w-2/3 my-6">
                          {cartItems.length === 0 ? (
                               <p>Your cart is empty</p>
                          ) : (

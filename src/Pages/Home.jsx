@@ -55,6 +55,8 @@ import ProductSlider from "../Components/ProductSlider";
 import quadlood01 from "../Assets/products/quadlood01.jpeg";
 import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
+import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
+
 import useGetAllProducts from "../hooks/Products/useGetAllProducts";
 
 const imageSources = [
@@ -115,14 +117,20 @@ const Home = () => {
                          </div>
                          <div>
                               <img
-                                   src={LampSolar}
+                                   src={bgquadlood03}
                                    alt="Solar Lamp"
                                    className="lg:-ml-24 w-30"
                               />
                          </div>
                     </div>
-
+                    <div className="flex justify-center" >
+                    <ButtonYellow
+                              link="../products"
+                              text="ORDER NOW"
+                         />
+                    </div>
                     <div className="mx-4 lg:mx-24 lg:pt-48 space-y-24">
+                   
                          <div className="text-center lg:px-60 ">
                               <h2 className="text-white font-bold text-3xl">
                                    Unlocking true socio economic environmental
