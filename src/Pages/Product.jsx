@@ -21,6 +21,8 @@ export const ProductDetails = () => {
                : product?.regular_price ?? 0,
      };
 
+     console.log("product", product);
+
      const productList = useMemo(() => {
           if (!products) return [];
           return products

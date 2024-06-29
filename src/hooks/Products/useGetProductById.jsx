@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 import api from "../../utils/api";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
@@ -11,7 +11,7 @@ export default function useGetProductById({ id }) {
                .get(url)
                .then(({ data }) => data.data);
 
-     const { data: product, error } = useSWR(url, fetcher);
+     const { data: product, error } = useSWRImmutable(url, fetcher);
 
      console.log("error", error);
 

@@ -5,10 +5,12 @@ import useLogin from "../hooks/Authentication/useLogin";
 import { ToastContainer } from "react-toastify";
 import ErrorBoundary from "../Components/ErrorBoundry";
 import { useAuth } from "../hooks/Authentication";
+import { useRefresh } from "../context/RefreshProvider";
 
 const Login = () => {
      const { login } = useLogin();
      const { save } = useAuth();
+     const { triggerRefresh } = useRefresh();
      const navigate = useNavigate();
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
@@ -20,10 +22,12 @@ const Login = () => {
           try {
                console.log("payload", payload);
                const result = await login(payload);
+               console.log({ result });
                if (result) {
                     save(result, result?.token);
-                    console.log(result);
-                    setTimeout(() => navigate("/"), 3000);
+                    setTimeout(() => {
+                         navigate("/");
+                    }, 3000);
                }
           } catch (error) {
                console.log({ error: error });
@@ -92,7 +96,10 @@ const Login = () => {
                                              className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-teal-600 shadow-sm rounded-lg"
                                         />
                                    </div>
-                                   <button className="w-full mt-4 px-4 py-2 text-white font-medium bg-teal-600 hover:bg-teal-700 active:bg-teal-600 rounded-lg duration-150">
+                                   <button
+                                        onClick={triggerRefresh}
+                                        className="w-full mt-4 px-4 py-2 text-white font-medium bg-teal-600 hover:bg-teal-700 active:bg-teal-600 rounded-lg duration-150"
+                                   >
                                         Sign in
                                    </button>
                               </form>

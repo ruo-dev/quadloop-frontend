@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
 import { BackTop } from "antd";
@@ -9,8 +9,15 @@ import Register from "./Pages/Register";
 import Recover from "./Pages/Recover";
 import { ProductDetails } from "./Pages/Product";
 import { SWRConfig } from "swr";
+import { useRefresh } from "./context/RefreshProvider";
 
 const App = () => {
+     const { refresh } = useRefresh();
+
+     useEffect(() => {
+          console.log("component refreshed!");
+     }, [refresh]);
+
      return (
           <SWRConfig
                value={{
@@ -23,9 +30,7 @@ const App = () => {
                }}
           >
                <div className=" bg-white ">
-                    <>
-                         <Navbar />
-                    </>
+                    <Navbar />
                     <Routes>
                          <Route path="/" element={<Home />} />
                          <Route path="/login" element={<Login />} />

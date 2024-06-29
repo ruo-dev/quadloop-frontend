@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import quadlood01 from "../Assets/products/quadlood01.jpeg";
 
 const ProductSlider = ({ images, style }) => {
      const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +33,7 @@ const ProductSlider = ({ images, style }) => {
                               }`}
                          >
                               <img
-                                   src={item.image}
+                                   src={item.image ?? quadlood01}
                                    alt={`Product Image ${index + 1}`}
                                    className="w-full h-full aspect-video"
                               />

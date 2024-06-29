@@ -6,13 +6,11 @@ import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useAuth } from "../hooks/Authentication";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
-import { defaultEnvOptions } from "../utils/defaultEnvOptions";
+import { useRefresh } from "../context/RefreshProvider";
 const Navbar = () => {
      const [state, setState] = useState(false);
      const { token, logout } = useAuth();
      const { data } = useGetAllCartItems();
-     const env = defaultEnvOptions();
-     console.log("cart item", data);
 
      const navigation = [
           { title: "Home", path: "../" },
@@ -23,10 +21,6 @@ const Navbar = () => {
           { title: "Partners", path: "../#partners" },
           { title: "Contact", path: "../#contact" },
      ];
-
-     useEffect(() => {
-          console.log("component refreshed!");
-     }, [env.CART_URL]);
 
      return (
           <>
@@ -105,26 +99,16 @@ const Navbar = () => {
                                                        fontSize: "1rem",
                                                   }}
                                              />
-                                             {data?.length !== 0 && (
-                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
-                                                       {data?.length > 0
-                                                            ? data?.length
-                                                            : ""}
+                                             {data?.length > 0 && (
+                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full">
+                                                       {data?.length}
                                                   </small>
                                              )}
                                         </Link>
                                    </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
                                    <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
-                                        {token ? (
-                                             <li>
-                                                  <ButtonYellow
-                                                       link="../"
-                                                       text="Logout"
-                                                       onClick={logout}
-                                                  />
-                                             </li>
-                                        ) : (
+                                        {!token ? (
                                              <>
                                                   <li>
                                                        <ButtonYellow
@@ -139,6 +123,14 @@ const Navbar = () => {
                                                        />
                                                   </li>
                                              </>
+                                        ) : (
+                                             <li>
+                                                  <ButtonYellow
+                                                       link="../"
+                                                       text="Logout"
+                                                       onClick={logout}
+                                                  />
+                                             </li>
                                         )}
                                    </div>
                               </ul>

@@ -2,13 +2,18 @@ import React, { useEffect, useMemo, useState } from "react";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 import useUpdateCartItem from "../hooks/Cart/useUpdateCartItem";
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
+import { useAuth } from "../hooks/Authentication";
+import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
 
 const Cart = () => {
      const { data, isLoading, error } = useGetAllCartItems();
      const { updateCartItem } = useUpdateCartItem();
+     const { handlePaystackPayment } = useCheckoutPayment();
+     const { user } = useAuth();
      const initialCartItems = data || [];
 
      const [cartItems, setCartItems] = useState(initialCartItems);
+     const [itemIds, setItemIds] = useState([]);
 
      const handleQuantityChange = (id, quantity) => {
           const updatedCartItems = cartItems.map((item) =>
@@ -34,6 +39,23 @@ const Cart = () => {
           } catch (error) {
                console.error("Error updating cart:", error);
           }
+     };
+
+     useEffect(() => {
+          const ids = cartItems.map((item) => item.id);
+          console.log(ids);
+          setItemIds(ids);
+     }, [cartItems]);
+
+     const onCheckout = async () => {
+          const payload = {
+               email: user?.email,
+               amount: getTotalPrice(),
+               items_id: itemIds,
+          };
+          const result = await handlePaystackPayment(payload);
+          console.log("result: ", result);
+          window.location.href = result.authorization_url;
      };
 
      return (
@@ -138,7 +160,11 @@ const Cart = () => {
                               <p>Total Price</p>
                               <p className="font-bold">NGN {getTotalPrice()}</p>
                          </div>
-                         <button className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                         <button
+                              disabled={!data ? true : false}
+                              onClick={onCheckout}
+                              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                         >
                               Checkout
                          </button>
                     </div>

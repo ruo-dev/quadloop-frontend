@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import { mutate } from "swr";
+import { useRefresh } from "../../context/RefreshProvider";
 
 export default function useLogin() {
      const env = defaultEnvOptions();
@@ -18,7 +18,6 @@ export default function useLogin() {
                     status,
                } = await api().post(url, payload);
                if (status !== 200 || !data) throw Error("");
-               mutate(url);
                toast.update(toastId, {
                     render: "login success!",
                     type: "success",
