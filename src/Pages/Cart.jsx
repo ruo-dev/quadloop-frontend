@@ -19,14 +19,14 @@ const Cart = () => {
      const [cartItems, setCartItems] = useState(initialCartItems);
      const [itemIds, setItemIds] = useState([]);
 
-     const handleQuantityChange = (id, quantity) => {
+     const handleQuantityChange = async (id, quantity) => {
           const updatedCartItems = cartItems.map((item) =>
                item.id === id
                     ? { ...item, quantity: Math.max(1, quantity) }
                     : item
           );
           setCartItems(updatedCartItems);
-          updateQuantityToBackend(id, Math.max(1, quantity));
+          await updateQuantityToBackend(id, Math.max(1, quantity));
      };
 
      const getTotalPrice = () => {
