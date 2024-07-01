@@ -1,4 +1,3 @@
-// src/components/ImageSlider.jsx
 import React, { useEffect, useRef } from "react";
 
 const AffiliateSlider = ({ images, style }) => {
@@ -27,15 +26,16 @@ const AffiliateSlider = ({ images, style }) => {
           <div className="relative w-full overflow-hidden" style={{ ...style }}>
                <div
                     ref={sliderRef}
-                    className="flex space-x-4"
+                    className="flex space-x-2"
                     style={{ whiteSpace: "nowrap", overflowX: "hidden" }}
                >
                     {images.concat(images).map((image, index) => (
-                         <div key={index} className="flex-shrink-0">
+                         <div key={index} className="flex-shrink-0 px-1 border">
+                              {" "}
                               <img
                                    src={image}
                                    alt={`Slide ${index + 1}`}
-                                   className="w-64 h-32 object-cover"
+                                   className="w-40 h-20 object-cover"
                               />
                          </div>
                     ))}

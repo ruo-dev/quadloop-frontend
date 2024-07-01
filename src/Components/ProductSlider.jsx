@@ -18,10 +18,10 @@ const ProductSlider = ({ images, style }) => {
 
      return (
           <div
-               className="relative w-full max-w-[450px] mx-auto border rounded-md"
+               className="relative w-full max-w-[650px] mx-auto border rounded-md"
                style={{ ...style }}
           >
-               <div className="overflow-hidden relative w-full h-[300px]">
+               <div className="overflow-hidden relative w-full h-[350px]">
                     {images.map((item, index) => (
                          <div
                               key={item.id}
