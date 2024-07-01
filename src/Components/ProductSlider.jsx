@@ -18,7 +18,7 @@ const ProductSlider = ({ images, style }) => {
 
      return (
           <div
-               className="relative w-full max-w-[450px] mx-auto border"
+               className="relative w-full max-w-[450px] mx-auto border rounded-md"
                style={{ ...style }}
           >
                <div className="overflow-hidden relative w-full h-[300px]">
@@ -34,7 +34,7 @@ const ProductSlider = ({ images, style }) => {
                               <img
                                    src={item.image}
                                    alt={`Product Image ${index + 1}`}
-                                   className="w-full h-full aspect-video"
+                                   className="w-full h-full aspect-video rounded-md"
                               />
                          </div>
                     ))}
@@ -55,7 +55,7 @@ const ProductSlider = ({ images, style }) => {
                     {images[currentIndex] && (
                          <Link
                               to={`/products/${images[currentIndex].id}`}
-                              className="absolute left-1/2 bottom-0 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
+                              className="absolute left-1/2 bottom-1/2 translate-y-1/2 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
                          >
                               Order Now
                          </Link>
