@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 import useUpdateCartItem from "../hooks/Cart/useUpdateCartItem";
+import useDeleteCartItem from "../hooks/Cart/useDeleteCartItem"; // import the hook
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
 import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
 import { useAuthContext } from "../context/AuthContext";
@@ -10,9 +11,11 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
      const { data } = useGetAllCartItems();
      const { updateCartItem } = useUpdateCartItem();
+     const { deleteCartItem } = useDeleteCartItem(); // use the hook
      const { handlePaystackPayment } = useCheckoutPayment();
      const auth = useAuthContext();
      const navigate = useNavigate();
+     const token = Cookies.get("jwt");
      const initialCartItems =
           data?.filter((item) => item?.order_id == null) || [];
 
@@ -28,6 +31,19 @@ const Cart = () => {
           setCartItems(updatedCartItems);
           await updateQuantityToBackend(id, Math.max(1, quantity));
      };
+
+     const handleDeleteItem = async (id) => {
+          const success = await deleteCartItem(id);
+          if (success) {
+               setCartItems(cartItems.filter((item) => item.id !== id));
+          }
+     };
+
+     useEffect(() => {
+          if (auth?.isTokenExpired(token)) {
+               setCartItems([]);
+          }
+     }, [token]);
 
      const getTotalPrice = () => {
           return cartItems
@@ -68,7 +84,7 @@ const Cart = () => {
                     Shopping Cart
                </h1>
                <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row md:space-x-4">
-                    <div className="w-full md:w-2/3 my-6">
+                    <div className="w-full md:w-2/3 my-6 md:self-start">
                          {cartItems.length === 0 ? (
                               <p>Your cart is empty</p>
                          ) : (
@@ -149,16 +165,26 @@ const Cart = () => {
                                                   </p>
                                              </div>
                                         </div>
-                                        <div>
+                                        <div className="flex flex-col items-end gap-6 justify-between">
                                              <p className="font-bold">
                                                   NGN {item.price.toFixed(2)}
                                              </p>
+                                             <button
+                                                  className="text-red-500 hover:text-red-700"
+                                                  onClick={() =>
+                                                       handleDeleteItem(
+                                                            item?.id
+                                                       )
+                                                  }
+                                             >
+                                                  🗑️
+                                             </button>
                                         </div>
                                    </div>
                               ))
                          )}
                     </div>
-                    <div className="w-full md:w-1/3 p-4 border rounded-lg shadow-sm">
+                    <div className="w-full md:w-1/3 p-4 border rounded-lg shadow-sm md:self-start md:mt-6">
                          <h2 className="text-xl font-bold mb-4">Summary</h2>
                          <div className="flex justify-between mb-4">
                               <p>Total Price</p>
