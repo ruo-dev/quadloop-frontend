@@ -3,7 +3,7 @@ import api from "../../utils/api";
 import useSWRImmutable from "swr/immutable";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 import { mutate } from "swr";
-import { useAuth } from "../Authentication";
+import Cookies from "js-cookie";
 
 export default function useGetAllCartItems({
      category = "",
@@ -11,8 +11,7 @@ export default function useGetAllCartItems({
      limit = 10,
 } = {}) {
      const env = defaultEnvOptions();
-     const { token } = useAuth();
-
+     const token = Cookies.get("jwt");
      //  const url = `${env.PRODUCTS_URL}?category=${category}&offset=${offset}&limit=${limit}`;
      const url = `${env.CART_URL}`;
 
@@ -29,13 +28,13 @@ export default function useGetAllCartItems({
                });
 
      const { data, error } = useSWRImmutable(url, fetcher);
-
+     console.log("items", data);
      const isLoading = !data && !error;
 
      useEffect(() => {
           if (!url) return;
           mutate(url);
-     }, [url]);
+     }, [url, token]);
 
      return {
           data,

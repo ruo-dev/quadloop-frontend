@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import { useRefresh } from "../../context/RefreshProvider";
 
 export default function useLogin() {
      const env = defaultEnvOptions();

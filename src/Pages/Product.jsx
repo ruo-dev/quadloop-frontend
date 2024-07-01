@@ -1,16 +1,21 @@
 import React, { useMemo } from "react";
+import Cookies from "js-cookie";
 import { ProductCard } from "../Components/ProductCard";
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useGetProductById from "../hooks/Products/useGetProductById";
 import useGetAllProducts from "../hooks/Products/useGetAllProducts";
 import useAddToCart from "../hooks/Cart/useAddToCart";
+import { useAuthContext } from "../context/AuthContext";
 
 export const ProductDetails = () => {
      const { productId: id } = useParams();
      const { product } = useGetProductById({ id });
      const { data: products } = useGetAllProducts();
      const { addToCart } = useAddToCart();
+     const auth = useAuthContext();
+     const navigate = useNavigate();
+
      console.log("productDetails", product);
 
      const payload = {
@@ -37,7 +42,16 @@ export const ProductDetails = () => {
      }, [products]);
 
      const addItemToCart = async () => {
-          await addToCart(payload);
+          try {
+               if (!auth.isTokenExpired(Cookies.get("jwt"))) {
+                    await addToCart(payload);
+                    console.log("Added to cart");
+                    return;
+               }
+               return navigate("/login");
+          } catch (error) {
+               console.log("Error", error);
+          }
      };
 
      return (

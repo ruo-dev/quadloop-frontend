@@ -4,13 +4,15 @@ import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { useAuth } from "../hooks/Authentication";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
-import { useRefresh } from "../context/RefreshProvider";
+import { useAuthContext } from "../context/AuthContext";
+import Cookies from "js-cookie";
+
 const Navbar = () => {
      const [state, setState] = useState(false);
-     const { token, logout } = useAuth();
+     const auth = useAuthContext();
      const { data } = useGetAllCartItems();
+     const token = Cookies.get("jwt");
 
      const navigation = [
           { title: "Home", path: "../" },
@@ -21,6 +23,10 @@ const Navbar = () => {
           { title: "Partners", path: "../#partners" },
           { title: "Contact", path: "../#contact" },
      ];
+
+     useEffect(() => {
+          console.log("Component refreshed!");
+     }, [token]);
 
      return (
           <>
@@ -99,16 +105,20 @@ const Navbar = () => {
                                                        fontSize: "1rem",
                                                   }}
                                              />
-                                             {data?.length > 0 && (
-                                                  <small className="absolute text-white h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
+                                             {data &&
+                                             data?.length !== 0 &&
+                                             !auth?.isTokenExpired(token) ? (
+                                                  <small className="text-white absolute h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
                                                        {data?.length}
                                                   </small>
+                                             ) : (
+                                                  <div className="invisible"></div>
                                              )}
                                         </Link>
                                    </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
                                    <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
-                                        {!token ? (
+                                        {auth?.isTokenExpired(token) ? (
                                              <>
                                                   <li>
                                                        <ButtonYellow
@@ -128,7 +138,7 @@ const Navbar = () => {
                                                   <ButtonYellow
                                                        link="../"
                                                        text="Logout"
-                                                       onClick={logout}
+                                                       onClick={auth?.logout}
                                                   />
                                              </li>
                                         )}

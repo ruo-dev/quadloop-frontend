@@ -9,15 +9,8 @@ import Register from "./Pages/Register";
 import Recover from "./Pages/Recover";
 import { ProductDetails } from "./Pages/Product";
 import { SWRConfig } from "swr";
-import { useRefresh } from "./context/RefreshProvider";
 
 const App = () => {
-     const { refresh } = useRefresh();
-
-     useEffect(() => {
-          console.log("component refreshed!");
-     }, [refresh]);
-
      return (
           <SWRConfig
                value={{

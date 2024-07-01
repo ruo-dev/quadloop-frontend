@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { LiaCartPlusSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import useAddToCart from "../hooks/Cart/useAddToCart";
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const ProductCard = ({ image, style, product }) => {
      const [isHovered, setIsHovered] = useState(false);
      const { addToCart } = useAddToCart();
+     const auth = useAuthContext();
+     const navigate = useNavigate();
 
      const payload = {
           product_id: product?.id ?? "",
@@ -16,7 +21,16 @@ export const ProductCard = ({ image, style, product }) => {
      };
 
      const addItemToCart = async () => {
-          await addToCart(payload);
+          try {
+               if (!auth.isTokenExpired(Cookies.get("jwt"))) {
+                    await addToCart(payload);
+                    console.log("Added to cart");
+                    return;
+               }
+               return navigate("/login");
+          } catch (error) {
+               console.log("Error", error);
+          }
      };
 
      return (

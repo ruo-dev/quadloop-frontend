@@ -18,15 +18,17 @@ const ProductSlider = ({ images, style }) => {
 
      return (
           <div
-               className="relative w-full max-w-[750px] mx-auto border"
+               className="relative w-full max-w-[450px] mx-auto border"
                style={{ ...style }}
-          > 
-               <div className="overflow-hidden relative w-full h-[400px]">
+          >
+               <div className="overflow-hidden relative w-full h-[300px]">
                     {images.map((item, index) => (
                          <div
                               key={item.id}
-                              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                                   index === currentIndex ? "opacity-100" : "opacity-0"
+                              className={`p-6 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                                   index === currentIndex
+                                        ? "opacity-100"
+                                        : "opacity-0"
                               }`}
                          >
                               <img
@@ -49,11 +51,11 @@ const ProductSlider = ({ images, style }) => {
                     >
                          ›
                     </button>
-                    
+
                     {images[currentIndex] && (
                          <Link
                               to={`/products/${images[currentIndex].id}`}
-                              className="absolute left-1/2 bottom-4 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
+                              className="absolute left-1/2 bottom-0 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
                          >
                               Order Now
                          </Link>

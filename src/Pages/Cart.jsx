@@ -1,16 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 import useUpdateCartItem from "../hooks/Cart/useUpdateCartItem";
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
-import { useAuth } from "../hooks/Authentication";
 import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-     const { data, isLoading, error } = useGetAllCartItems();
+     const { data } = useGetAllCartItems();
      const { updateCartItem } = useUpdateCartItem();
      const { handlePaystackPayment } = useCheckoutPayment();
-     const { user } = useAuth();
-     const initialCartItems = data || [];
+     const auth = useAuthContext();
+     const navigate = useNavigate();
+     const initialCartItems =
+          data?.filter((item) => item?.order_id == null) || [];
 
      const [cartItems, setCartItems] = useState(initialCartItems);
      const [itemIds, setItemIds] = useState([]);
@@ -48,13 +52,13 @@ const Cart = () => {
      }, [cartItems]);
 
      const onCheckout = async () => {
+          const user = JSON.parse(localStorage.getItem("user"));
           const payload = {
                email: user?.email,
                amount: getTotalPrice(),
                items_id: itemIds,
           };
           const result = await handlePaystackPayment(payload);
-          console.log("result: ", result);
           window.location.href = result.authorization_url;
      };
 
@@ -161,8 +165,11 @@ const Cart = () => {
                               <p className="font-bold">NGN {getTotalPrice()}</p>
                          </div>
                          <button
-                              disabled={!data ? true : false}
-                              onClick={onCheckout}
+                              onClick={() => {
+                                   auth.isTokenExpired(Cookies.get("jwt"))
+                                        ? navigate("/login")
+                                        : onCheckout();
+                              }}
                               className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                          >
                               Checkout

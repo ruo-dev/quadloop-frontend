@@ -88,14 +88,16 @@ const Home = () => {
           { id: 1, image: quadlood01 },
           { id: 2, image: quadlood02 },
           { id: 3, image: quadlood03 },
-     ]
+     ];
 
-     const productImages =  (products ?? testProducts).map((product) => ({
+     const productImages = (products ?? testProducts).map((product) => ({
           id: product?.id,
-          image: !products? product.image : product?.product_image_url
-     })) 
+          image: !products
+               ? product.image
+               : product?.product_image_url ?? quadlood01,
+     }));
 
-     console.log({productImages})
+     console.log({ productImages });
 
      return (
           <div>
@@ -128,14 +130,10 @@ const Home = () => {
                               />
                          </div>
                     </div>
-                    <div className="flex justify-center" >
-                    <ButtonYellow
-                              link="../products"
-                              text="ORDER NOW"
-                         />
+                    <div className="flex justify-center">
+                         <ButtonYellow link="../products" text="ORDER NOW" />
                     </div>
                     <div className="mx-4 lg:mx-24 lg:pt-48 space-y-24">
-                   
                          <div className="text-center lg:px-60 ">
                               <h2 className="text-white font-bold text-3xl">
                                    Unlocking true socio economic environmental
@@ -333,7 +331,13 @@ const Home = () => {
                     </div>
 
                     <div className="">
-                         <ProductSlider images={productImages.length > 0 ? productImages : testProducts} />
+                         <ProductSlider
+                              images={
+                                   productImages.length > 0
+                                        ? productImages
+                                        : testProducts
+                              }
+                         />
                     </div>
 
                     <div className="flex justify-center items-center mx-auto">
