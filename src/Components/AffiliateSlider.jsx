@@ -26,7 +26,7 @@ const AffiliateSlider = ({ images, style }) => {
           <div className="relative w-full overflow-hidden" style={{ ...style }}>
                <div
                     ref={sliderRef}
-                    className="flex space-x-2"
+                    className="flex space-x-16"
                     style={{ whiteSpace: "nowrap", overflowX: "hidden" }}
                >
                     {images.concat(images).map((image, index) => (
@@ -35,7 +35,7 @@ const AffiliateSlider = ({ images, style }) => {
                               <img
                                    src={image}
                                    alt={`Slide ${index + 1}`}
-                                   className="w-40 h-20 object-cover"
+                                   className="w-20 h-10 object-cover"
                               />
                          </div>
                     ))}
