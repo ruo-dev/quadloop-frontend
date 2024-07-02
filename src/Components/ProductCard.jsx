@@ -6,7 +6,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-export const ProductCard = ({ image, style, product }) => {
+export const ProductCard = ({ image, style, product, getCartItems }) => {
      const [isHovered, setIsHovered] = useState(false);
      const { addToCart } = useAddToCart();
      const auth = useAuthContext();
@@ -23,9 +23,12 @@ export const ProductCard = ({ image, style, product }) => {
      const addItemToCart = async () => {
           try {
                if (!auth.isTokenExpired(Cookies.get("jwt"))) {
-                    await addToCart(payload);
-                    console.log("Added to cart");
-                    return;
+                    const success = await addToCart(payload);
+                    if (success) {
+                         getCartItems();
+                         console.log("Added to cart");
+                         return;
+                    }
                }
                return navigate("/login");
           } catch (error) {

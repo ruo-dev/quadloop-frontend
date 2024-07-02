@@ -1,34 +1,33 @@
+// src/hooks/Cart/useDeleteCartItem.js
 import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 import Cookies from "js-cookie";
+import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
-export default function useAddToCart() {
+export default function useDeleteCartItem() {
      const env = defaultEnvOptions();
      const token = Cookies.get("jwt");
 
-     const addToCart = useCallback(
-          async (payload) => {
-               const toastId = toast.loading("Setting site data...");
+     const deleteCartItem = useCallback(
+          async (itemId) => {
+               const toastId = toast.loading("Deleting cart item...");
                try {
-                    const url = `${env.CART_URL}`;
+                    const url = `${env.CART_URL}/${itemId}`;
 
-                    const {
-                         data: { data },
-                         status,
-                    } = await api().post(url, payload, {
+                    const { status } = await api().delete(url, {
                          headers: {
                               Authorization: `Bearer ${token}`,
                          },
                     });
 
-                    console.log(data, status);
-                    if (status !== 201)
-                         throw new Error("Failed to add to cart");
+                    console.log({ status });
+
+                    if (status !== 200)
+                         throw new Error("Failed to delete cart item");
 
                     toast.update(toastId, {
-                         render: "Success: Added to cart!",
+                         render: "Success: Cart item deleted!",
                          type: "success",
                          isLoading: false,
                          autoClose: 3000,
@@ -36,13 +35,13 @@ export default function useAddToCart() {
 
                     return true;
                } catch (error) {
-                    console.error(error);
                     toast.update(toastId, {
-                         render: "Failed: Added to cart!",
+                         render: "Failed: Delete cart item!",
                          type: "error",
                          isLoading: false,
                          autoClose: 3000,
                     });
+                    console.error("Delete cart item error:", error);
                     return false;
                }
           },
@@ -50,6 +49,6 @@ export default function useAddToCart() {
      );
 
      return {
-          addToCart,
+          deleteCartItem,
      };
 }

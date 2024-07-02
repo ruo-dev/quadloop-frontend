@@ -3,11 +3,8 @@ import quadloop01 from "../Assets/products/quadlood01.jpeg";
 // import quadloop02 from "../Assets/products/quadlood02.jpeg";
 // import quadloop03 from "../Assets/products/quadlood03.jpeg";
 import { ProductCard } from "../Components/ProductCard";
-import useGetAllProducts from "../hooks/Products/useGetAllProducts";
 
-const Products = () => {
-     const { data: products, isLoading, error } = useGetAllProducts();
-
+const Products = ({ products }) => {
      console.log("Products", products);
 
      const productList = useMemo(() => {

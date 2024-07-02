@@ -8,6 +8,9 @@ const api = () => {
           post: async (url, data, options = {}) => {
                return await axios.post(url, data, options);
           },
+          put: async (url, data, options = {}) => {
+               return await axios.put(url, data, options);
+          },
           delete: async (url, options = {}) => {
                return await axios.delete(url, options);
           },

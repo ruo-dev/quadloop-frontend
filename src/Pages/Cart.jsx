@@ -1,60 +1,59 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 import useUpdateCartItem from "../hooks/Cart/useUpdateCartItem";
-import useDeleteCartItem from "../hooks/Cart/useDeleteCartItem"; // import the hook
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
-import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import useDeleteCartItem from "../hooks/Cart/useDeleteCartItem";
+import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
 
-const Cart = () => {
-     const { data } = useGetAllCartItems();
+const Cart = ({ cartItems, getCartItems }) => {
+     console.log("item: ", cartItems);
      const { updateCartItem } = useUpdateCartItem();
-     const { deleteCartItem } = useDeleteCartItem(); // use the hook
+     const { deleteCartItem } = useDeleteCartItem();
      const { handlePaystackPayment } = useCheckoutPayment();
      const auth = useAuthContext();
      const navigate = useNavigate();
-     const token = Cookies.get("jwt");
-     const initialCartItems =
-          data?.filter((item) => item?.order_id == null) || [];
 
-     const [cartItems, setCartItems] = useState(initialCartItems);
      const [itemIds, setItemIds] = useState([]);
 
      const handleQuantityChange = async (id, quantity) => {
-          const updatedCartItems = cartItems.map((item) =>
+          const updatedCartItems = cartItems?.map((item) =>
                item.id === id
                     ? { ...item, quantity: Math.max(1, quantity) }
                     : item
           );
-          setCartItems(updatedCartItems);
+          getCartItems();
           await updateQuantityToBackend(id, Math.max(1, quantity));
      };
 
      const handleDeleteItem = async (id) => {
-          const success = await deleteCartItem(id);
-          if (success) {
-               setCartItems(cartItems.filter((item) => item.id !== id));
+          try {
+               console.log("id", id);
+               const success = await deleteCartItem(id);
+               console.log("success", success);
+               if (success) {
+                    getCartItems();
+               }
+               console.log("Cart updated successfully");
+          } catch (error) {
+               console.error("Error updating cart:", error);
           }
      };
 
-     useEffect(() => {
-          if (auth?.isTokenExpired(token)) {
-               setCartItems([]);
-          }
-     }, [token]);
-
      const getTotalPrice = () => {
           return cartItems
-               .reduce((total, item) => total + item?.price, 0)
+               ?.reduce((total, item) => total + item?.price, 0)
                .toFixed(2);
      };
 
      const updateQuantityToBackend = async (id, quantity) => {
           try {
-               await updateCartItem(id, { quantity });
+               const success = await updateCartItem(id, { quantity });
                console.log("Updated quantity", quantity);
+               if (success) {
+                    getCartItems();
+               }
                console.log("Cart updated successfully");
           } catch (error) {
                console.error("Error updating cart:", error);
@@ -63,9 +62,8 @@ const Cart = () => {
 
      useEffect(() => {
           const ids = cartItems.map((item) => item.id);
-          console.log(ids);
           setItemIds(ids);
-     }, [cartItems]);
+     }, []);
 
      const onCheckout = async () => {
           const user = JSON.parse(localStorage.getItem("user"));
@@ -85,10 +83,10 @@ const Cart = () => {
                </h1>
                <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row md:space-x-4">
                     <div className="w-full md:w-2/3 my-6 md:self-start">
-                         {cartItems.length === 0 ? (
+                         {cartItems?.length === 0 ? (
                               <p>Your cart is empty</p>
                          ) : (
-                              cartItems.map((item) => (
+                              cartItems?.map((item) => (
                                    <div
                                         key={item?.id}
                                         className="flex items-center justify-between p-4 mb-4 border rounded-lg shadow-sm"
@@ -148,8 +146,8 @@ const Cart = () => {
                                                             className="px-2 py-1 border rounded"
                                                             onClick={() =>
                                                                  handleQuantityChange(
-                                                                      item.id,
-                                                                      item.quantity +
+                                                                      item?.id,
+                                                                      item?.quantity +
                                                                            1
                                                                  )
                                                             }
@@ -159,7 +157,7 @@ const Cart = () => {
                                                   </div>
                                                   <p className="text-sm">
                                                        NGN{" "}
-                                                       {item.product.regular_price.toFixed(
+                                                       {item?.product?.regular_price.toFixed(
                                                             2
                                                        )}
                                                   </p>
@@ -170,14 +168,14 @@ const Cart = () => {
                                                   NGN {item.price.toFixed(2)}
                                              </p>
                                              <button
-                                                  className="text-red-500 hover:text-red-700"
-                                                  onClick={() =>
-                                                       handleDeleteItem(
+                                                  className="text-red-500 hover:text-red-700 text-sm"
+                                                  onClick={async () =>
+                                                       await handleDeleteItem(
                                                             item?.id
                                                        )
                                                   }
                                              >
-                                                  🗑️
+                                                  remove
                                              </button>
                                         </div>
                                    </div>
@@ -194,6 +192,8 @@ const Cart = () => {
                               onClick={() => {
                                    auth.isTokenExpired(Cookies.get("jwt"))
                                         ? navigate("/login")
+                                        : cartItems?.length === 0
+                                        ? navigate("/products")
                                         : onCheckout();
                               }}
                               className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"

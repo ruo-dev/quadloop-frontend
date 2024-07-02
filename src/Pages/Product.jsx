@@ -4,14 +4,12 @@ import { ProductCard } from "../Components/ProductCard";
 import quadloop03 from "../Assets/products/quadlood03.jpeg";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetProductById from "../hooks/Products/useGetProductById";
-import useGetAllProducts from "../hooks/Products/useGetAllProducts";
 import useAddToCart from "../hooks/Cart/useAddToCart";
 import { useAuthContext } from "../context/AuthContext";
 
-export const ProductDetails = () => {
+export const ProductDetails = ({ products, getCartItems }) => {
      const { productId: id } = useParams();
      const { product } = useGetProductById({ id });
-     const { data: products } = useGetAllProducts();
      const { addToCart } = useAddToCart();
      const auth = useAuthContext();
      const navigate = useNavigate();
@@ -34,6 +32,7 @@ export const ProductDetails = () => {
                .slice(0, 5)
                .map((product) => (
                     <ProductCard
+                         getCartItems={getCartItems}
                          key={product?.id}
                          image={quadloop03}
                          product={product}
@@ -44,8 +43,12 @@ export const ProductDetails = () => {
      const addItemToCart = async () => {
           try {
                if (!auth.isTokenExpired(Cookies.get("jwt"))) {
-                    await addToCart(payload);
-                    console.log("Added to cart");
+                    const success = await addToCart(payload);
+                    if (success) {
+                         console.log("Added to cart");
+                         getCartItems();
+                         return;
+                    }
                     return;
                }
                return navigate("/login");

@@ -1,8 +1,6 @@
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
-import useSWRImmutable from "swr/immutable";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import { mutate } from "swr";
 import Cookies from "js-cookie";
 
 export default function useGetAllCartItems({
@@ -12,33 +10,42 @@ export default function useGetAllCartItems({
 } = {}) {
      const env = defaultEnvOptions();
      const token = Cookies.get("jwt");
-     //  const url = `${env.PRODUCTS_URL}?category=${category}&offset=${offset}&limit=${limit}`;
      const url = `${env.CART_URL}`;
 
-     const fetcher = (url) =>
-          api()
-               .get(url, {
+     const [data, setData] = useState([]);
+     const [error, setError] = useState(null);
+     const [isLoading, setIsLoading] = useState(true);
+
+     const fetchData = useCallback(async () => {
+          setIsLoading(true);
+          try {
+               const response = await api().get(url, {
                     headers: {
                          Authorization: `Bearer ${token}`,
                     },
-               })
-               .then(({ data, status }) => {
-                    if (status !== 200 || !data) return undefined;
-                    return data.data;
                });
-
-     const { data, error } = useSWRImmutable(url, fetcher);
-     console.log("items", data);
-     const isLoading = !data && !error;
-
-     useEffect(() => {
-          if (!url) return;
-          mutate(url);
+               console.log({ response });
+               if (response.status === 200) {
+                    setData(response.data.data);
+               } else {
+                    setError("Failed to fetch cart items");
+               }
+          } catch (error) {
+               setError(error.message || "An error occurred");
+          } finally {
+               setIsLoading(false);
+          }
      }, [url, token]);
 
+     useEffect(() => {
+          fetchData();
+     }, [fetchData]);
+
      return {
-          data,
+          data: data?.filter((item) => item?.order_id == null),
           error,
           isLoading,
+          fetchData,
+          setData,
      };
 }

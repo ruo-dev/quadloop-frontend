@@ -4,11 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ErrorBoundary from "../Components/ErrorBoundry";
 import { useAuthContext } from "../context/AuthContext";
-import { useLogin } from "../hooks/Authentication";
 
 const Login = () => {
      const auth = useAuthContext();
-     // const { login } = useLogin();
      const navigate = useNavigate();
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
@@ -19,10 +17,10 @@ const Login = () => {
           e.preventDefault();
           try {
                console.log("payload", payload);
-               await auth?.login(payload);
-               setTimeout(() => {
-                    navigate("/");
-               }, 3000);
+               const result = await auth?.login(payload);
+               if (result) {
+                    navigate(-1);
+               }
           } catch (error) {
                console.log({ error: error });
           }

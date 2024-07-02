@@ -1,8 +1,6 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../utils/api";
-import useSWRImmutable from "swr/immutable";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import { mutate } from "swr";
 
 export default function useGetAllProducts({
      category = "",
@@ -10,25 +8,31 @@ export default function useGetAllProducts({
      limit = 10,
 } = {}) {
      const env = defaultEnvOptions();
-
-     //  const url = ${env.PRODUCTS_URL}?category=${category}&offset=${offset}&limit=${limit};
+     // const url = `${env.PRODUCTS_URL}?category=${category}&offset=${offset}&limit=${limit}`;
      const url = `${env.PRODUCTS_URL}`;
 
-     const fetcher = (url) =>
-          api()
-               .get(url)
-               .then(({ data, status }) => {
-                    if (status !== 200 || !data) return undefined;
-                    return data.data;
-               });
-
-     const { data, error } = useSWRImmutable(url, fetcher);
-
-     const isLoading = !data && !error;
+     const [data, setData] = useState([]);
+     const [error, setError] = useState(null);
+     const [isLoading, setIsLoading] = useState(true);
 
      useEffect(() => {
-          if (!url) return;
-          mutate(url);
+          const fetchData = async () => {
+               setIsLoading(true);
+               try {
+                    const response = await api().get(url);
+                    if (response.status === 200) {
+                         setData(response.data.data);
+                    } else {
+                         setError("Failed to fetch data");
+                    }
+               } catch (error) {
+                    setError(error);
+               } finally {
+                    setIsLoading(false);
+               }
+          };
+
+          fetchData();
      }, [url]);
 
      return {

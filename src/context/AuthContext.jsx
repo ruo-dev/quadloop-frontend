@@ -5,7 +5,10 @@ import { useLogin } from "../hooks/Authentication";
 
 const AuthContext = createContext();
 
-export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext = () => {
+     const context = useContext(AuthContext);
+     return context;
+};
 
 export const AuthProvider = ({ children }) => {
      const [user, setUser] = useState(null);
@@ -15,6 +18,8 @@ export const AuthProvider = ({ children }) => {
           const token = Cookies.get("jwt");
           if (token && !isTokenExpired(token)) {
                setUser({ token });
+          } else {
+               setUser(null);
           }
      }, []);
 
@@ -29,8 +34,10 @@ export const AuthProvider = ({ children }) => {
                     setUser({ token: data.token });
                     localStorage.setItem("user", JSON.stringify(data));
                }
+               return data;
           } catch (error) {
                console.error("Login failed:", error);
+               return null;
           }
      };
 
@@ -39,10 +46,6 @@ export const AuthProvider = ({ children }) => {
           localStorage.removeItem("user");
           setUser(null);
      };
-
-     useEffect(() => {
-          console.log("Logged out!!!");
-     }, [logout, user]);
 
      const isTokenExpired = (token) => {
           if (!token) return true;

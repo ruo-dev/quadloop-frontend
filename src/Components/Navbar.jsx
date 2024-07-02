@@ -4,14 +4,12 @@ import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import useGetAllCartItems from "../hooks/Cart/useGetAllCartItems";
 import { useAuthContext } from "../context/AuthContext";
 import Cookies from "js-cookie";
 
-const Navbar = () => {
+const Navbar = ({ cartItems }) => {
      const [state, setState] = useState(false);
      const auth = useAuthContext();
-     const { data } = useGetAllCartItems();
      const token = Cookies.get("jwt");
 
      const navigation = [
@@ -24,9 +22,11 @@ const Navbar = () => {
           { title: "Contact", path: "../#contact" },
      ];
 
+     console.log("item length: ", cartItems.length);
+
      useEffect(() => {
           console.log("Component refreshed!");
-     }, [token]);
+     }, [cartItems]);
 
      return (
           <>
@@ -105,15 +105,14 @@ const Navbar = () => {
                                                        fontSize: "1rem",
                                                   }}
                                              />
-                                             {data &&
-                                             data?.length !== 0 &&
-                                             !auth?.isTokenExpired(token) ? (
-                                                  <small className="text-white absolute h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
-                                                       {data?.length}
-                                                  </small>
-                                             ) : (
-                                                  <div className="invisible"></div>
-                                             )}
+                                             {cartItems?.length !== 0 &&
+                                                  !auth.isTokenExpired(
+                                                       token
+                                                  ) && (
+                                                       <small className="text-white absolute h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
+                                                            {cartItems?.length}
+                                                       </small>
+                                                  )}
                                         </Link>
                                    </li>
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>

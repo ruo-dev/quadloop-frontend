@@ -3,26 +3,27 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Neo Sans Std";
-    src: url("Fonts/Neo Sans Std Bold.otf");
-    font-weight: bold;
-  }
-  
-  @font-face {
-    font-family: "Neo Sans Std";
-    src: url("Fonts/Neo Sans Std Light.otf");
-    font-weight: lighter;
-  }
-  
-  @font-face {
-    font-family: "Neo Sans Std";
-    src: url("Fonts/Neo Sans Std Regular.otf");
-    font-weight: normal;
-  }
-
-  :root {
-    font-family: 'Neo Sans Std'; 
+     font-family: "Neo Sans Std";
+     src: url("Fonts/Neo Sans Std Bold.otf");
+     font-weight: bold;
 }
 
+@font-face {
+     font-family: "Neo Sans Std";
+     src: url("Fonts/Neo Sans Std Light.otf");
+     font-weight: lighter;
+}
 
+@font-face {
+     font-family: "Neo Sans Std";
+     src: url("Fonts/Neo Sans Std Regular.otf");
+     font-weight: normal;
+}
 
+:root {
+     font-family: "Neo Sans Std";
+}
+
+html {
+     scroll-behavior: smooth;
+}

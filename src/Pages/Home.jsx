@@ -57,8 +57,6 @@ import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
 
-import useGetAllProducts from "../hooks/Products/useGetAllProducts";
-
 const imageSources = [
      hinckley,
      fate,
@@ -73,7 +71,7 @@ const imageSources = [
      cv,
 ];
 
-const Home = () => {
+const Home = ({ products }) => {
      const settings = {
           dots: true,
           infinite: true,
@@ -81,8 +79,6 @@ const Home = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
      };
-
-     const { data: products } = useGetAllProducts();
 
      const testProducts = [
           { id: 1, image: quadlood01 },
