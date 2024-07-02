@@ -30,7 +30,7 @@ const AffiliateSlider = ({ images, style }) => {
                     style={{ whiteSpace: "nowrap", overflowX: "hidden" }}
                >
                     {images.concat(images).map((image, index) => (
-                         <div key={index} className="flex-shrink-0 px-1 border">
+                         <div key={index} className="flex-shrink-0 px-1">
                               {" "}
                               <img
                                    src={image}
