@@ -19,7 +19,9 @@ const Login = () => {
                console.log("payload", payload);
                const result = await auth?.login(payload);
                if (result) {
-                    navigate(-1);
+                    setTimeout(() => {
+                         navigate(-1);
+                    }, 3000);
                }
           } catch (error) {
                console.log({ error: error });

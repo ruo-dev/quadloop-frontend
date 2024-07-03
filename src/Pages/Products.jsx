@@ -4,7 +4,7 @@ import quadloop01 from "../Assets/products/quadlood01.jpeg";
 // import quadloop03 from "../Assets/products/quadlood03.jpeg";
 import { ProductCard } from "../Components/ProductCard";
 
-const Products = ({ products }) => {
+const Products = ({ products, getCartItems }) => {
      console.log("Products", products);
 
      const productList = useMemo(() => {
@@ -14,6 +14,7 @@ const Products = ({ products }) => {
                     key={product?.id}
                     image={quadloop01}
                     product={product}
+                    getCartItems={getCartItems}
                />
           ));
      }, [products]);

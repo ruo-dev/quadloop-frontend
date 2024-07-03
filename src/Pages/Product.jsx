@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useGetProductById from "../hooks/Products/useGetProductById";
 import useAddToCart from "../hooks/Cart/useAddToCart";
 import { useAuthContext } from "../context/AuthContext";
+import { Circles } from "react-loader-spinner";
 
 export const ProductDetails = ({ products, getCartItems }) => {
      const { productId: id } = useParams();
@@ -60,7 +61,17 @@ export const ProductDetails = ({ products, getCartItems }) => {
      return (
           <main className="min-h-screen">
                {isLoading ? (
-                    <div>Loading...</div>
+                    <div className="mt-[120px] mx-auto h-[30rem] md:h-[40rem] aspect-square grid place-items-center">
+                         <Circles
+                              height="80"
+                              width="80"
+                              color="#0d9488"
+                              ariaLabel="circles-loading"
+                              wrapperStyle={{}}
+                              wrapperClass=""
+                              visible={true}
+                         />
+                    </div>
                ) : (
                     <section className="mt-[120px] flex flex-col lg:flex-row items-center justify-between max-w-screen-xl mx-auto py-6">
                          <div className="p-4 lg:flex-1 w-full">

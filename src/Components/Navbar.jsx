@@ -22,7 +22,7 @@ const Navbar = ({ cartItems }) => {
           { title: "Contact", path: "../#contact" },
      ];
 
-     console.log("item length: ", cartItems.length);
+     console.log("item length: ", cartItems?.length);
 
      useEffect(() => {
           console.log("Component refreshed!");

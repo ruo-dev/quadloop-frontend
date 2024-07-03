@@ -23,12 +23,15 @@ const App = () => {
           <>
                <div className=" bg-white ">
                     <>
-                         <Navbar cartItems={data} getCartItems={fetchData} />
+                         <Navbar
+                              cartItems={data ?? []}
+                              getCartItems={fetchData}
+                         />
                     </>
                     <Routes>
                          <Route
                               path="/"
-                              element={<Home products={products} />}
+                              element={<Home products={products ?? []} />}
                          />
                          <Route
                               path="/login"
@@ -53,13 +56,18 @@ const App = () => {
                          <Route path="/recover" element={<Recover />} />
                          <Route
                               path="/products"
-                              element={<Products products={products} />}
+                              element={
+                                   <Products
+                                        products={products ?? []}
+                                        getCartItems={fetchData}
+                                   />
+                              }
                          />
                          <Route
                               path="/products/:productId"
                               element={
                                    <ProductDetails
-                                        products={products}
+                                        products={products ?? []}
                                         getCartItems={fetchData}
                                    />
                               }
@@ -69,7 +77,7 @@ const App = () => {
                               element={
                                    <>
                                         <Cart
-                                             cartItems={data}
+                                             cartItems={data ?? []}
                                              getCartItems={fetchData}
                                              setICartItems={setData}
                                         />
