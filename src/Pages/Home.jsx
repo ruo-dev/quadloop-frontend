@@ -492,7 +492,7 @@ const Home = ({ products }) => {
                                         className="flex space-x-4"
                                    >
                                         <GeoAltFill
-                                             class="text-amber-500"
+                                             className="text-amber-500"
                                              size={24}
                                         />
                                         <span>
@@ -504,7 +504,7 @@ const Home = ({ products }) => {
                                         className="flex space-x-4"
                                    >
                                         <TelephoneFill
-                                             class="text-amber-500"
+                                             className="text-amber-500"
                                              size={24}
                                         />
                                         <span>+ 234 802 946 3826</span>
@@ -514,7 +514,7 @@ const Home = ({ products }) => {
                                         className="flex space-x-4"
                                    >
                                         <EnvelopeOpenFill
-                                             class="text-amber-500"
+                                             className="text-amber-500"
                                              size={24}
                                         />
                                         <span>hello@quadloop.africa</span>
