@@ -25,8 +25,9 @@ export default function useLogin() {
                });
                return data;
           } catch (error) {
+               console.log("error", error);
                toast.update(toastId, {
-                    render: "login failed! ",
+                    render: "login failed! " + error?.response?.data?.message,
                     type: "error",
                     isLoading: false,
                     autoClose: 3000,

@@ -22,7 +22,7 @@ const ProductSlider = ({ images, style }) => {
                style={{ ...style }}
           >
                <div className="overflow-hidden relative w-full h-[350px]">
-                    {images.map((item, index) => (
+                    {images?.map((item, index) => (
                          <div
                               key={item.id}
                               className={`p-6 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -35,6 +35,7 @@ const ProductSlider = ({ images, style }) => {
                                    src={item.image}
                                    alt={`Product Image ${index + 1}`}
                                    className="w-full h-full aspect-video rounded-md"
+                                   loading="lazy"
                               />
                          </div>
                     ))}

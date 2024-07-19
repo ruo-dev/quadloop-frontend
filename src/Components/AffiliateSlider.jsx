@@ -29,13 +29,17 @@ const AffiliateSlider = ({ images, style }) => {
                     className="flex space-x-16"
                     style={{ whiteSpace: "nowrap", overflowX: "hidden" }}
                >
-                    {images.concat(images).map((image, index) => (
-                         <div key={index} className="flex-shrink-0 px-1">
+                    {images?.concat(images)?.map((image, index) => (
+                         <div
+                              key={index}
+                              className="flex-shrink-0 px-1 w-25 h-10"
+                         >
                               {" "}
                               <img
                                    src={image}
                                    alt={`Slide ${index + 1}`}
-                                   className="w-20 h-10 object-cover"
+                                   className="w-full h-full object-cover"
+                                   loading="lazy"
                               />
                          </div>
                     ))}

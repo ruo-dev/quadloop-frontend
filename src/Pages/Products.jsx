@@ -5,8 +5,6 @@ import quadloop01 from "../Assets/products/quadlood01.jpeg";
 import { ProductCard } from "../Components/ProductCard";
 
 const Products = ({ products, getCartItems }) => {
-     console.log("Products", products);
-
      const productList = useMemo(() => {
           if (!products) return [];
           return products.map((product) => (

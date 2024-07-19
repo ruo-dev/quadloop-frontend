@@ -2,25 +2,27 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useLogin } from "../hooks/Authentication";
+import { Circles } from "react-loader-spinner";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const useAuthContext = () => {
-     const context = useContext(AuthContext);
-     return context;
+     return useContext(AuthContext);
 };
 
 export const AuthProvider = ({ children }) => {
-     const [user, setUser] = useState(null);
+     const [token, setToken] = useState(null);
+     const [isLoading, setIsLoading] = useState(true);
      const { login: loginApi } = useLogin();
 
      useEffect(() => {
           const token = Cookies.get("jwt");
           if (token && !isTokenExpired(token)) {
-               setUser({ token });
+               setToken(token);
           } else {
-               setUser(null);
+               setToken(null);
           }
+          setIsLoading(false);
      }, []);
 
      const login = async ({ email, password }) => {
@@ -31,7 +33,7 @@ export const AuthProvider = ({ children }) => {
                          expires: 1 / 24,
                          path: "/",
                     });
-                    setUser({ token: data.token });
+                    setToken(data.token);
                     localStorage.setItem("user", JSON.stringify(data));
                }
                return data;
@@ -42,9 +44,9 @@ export const AuthProvider = ({ children }) => {
      };
 
      const logout = () => {
-          Cookies.remove("jwt", { path: "/", expires: 1 / 24 });
+          Cookies.remove("jwt", { path: "/" });
           localStorage.removeItem("user");
-          setUser(null);
+          setToken(null);
      };
 
      const isTokenExpired = (token) => {
@@ -59,7 +61,9 @@ export const AuthProvider = ({ children }) => {
      };
 
      return (
-          <AuthContext.Provider value={{ user, login, logout, isTokenExpired }}>
+          <AuthContext.Provider
+               value={{ token, login, logout, isTokenExpired }}
+          >
                {children}
           </AuthContext.Provider>
      );

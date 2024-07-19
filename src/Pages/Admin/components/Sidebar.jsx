@@ -1,35 +1,91 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../../context/AuthContext";
 
 const Sidebar = () => {
+     const { logout } = useAuthContext();
      return (
-          <div className="w-64 bg-gray-800 h-screen text-white">
-               <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
+          <div className="fixed top-0 left-0 w-64 h-full bg-gray-800 text-white p-4">
+               <Link
+                    to="/"
+                    className="cursor-pointer block p-4 text-2xl font-bold"
+               >
+                    QuadLoop
+               </Link>
                <nav>
                     <ul>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/">Dashboard</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab="
+                              >
+                                   Home
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/users">Users</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=users&action=list"
+                              >
+                                   Users
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/roles">Roles</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=roles&action=list"
+                              >
+                                   Roles
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/products">Products</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=products&action=list"
+                              >
+                                   Products
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/categories">Categories</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=categories"
+                              >
+                                   Categories
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/orders">Orders</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=orders"
+                              >
+                                   Orders
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/transactions">Transactions</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=transactions&action=list"
+                              >
+                                   Transactions
+                              </Link>
                          </li>
-                         <li className="p-4 hover:bg-gray-700">
-                              <Link to="/analytics">Analytics</Link>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=analytics&action=list"
+                              >
+                                   Analytics
+                              </Link>
+                         </li>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin"
+                                   onClick={logout}
+                              >
+                                   Log out
+                              </Link>
                          </li>
                     </ul>
                </nav>

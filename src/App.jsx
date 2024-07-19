@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { BackTop } from "antd";
 import { Cart, Home, NoPage, Products } from "./Pages";
-import { Navbar, Footer } from "./Components";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Recover from "./Pages/Recover";
@@ -11,33 +10,38 @@ import { ProductDetails } from "./Pages/Product";
 import Cookies from "js-cookie";
 import { useAuthContext } from "./context/AuthContext";
 import useGetAllCartItems from "./hooks/Cart/useGetAllCartItems";
-import useGetAllProducts from "./hooks/Products/useGetAllProducts";
+import AdminApp from "./Pages/Admin/AdminApp";
+import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
+import { useProducts } from "./context/ProductContext";
+import { Layout } from "./Components/Layout";
+import Distributor from "./Pages/Distributor";
 
 const App = () => {
      const token = Cookies.get("jwt");
      const auth = useAuthContext();
-     const { data, fetchData, setData } = useGetAllCartItems();
-     const { data: products } = useGetAllProducts();
+     const { data: products, fetchData: getProducts } = useProducts();
+     const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
 
      return (
           <>
+               <ScrollToHashElement />
                <div className=" bg-white ">
-                    <>
-                         <Navbar
-                              cartItems={data ?? []}
-                              getCartItems={fetchData}
-                         />
-                    </>
                     <Routes>
                          <Route
                               path="/"
-                              element={<Home products={products ?? []} />}
+                              element={
+                                   <Layout cartItems={data}>
+                                        <Home products={products ?? []} />
+                                   </Layout>
+                              }
                          />
                          <Route
                               path="/login"
                               element={
                                    auth.isTokenExpired(token) ? (
-                                        <Login />
+                                        <Layout cartItems={data}>
+                                             <Login />
+                                        </Layout>
                                    ) : (
                                         <Navigate to={"/"} />
                                    )
@@ -47,46 +51,77 @@ const App = () => {
                               path="/register"
                               element={
                                    auth.isTokenExpired(token) ? (
-                                        <Register />
+                                        <Layout cartItems={data}>
+                                             <Register />
+                                        </Layout>
                                    ) : (
                                         <Navigate to={"/"} />
                                    )
                               }
                          />
-                         <Route path="/recover" element={<Recover />} />
+                         <Route
+                              path="/recover"
+                              element={
+                                   <Layout cartItems={data}>
+                                        <Recover />
+                                   </Layout>
+                              }
+                         />
                          <Route
                               path="/products"
                               element={
-                                   <Products
-                                        products={products ?? []}
-                                        getCartItems={fetchData}
-                                   />
+                                   <Layout cartItems={data}>
+                                        <Products
+                                             products={products ?? []}
+                                             getCartItems={getCartItems}
+                                             getProducts={getProducts}
+                                        />
+                                   </Layout>
                               }
                          />
                          <Route
                               path="/products/:productId"
                               element={
-                                   <ProductDetails
-                                        products={products ?? []}
-                                        getCartItems={fetchData}
-                                   />
+                                   <Layout cartItems={data}>
+                                        <ProductDetails
+                                             products={products ?? []}
+                                             getCartItems={getCartItems}
+                                        />
+                                   </Layout>
                               }
                          />
                          <Route
                               path="/cart"
                               element={
-                                   <>
+                                   <Layout cartItems={data}>
                                         <Cart
                                              cartItems={data ?? []}
-                                             getCartItems={fetchData}
+                                             getCartItems={getCartItems}
                                              setICartItems={setData}
                                         />
-                                   </>
+                                   </Layout>
+                              }
+                         />
+                         <Route
+                              path="/distributor"
+                              element={
+                                   <Layout cartItems={data}>
+                                        <Distributor />
+                                   </Layout>
+                              }
+                         />
+                         <Route
+                              path="/admin"
+                              element={
+                                   !auth.isTokenExpired(token) ? (
+                                        <AdminApp />
+                                   ) : (
+                                        <Navigate to={"/login"} />
+                                   )
                               }
                          />
                          <Route path="/*" element={<NoPage />} />
                     </Routes>
-                    <Footer />
                     <BackTop />
                </div>
           </>

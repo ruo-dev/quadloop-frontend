@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 
 const Navbar = ({ cartItems }) => {
      const [state, setState] = useState(false);
+     const [isAdmin, setIsAdmin] = useState(false);
      const auth = useAuthContext();
      const token = Cookies.get("jwt");
 
@@ -22,10 +23,12 @@ const Navbar = ({ cartItems }) => {
           { title: "Contact", path: "../#contact" },
      ];
 
-     console.log("item length: ", cartItems?.length);
-
      useEffect(() => {
           console.log("Component refreshed!");
+          const user = JSON.parse(localStorage.getItem("user"));
+          if (user?.userRole?.role?.role_name === "admin") {
+               setIsAdmin(true);
+          }
      }, [cartItems]);
 
      return (
@@ -34,7 +37,12 @@ const Navbar = ({ cartItems }) => {
                     <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
                          <div className="flex items-center justify-between py-3 md:py-5 md:block">
                               <Link to={"../"}>
-                                   <img src={Logo} width={200} alt="Quadloop" />
+                                   <img
+                                        src={Logo}
+                                        width={200}
+                                        alt="Quadloop"
+                                        loading="lazy"
+                                   />
                               </Link>
                               <div className="md:hidden">
                                    <button
@@ -100,13 +108,16 @@ const Navbar = ({ cartItems }) => {
                                              to={"../cart"}
                                              className="inline-block relative"
                                         >
-                                             <Cart
-                                                  style={{
-                                                       fontSize: "1rem",
-                                                  }}
-                                             />
+                                             <button>
+                                                  {" "}
+                                                  <Cart
+                                                       style={{
+                                                            fontSize: "1rem",
+                                                       }}
+                                                  />
+                                             </button>
                                              {cartItems?.length !== 0 &&
-                                                  !auth.isTokenExpired(
+                                                  !auth?.isTokenExpired(
                                                        token
                                                   ) && (
                                                        <small className="text-white absolute h-[15px] w-[15px] grid place-items-center font-bold top-[-10px] right-[-5px] rounded-full bg-red-500">
@@ -133,13 +144,25 @@ const Navbar = ({ cartItems }) => {
                                                   </li>
                                              </>
                                         ) : (
-                                             <li>
-                                                  <ButtonYellow
-                                                       link="../"
-                                                       text="Logout"
-                                                       onClick={auth?.logout}
-                                                  />
-                                             </li>
+                                             <>
+                                                  <li>
+                                                       <ButtonYellow
+                                                            link="../"
+                                                            text="Logout"
+                                                            onClick={
+                                                                 auth?.logout
+                                                            }
+                                                       />
+                                                  </li>
+                                                  {isAdmin && (
+                                                       <li>
+                                                            <ButtonYellow
+                                                                 link="../admin?tab=dashboard"
+                                                                 text="Dashboard"
+                                                            />
+                                                       </li>
+                                                  )}
+                                             </>
                                         )}
                                    </div>
                               </ul>

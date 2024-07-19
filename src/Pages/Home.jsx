@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import {
      About1,
      About2,
@@ -56,6 +56,7 @@ import quadlood01 from "../Assets/products/quadlood01.jpeg";
 import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
+import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 
 const imageSources = [
      hinckley,
@@ -93,10 +94,10 @@ const Home = ({ products }) => {
                : product?.product_image_url ?? quadlood01,
      }));
 
-     console.log({ productImages });
-
      return (
           <div>
+               <ScrollToHashElement />
+
                {/*Hero*/}
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
@@ -123,6 +124,7 @@ const Home = ({ products }) => {
                                    src={bgquadlood03}
                                    alt="Solar Lamp"
                                    className="lg:-ml-24 w-30"
+                                   loading="lazy"
                               />
                          </div>
                     </div>
@@ -148,7 +150,11 @@ const Home = ({ products }) => {
 
                          <div className="flex justify-center">
                               <a href="#about">
-                                   <img src={Scroll} alt="arrow down" />
+                                   <img
+                                        src={Scroll}
+                                        alt="arrow down"
+                                        loading="lazy"
+                                   />
                               </a>
                          </div>
                     </div>
@@ -200,36 +206,43 @@ const Home = ({ products }) => {
                          <div className="slider-container  lg:w-1/2">
                               <Slider {...settings}>
                                    <img
+                                        loading="lazy"
                                         src={About1}
                                         alt=""
                                         className="object-cover object-top h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About2}
                                         alt=""
                                         className="object-cover object-top h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About3}
                                         alt=""
                                         className="object-cover object-top h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About4}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About5}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About6}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
                                    />
                                    <img
+                                        loading="lazy"
                                         src={About7}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
@@ -301,12 +314,16 @@ const Home = ({ products }) => {
                          </h2>
 
                          <div className="flex justify-center">
-                              <img src={SDGs} alt="SDGs" />
+                              <img loading="lazy" src={SDGs} alt="SDGs" />
                          </div>
 
                          <div className="flex justify-center">
                               <a href="#about">
-                                   <img src={Scroll} alt="arrow down" />
+                                   <img
+                                        loading="lazy"
+                                        src={Scroll}
+                                        alt="arrow down"
+                                   />
                               </a>
                          </div>
                     </div>

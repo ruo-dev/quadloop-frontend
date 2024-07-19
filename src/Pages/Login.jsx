@@ -6,22 +6,25 @@ import ErrorBoundary from "../Components/ErrorBoundry";
 import { useAuthContext } from "../context/AuthContext";
 
 const Login = () => {
-     const auth = useAuthContext();
+     const { login } = useAuthContext();
      const navigate = useNavigate();
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
-
      const payload = { email, password };
 
      const onSubmit = async (e) => {
           e.preventDefault();
           try {
-               console.log("payload", payload);
-               const result = await auth?.login(payload);
+               const result = await login(payload);
                if (result) {
-                    setTimeout(() => {
-                         navigate(-1);
-                    }, 3000);
+                    if (result?.userRole?.role?.role_name === "admin") {
+                         setTimeout(() => {
+                              navigate("/admin?tab=dashboard");
+                         }, 3000);
+                    } else
+                         setTimeout(() => {
+                              navigate(-1);
+                         }, 3000);
                }
           } catch (error) {
                console.log({ error: error });
@@ -43,7 +46,7 @@ const Login = () => {
                     theme="light"
                />
                <section
-                    className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
+                    className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 min-h-screen"
                     style={{
                          backgroundImage: `url(${hero})`,
                     }}

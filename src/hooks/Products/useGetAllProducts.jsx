@@ -8,7 +8,6 @@ export default function useGetAllProducts({
      limit = 10,
 } = {}) {
      const env = defaultEnvOptions();
-     // const url = `${env.PRODUCTS_URL}?category=${category}&offset=${offset}&limit=${limit}`;
      const url = `${env.PRODUCTS_URL}`;
 
      const [data, setData] = useState([]);
