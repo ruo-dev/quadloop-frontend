@@ -8,10 +8,10 @@ export const ProductForm = ({ categories, getProducts }) => {
      const [loading, setLoading] = useState(false);
      const [productName, setProductName] = useState("");
      const [description, setDescription] = useState("");
-     const [regularPrice, setRegularPrice] = useState(null);
-     const [discountPrice, setDiscountPrice] = useState(null);
-     const [quantity, setQuantity] = useState(null);
-     const [weight, setWeight] = useState(null);
+     const [regularPrice, setRegularPrice] = useState("");
+     const [discountPrice, setDiscountPrice] = useState("");
+     const [quantity, setQuantity] = useState("");
+     const [weight, setWeight] = useState("");
      const [tags, setTags] = useState([]);
      const [category, setCategory] = useState("");
      const [images, setImages] = useState([]);
@@ -33,10 +33,10 @@ export const ProductForm = ({ categories, getProducts }) => {
      const clearFormFields = () => {
           setProductName("");
           setDescription("");
-          setRegularPrice(null);
-          setDiscountPrice(null);
-          setQuantity(null);
-          setWeight(null);
+          setRegularPrice("");
+          setDiscountPrice("");
+          setQuantity("");
+          setWeight("");
           setTags([]);
           setCategory("");
           setImages([]);

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const UserForm = ({ formName }) => {
+const UserForm = ({ formName, roles }) => {
      const [form, setForm] = useState({
           username: "",
           firstName: "",
           lastName: "",
           email: "",
           phoneNumber: "",
-          role: "User",
+          role: "",
      });
 
      const handleInputChange = (e) => {
@@ -106,9 +106,11 @@ const UserForm = ({ formName }) => {
                                         onChange={handleInputChange}
                                    >
                                         <option>Select a Role</option>
-                                        <option value="User">User</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="Editor">Editor</option>
+                                        {roles?.map((role) => (
+                                             <option value={role.id}>
+                                                  {role.role_name}
+                                             </option>
+                                        ))}
                                    </select>
                               </div>
                               <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">

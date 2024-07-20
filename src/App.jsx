@@ -11,10 +11,10 @@ import Cookies from "js-cookie";
 import { useAuthContext } from "./context/AuthContext";
 import useGetAllCartItems from "./hooks/Cart/useGetAllCartItems";
 import AdminApp from "./Pages/Admin/AdminApp";
-import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 import { useProducts } from "./context/ProductContext";
 import { Layout } from "./Components/Layout";
 import Distributor from "./Pages/Distributor";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
      const token = Cookies.get("jwt");
@@ -24,7 +24,18 @@ const App = () => {
 
      return (
           <>
-               <ScrollToHashElement />
+               <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+               />
                <div className=" bg-white ">
                     <Routes>
                          <Route

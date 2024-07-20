@@ -8,9 +8,11 @@ import Orders from "../Orders";
 import Transactions from "../Transactions";
 import Analytics from "../Analytics";
 import Categories from "../Categories";
+import useGetAllRoles from "../../../hooks/Roles/useGetAllRoles";
 
 const Content = ({ categories, products, getProducts }) => {
      const { search } = useLocation();
+     const { data: roles, fetchData: getRoles } = useGetAllRoles();
      const [tab, setTab] = useState("");
      const [action, setAction] = useState("");
      const [activeTab, setActiveTab] = useState(null);
@@ -41,13 +43,22 @@ const Content = ({ categories, products, getProducts }) => {
           switch (tab) {
                case "":
                case Tabs.dashboard:
-                    setActiveTab(<Dashboard />);
+                    setActiveTab(<Dashboard tab={tab} action={action} />);
                     break;
                case Tabs.users:
-                    setActiveTab(<Users />);
+                    setActiveTab(
+                         <Users tab={tab} action={action} roles={roles} />
+                    );
                     break;
                case Tabs.roles:
-                    setActiveTab(<Roles />);
+                    setActiveTab(
+                         <Roles
+                              tab={tab}
+                              action={action}
+                              roles={roles}
+                              getRoles={getRoles}
+                         />
+                    );
                     break;
                case Tabs.categories:
                     setActiveTab(<Categories categories={categories} />);
@@ -64,16 +75,16 @@ const Content = ({ categories, products, getProducts }) => {
                     );
                     break;
                case Tabs.orders:
-                    setActiveTab(<Orders />);
+                    setActiveTab(<Orders tab={tab} action={action} />);
                     break;
                case Tabs.transactions:
-                    setActiveTab(<Transactions />);
+                    setActiveTab(<Transactions tab={tab} action={action} />);
                     break;
                case Tabs.analytics:
-                    setActiveTab(<Analytics />);
+                    setActiveTab(<Analytics tab={tab} action={action} />);
                     break;
                default:
-                    setActiveTab(<Dashboard />);
+                    setActiveTab(<Dashboard tab={tab} action={action} />);
                     break;
           }
      }, [tab, action]);

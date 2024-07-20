@@ -17,14 +17,9 @@ const Login = () => {
           try {
                const result = await login(payload);
                if (result) {
-                    if (result?.userRole?.role?.role_name === "admin") {
-                         setTimeout(() => {
-                              navigate("/admin?tab=dashboard");
-                         }, 3000);
-                    } else
-                         setTimeout(() => {
-                              navigate(-1);
-                         }, 3000);
+                    setTimeout(() => {
+                         navigate(-1);
+                    }, 3000);
                }
           } catch (error) {
                console.log({ error: error });
@@ -33,18 +28,6 @@ const Login = () => {
 
      return (
           <ErrorBoundary>
-               <ToastContainer
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-               />
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 min-h-screen"
                     style={{

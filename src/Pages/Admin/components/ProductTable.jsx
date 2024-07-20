@@ -1,36 +1,24 @@
 import React from "react";
+import { MdEdit } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
-// const products = [
-//      {
-//           id: 1,
-//           product: "Product 1",
-//           category: "Category 1",
-//           status: "Available",
-//           price: "$10",
-//           rating: 4,
-//      },
-//      {
-//           id: 2,
-//           product: "Product 2",
-//           category: "Category 2",
-//           status: "Unavailable",
-//           price: "$20",
-//           rating: 3,
-//      },
-//      {
-//           id: 3,
-//           product: "Product 3",
-//           category: "Category 3",
-//           status: "Available",
-//           price: "$30",
-//           rating: 5,
-//      },
-//      // Add more products as needed
-// ];
+import useDeleteProduct from "../../../hooks/Products/useDeleteProduct";
+import { useProducts } from "../../../context/ProductContext";
 
 const ProductTable = ({ products }) => {
-     console.log({ products });
+     const { deleteProduct } = useDeleteProduct();
+     const { fetchData: getProducts } = useProducts();
+
+     const handleDeleteProduct = async (productId) => {
+          try {
+               const result = await deleteProduct(productId);
+               if (result) {
+                    getProducts();
+               }
+          } catch (error) {
+               console.error("error", error.message);
+          }
+     };
      return (
           <div className="overflow-x-auto">
                <div className="flex items-center justify-between my-2">
@@ -86,11 +74,18 @@ const ProductTable = ({ products }) => {
                                         {product.rating}
                                    </td>
                                    <td className="py-3 px-6 text-center">
-                                        <button className="bg-blue-500 text-white py-1 px-3 rounded text-xs">
-                                             Edit
+                                        <button className=" py-1 px-3 rounded text-xs">
+                                             <MdEdit />
                                         </button>
-                                        <button className="bg-red-500 text-white py-1 px-3 rounded text-xs ml-2">
-                                             Delete
+                                        <button
+                                             onClick={() => {
+                                                  handleDeleteProduct(
+                                                       product.id
+                                                  );
+                                             }}
+                                             className="bg-red-500 text-white py-1 px-3 rounded text-xs ml-2"
+                                        >
+                                             <RiDeleteBinLine />
                                         </button>
                                    </td>
                               </tr>
