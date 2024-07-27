@@ -44,10 +44,10 @@ export default function useAddProduct() {
 
                     console.log(data, status);
                     if (status !== 201)
-                         throw new Error("Failed to add to cart");
+                         throw new Error("Failed to create product");
 
                     toast.update(toastId, {
-                         render: "Success: Added to cart!",
+                         render: "Success: Create product!",
                          type: "success",
                          isLoading: false,
                          autoClose: 3000,
@@ -57,7 +57,7 @@ export default function useAddProduct() {
                } catch (error) {
                     console.error(error);
                     toast.update(toastId, {
-                         render: "Failed: Added to cart!",
+                         render: "Failed: " + error?.response?.data?.message,
                          type: "error",
                          isLoading: false,
                          autoClose: 3000,

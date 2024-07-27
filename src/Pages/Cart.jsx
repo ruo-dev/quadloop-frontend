@@ -8,7 +8,7 @@ import useDeleteCartItem from "../hooks/Cart/useDeleteCartItem";
 import useCheckoutPayment from "../hooks/Cart/useCheckoutCart";
 
 const Cart = ({ cartItems, getCartItems }) => {
-     console.log("item: ", cartItems);
+     const token = Cookies.get("jwt");
      const { updateCartItem } = useUpdateCartItem();
      const { deleteCartItem } = useDeleteCartItem();
      const { handlePaystackPayment } = useCheckoutPayment();
@@ -83,7 +83,8 @@ const Cart = ({ cartItems, getCartItems }) => {
                </h1>
                <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row md:space-x-4">
                     <div className="w-full md:w-2/3 my-6 md:self-start">
-                         {cartItems?.length === 0 ? (
+                         {auth.isTokenExpired(token) &&
+                         cartItems?.length === 0 ? (
                               <p>Your cart is empty</p>
                          ) : (
                               cartItems?.map((item) => (

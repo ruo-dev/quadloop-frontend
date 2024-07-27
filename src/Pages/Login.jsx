@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { hero } from "../Assets";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import ErrorBoundary from "../Components/ErrorBoundry";
 import { useAuthContext } from "../context/AuthContext";
 

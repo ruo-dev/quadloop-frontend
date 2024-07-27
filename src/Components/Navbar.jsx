@@ -103,6 +103,13 @@ const Navbar = ({ cartItems }) => {
                                              </li>
                                         );
                                    })}
+                                   {isAdmin && !auth?.isTokenExpired(token) && (
+                                        <li>
+                                             <Link to={"/admin?tab=dashboard"}>
+                                                  Dashboard
+                                             </Link>
+                                        </li>
+                                   )}
                                    <li className="my-3">
                                         <Link
                                              to={"../cart"}
@@ -126,6 +133,7 @@ const Navbar = ({ cartItems }) => {
                                                   )}
                                         </Link>
                                    </li>
+
                                    <span className="hidden w-px h-6 bg-gray-300 md:block"></span>
                                    <div className="space-y-3 items-center gap-x-2 md:flex md:space-y-0">
                                         {auth?.isTokenExpired(token) ? (
@@ -146,22 +154,23 @@ const Navbar = ({ cartItems }) => {
                                         ) : (
                                              <>
                                                   <li>
+                                                       <div>
+                                                            <button
+                                                                 className="block py-2 px-4 font-medium text-center text-white bg-amber-500  active:shadow-none rounded-full shadow md:inline"
+                                                                 onClick={
+                                                                      auth?.logout
+                                                                 }
+                                                            >
+                                                                 Logout
+                                                            </button>
+                                                       </div>
+                                                  </li>
+                                                  <li>
                                                        <ButtonYellow
-                                                            link="../"
-                                                            text="Logout"
-                                                            onClick={
-                                                                 auth?.logout
-                                                            }
+                                                            link="../products"
+                                                            text="Shop"
                                                        />
                                                   </li>
-                                                  {isAdmin && (
-                                                       <li>
-                                                            <ButtonYellow
-                                                                 link="../admin?tab=dashboard"
-                                                                 text="Dashboard"
-                                                            />
-                                                       </li>
-                                                  )}
                                              </>
                                         )}
                                    </div>

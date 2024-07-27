@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import useCreateUser from "../../../hooks/users/useCreateUser";
+import { useRoles } from "../../../context/RoleContext";
 
-const UserForm = ({ formName, roles }) => {
+const UserForm = ({ formName, fetchUsers }) => {
+     const { roles } = useRoles();
+     const { createUser } = useCreateUser();
      const [form, setForm] = useState({
-          username: "",
           firstName: "",
           lastName: "",
           email: "",
@@ -18,9 +21,26 @@ const UserForm = ({ formName, roles }) => {
           });
      };
 
-     const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
           e.preventDefault();
-          // Handle form submission logic here
+          const payload = {
+               first_name: form.firstName,
+               last_name: form.lastName,
+               email: form.email,
+               phone_number: form.phoneNumber,
+               role_id: form.role,
+          };
+          const result = await createUser(payload);
+          if (result) {
+               fetchUsers();
+               setForm({
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    phoneNumber: "",
+                    role: "",
+               });
+          }
           console.log("Form submitted:", form);
      };
 
@@ -35,18 +55,6 @@ const UserForm = ({ formName, roles }) => {
                               {formName ?? "Create User"}
                          </h3>
                          <form onSubmit={handleSubmit}>
-                              <div className="mb-4">
-                                   <label className="block text-gray-700">
-                                        Username
-                                   </label>
-                                   <input
-                                        className="w-full p-2 border rounded"
-                                        type="text"
-                                        name="username"
-                                        value={form.username}
-                                        onChange={handleInputChange}
-                                   />
-                              </div>
                               <div className="mb-4">
                                    <label className="block text-gray-700">
                                         First Name
@@ -107,7 +115,10 @@ const UserForm = ({ formName, roles }) => {
                                    >
                                         <option>Select a Role</option>
                                         {roles?.map((role) => (
-                                             <option value={role.id}>
+                                             <option
+                                                  key={role.id}
+                                                  value={role.id}
+                                             >
                                                   {role.role_name}
                                              </option>
                                         ))}

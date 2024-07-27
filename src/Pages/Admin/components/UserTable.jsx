@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
+import useDeleteUser from "../../../hooks/users/useDeleteUser";
+import { useUsers } from "../../../context/UserContext";
 
-const UserTable = ({ users }) => {
+const UserTable = () => {
+     const { deleteUser } = useDeleteUser();
+     const { users, fetchUsers } = useUsers();
+
+     useEffect(() => {
+          if (users.length === 0) {
+               fetchUsers();
+          }
+     }, []);
+     const handleDeleteUser = async (userId) => {
+          try {
+               const result = await deleteUser(userId);
+               if (result) {
+                    fetchUsers();
+               }
+          } catch (error) {
+               console.log("error: ", error.message);
+          }
+     };
      return (
           <div className="overflow-x-auto">
                <div className="flex items-center justify-between my-2">
@@ -33,32 +53,32 @@ const UserTable = ({ users }) => {
                     <tbody className="text-gray-600 text-sm font-light">
                          {users?.map((userData) => (
                               <tr
-                                   key={userData.user.id}
+                                   key={userData?.user?.id}
                                    className="border-b border-gray-200 hover:bg-gray-100"
                               >
                                    <td className="py-3 px-6 text-left whitespace-nowrap">
-                                        {userData.user.id}
+                                        {userData?.user?.id}
                                    </td>
                                    <td className="py-3 px-6 text-left">
-                                        {userData.user.first_name ?? "John"}
+                                        {userData?.user?.first_name}
                                    </td>
                                    <td className="py-3 px-6 text-left">
-                                        {userData.user.last_name ?? "Doe"}
+                                        {userData?.user?.last_name}
                                    </td>
                                    <td className="py-3 px-6 text-left">
-                                        {userData.user.email}
+                                        {userData?.user?.email}
                                    </td>
                                    <td className="py-3 px-6 text-left">
-                                        {userData.role.role_name}
+                                        {userData?.role?.role_name}
                                    </td>
                                    <td
                                         className={`py-3 px-6 text-left ${
-                                             userData.user.active
+                                             userData?.user?.active
                                                   ? "text-green-500"
                                                   : "text-red-500"
                                         }`}
                                    >
-                                        {userData.user.active
+                                        {userData?.user?.active
                                              ? "Active"
                                              : "Inactive"}
                                    </td>
@@ -66,7 +86,14 @@ const UserTable = ({ users }) => {
                                         <button className=" py-1 px-3 rounded text-xs">
                                              <MdEdit />
                                         </button>
-                                        <button className="bg-red-500 text-white py-1 px-3 rounded text-xs ml-2">
+                                        <button
+                                             onClick={() =>
+                                                  handleDeleteUser(
+                                                       userData?.user?.id
+                                                  )
+                                             }
+                                             className="bg-red-500 text-white py-1 px-3 rounded text-xs ml-2"
+                                        >
                                              <RiDeleteBinLine />
                                         </button>
                                    </td>

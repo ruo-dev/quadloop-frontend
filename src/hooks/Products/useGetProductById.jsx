@@ -28,7 +28,7 @@ export default function useGetProductById({ id }) {
           };
 
           fetchData();
-     }, [url]);
+     }, []);
 
      return {
           product,

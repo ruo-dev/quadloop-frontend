@@ -124,10 +124,10 @@ const App = () => {
                          <Route
                               path="/admin"
                               element={
-                                   !auth.isTokenExpired(token) ? (
-                                        <AdminApp />
-                                   ) : (
+                                   auth.isTokenExpired(token) ? (
                                         <Navigate to={"/login"} />
+                                   ) : (
+                                        <AdminApp />
                                    )
                               }
                          />

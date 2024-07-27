@@ -4,16 +4,15 @@ import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 import Cookies from "js-cookie";
 
-export default function useAddToCart() {
+export default function useAddCategory() {
      const env = defaultEnvOptions();
      const token = Cookies.get("jwt");
-     const addToCart = useCallback(
+
+     const addCategory = useCallback(
           async (payload) => {
                const toastId = toast.loading("Setting site data...");
                try {
-                    const url = payload.referrer
-                         ? `${env.CART_URL}?referrer=${payload.referrer}`
-                         : env.CART_URL;
+                    const url = `${env.CATEGORIES_URL}`;
 
                     const {
                          data: { data },
@@ -24,11 +23,11 @@ export default function useAddToCart() {
                          },
                     });
 
-                    if (status !== 201)
-                         throw new Error("Failed to add to cart");
+                    console.log(data, status);
+                    if (status !== 201) throw new Error("Failed to category!");
 
                     toast.update(toastId, {
-                         render: "Success: Added to cart!",
+                         render: "Success: Added category!",
                          type: "success",
                          isLoading: false,
                          autoClose: 3000,
@@ -38,7 +37,7 @@ export default function useAddToCart() {
                } catch (error) {
                     console.error(error);
                     toast.update(toastId, {
-                         render: "Failed: " + error?.response?.data?.message,
+                         render: "Failed: Added category!",
                          type: "error",
                          isLoading: false,
                          autoClose: 3000,
@@ -46,10 +45,10 @@ export default function useAddToCart() {
                     return false;
                }
           },
-          [env.CART_URL, token]
+          [env.CATEGORIES_URL, token]
      );
 
      return {
-          addToCart,
+          addCategory,
      };
 }

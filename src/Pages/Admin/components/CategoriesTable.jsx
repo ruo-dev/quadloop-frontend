@@ -2,27 +2,24 @@ import React, { useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import useDeleteRole from "../../../hooks/Roles/useDeleteRole";
-import { useRoles } from "../../../context/RoleContext";
-import { useUsers } from "../../../context/UserContext";
+import { useCategories } from "../../../context/CategoryContext";
+import useDeleteCategory from "../../../hooks/Categories/useDeleteCategory";
 
-const RoleTable = () => {
-     const { deleteRole } = useDeleteRole();
-     const { roles, getRoles } = useRoles();
-     const { fetchUsers } = useUsers();
+const CategoriesTable = () => {
+     const { deleteCategory } = useDeleteCategory();
+     const { data: categories, fetchData: getCategories } = useCategories();
 
      useEffect(() => {
-          if (roles.length === 0) {
-               getRoles();
+          if (categories.length == 0) {
+               getCategories();
           }
      }, []);
 
-     const handleDeleteRole = async (roleId) => {
+     const handleCategoryDelete = async (categoryId) => {
           try {
-               const result = await deleteRole(roleId);
+               const result = await deleteCategory(categoryId);
                if (result) {
-                    getRoles();
-                    fetchUsers();
+                    getCategories();
                }
           } catch (error) {
                console.log("{ error }", error.message);
@@ -31,10 +28,10 @@ const RoleTable = () => {
      return (
           <div className="overflow-x-auto">
                <div className="flex items-center justify-between my-2">
-                    <h1 className="text-xl my-3">Role List</h1>
+                    <h1 className="text-xl my-3">Category List</h1>
                     <Link
                          className="py-2 px-6 bg-blue-500 text-white rounded-md"
-                         to="/admin?tab=roles&action=create"
+                         to="/admin?tab=categories&action=create"
                     >
                          Create
                     </Link>
@@ -43,7 +40,9 @@ const RoleTable = () => {
                <table className="min-w-full bg-white border border-gray-200">
                     <thead>
                          <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                              <th className="py-3 px-6 text-left">Role Name</th>
+                              <th className="py-3 px-6 text-left">
+                                   Category Name
+                              </th>
                               <th className="py-3 px-6 text-left">
                                    Description
                               </th>
@@ -51,16 +50,16 @@ const RoleTable = () => {
                          </tr>
                     </thead>
                     <tbody className="text-gray-600 text-sm font-light">
-                         {roles?.map((role) => (
+                         {categories?.map((category) => (
                               <tr
-                                   key={role.id}
+                                   key={category.id}
                                    className="border-b border-gray-200 hover:bg-gray-100"
                               >
                                    <td className="py-3 px-6 text-left whitespace-nowrap">
-                                        {role.role_name}
+                                        {category.category_name}
                                    </td>
                                    <td className="py-3 px-6 text-left">
-                                        {role.description}
+                                        {category.category_description}
                                    </td>
                                    <td className="py-3 px-6 text-center">
                                         <button className="py-1 px-3 rounded text-xs">
@@ -68,7 +67,9 @@ const RoleTable = () => {
                                         </button>
                                         <button
                                              onClick={() =>
-                                                  handleDeleteRole(role.id)
+                                                  handleCategoryDelete(
+                                                       category.id
+                                                  )
                                              }
                                              className="bg-red-500 text-white py-1 px-3 rounded text-xs ml-2"
                                         >
@@ -83,4 +84,4 @@ const RoleTable = () => {
      );
 };
 
-export default RoleTable;
+export default CategoriesTable;

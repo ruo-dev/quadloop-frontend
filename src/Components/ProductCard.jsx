@@ -15,9 +15,6 @@ export const ProductCard = ({ image, style, product, getCartItems }) => {
      const payload = {
           product_id: product?.id ?? "",
           quantity: 1,
-          price: product?.discount_price
-               ? product?.discount_price
-               : product?.regular_price,
      };
 
      const addItemToCart = async () => {

@@ -49,20 +49,20 @@ const Sidebar = () => {
                          <li className="hover:bg-gray-700">
                               <Link
                                    className="w-full h-full block p-4"
-                                   to="/admin?tab=categories"
+                                   to="/admin?tab=categories&action=list"
                               >
                                    Categories
                               </Link>
                          </li>
-                         <li className="hover:bg-gray-700">
+                         {/* <li className="hover:bg-gray-700">
                               <Link
                                    className="w-full h-full block p-4"
-                                   to="/admin?tab=orders"
+                                   to="/admin?tab=orders&action=list"
                               >
                                    Orders
                               </Link>
                          </li>
-                         <li className="hover:bg-gray-700">
+                          <li className="hover:bg-gray-700">
                               <Link
                                    className="w-full h-full block p-4"
                                    to="/admin?tab=transactions&action=list"
@@ -77,7 +77,7 @@ const Sidebar = () => {
                               >
                                    Analytics
                               </Link>
-                         </li>
+                         </li> */}
                          <li className="hover:bg-gray-700">
                               <Link
                                    className="w-full h-full block p-4"

@@ -426,14 +426,6 @@ const Home = ({ products }) => {
                               src="https://371881b455594e5f9a575a2a8e27d4b6.elf.site"
                               width="100%"
                               height="460"
-                              frameborder="0"
-                         ></iframe>
-                         <iframe
-                              title="premium times"
-                              src="https://www.premiumtimesng.com/opinion/545738-circular-economy-a-seat-at-the-table-for-african-entrepreneurs-by-natalie-beinisch.html?tztc=1e"
-                              width="100%"
-                              height="460"
-                              frameborder="0"
                          ></iframe>
                     </div>
                     <div className="flex justify-center items-center mx-auto">

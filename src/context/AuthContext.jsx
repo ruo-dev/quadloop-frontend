@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useLogin } from "../hooks/Authentication";
-import { Circles } from "react-loader-spinner";
 
 const AuthContext = createContext(null);
 
@@ -47,6 +46,7 @@ export const AuthProvider = ({ children }) => {
           Cookies.remove("jwt", { path: "/" });
           localStorage.removeItem("user");
           setToken(null);
+          window.location.reload();
      };
 
      const isTokenExpired = (token) => {

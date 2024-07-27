@@ -8,11 +8,15 @@ import Orders from "../Orders";
 import Transactions from "../Transactions";
 import Analytics from "../Analytics";
 import Categories from "../Categories";
-import useGetAllRoles from "../../../hooks/Roles/useGetAllRoles";
 
-const Content = ({ categories, products, getProducts }) => {
+const Content = ({
+     categories,
+     products,
+     getProducts,
+     roles = [],
+     getRoles,
+}) => {
      const { search } = useLocation();
-     const { data: roles, fetchData: getRoles } = useGetAllRoles();
      const [tab, setTab] = useState("");
      const [action, setAction] = useState("");
      const [activeTab, setActiveTab] = useState(null);

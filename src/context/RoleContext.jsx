@@ -1,9 +1,17 @@
-import { useState, useEffect, useCallback } from "react";
-import api from "../../utils/api";
-import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
+import React, {
+     createContext,
+     useContext,
+     useState,
+     useEffect,
+     useCallback,
+} from "react";
+import api from "../utils/api";
+import { defaultEnvOptions } from "../utils/defaultEnvOptions";
 import Cookies from "js-cookie";
 
-export default function useGetAllRoles({ offset = 0, limit = 10 } = {}) {
+const RolesContext = createContext();
+
+export const RolesProvider = ({ children }) => {
      const env = defaultEnvOptions();
      const token = Cookies.get("jwt");
      const url = `${env.ROLES_URL}`;
@@ -31,16 +39,21 @@ export default function useGetAllRoles({ offset = 0, limit = 10 } = {}) {
           } finally {
                setIsLoading(false);
           }
-     }, []);
+     }, [token, url]);
 
      useEffect(() => {
           fetchData();
      }, [fetchData]);
 
-     return {
-          data,
-          error,
-          isLoading,
-          fetchData,
-     };
-}
+     return (
+          <RolesContext.Provider
+               value={{ roles: data, error, isLoading, getRoles: fetchData }}
+          >
+               {children}
+          </RolesContext.Provider>
+     );
+};
+
+export const useRoles = () => {
+     return useContext(RolesContext);
+};

@@ -26,7 +26,9 @@ const Roles = ({ tab, action, roles, getRoles }) => {
           switch (currentAction) {
                case "":
                case Actions.list:
-                    setComponent(<RoleTable roles={roles} />);
+                    setComponent(
+                         <RoleTable roles={roles} getRoles={getRoles} />
+                    );
                     break;
                case Actions.create:
                     setComponent(<CreateRoleForm getRoles={getRoles} />);

@@ -1,8 +1,11 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
 import Content from "./components/Content";
+import useGetAllRoles from "../../hooks/Roles/useGetAllRoles";
 
 function AdminApp({ categories, products, getProducts }) {
+     const { data: roles, fetchData: getRoles } = useGetAllRoles();
+
      return (
           <>
                <div className="min-h-screen flex overflow-hidden">
@@ -12,6 +15,8 @@ function AdminApp({ categories, products, getProducts }) {
                               categories={categories}
                               products={products}
                               getProducts={getProducts}
+                              roles={roles}
+                              getRoles={getRoles}
                          />
                     </div>
                </div>

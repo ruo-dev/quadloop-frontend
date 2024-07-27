@@ -1,34 +1,34 @@
+// src/hooks/Cart/useDeleteRole.js
 import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 import Cookies from "js-cookie";
+import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
-export default function useAddToCart() {
+export default function useDeleteUser() {
      const env = defaultEnvOptions();
      const token = Cookies.get("jwt");
-     const addToCart = useCallback(
-          async (payload) => {
-               const toastId = toast.loading("Setting site data...");
+
+     const deleteUser = useCallback(
+          async (userId) => {
+               const toastId = toast.loading("Deleting user...");
                try {
-                    const url = payload.referrer
-                         ? `${env.CART_URL}?referrer=${payload.referrer}`
-                         : env.CART_URL;
+                    const url = `${env.USERS_URL}/${userId}`;
 
                     const {
                          data: { data },
                          status,
-                    } = await api().post(url, payload, {
+                    } = await api().delete(url, {
                          headers: {
                               Authorization: `Bearer ${token}`,
                          },
                     });
 
-                    if (status !== 201)
-                         throw new Error("Failed to add to cart");
+                    if (status !== 200)
+                         throw new Error("Failed to delete user");
 
                     toast.update(toastId, {
-                         render: "Success: Added to cart!",
+                         render: "Success: user deleted!",
                          type: "success",
                          isLoading: false,
                          autoClose: 3000,
@@ -36,20 +36,22 @@ export default function useAddToCart() {
 
                     return true;
                } catch (error) {
-                    console.error(error);
                     toast.update(toastId, {
-                         render: "Failed: " + error?.response?.data?.message,
+                         render:
+                              "Failed: Delete user! " +
+                              error?.response?.data?.message,
                          type: "error",
                          isLoading: false,
                          autoClose: 3000,
                     });
+                    console.error("Delete User error:", error);
                     return false;
                }
           },
-          [env.CART_URL, token]
+          [env.USERS_URL, token]
      );
 
      return {
-          addToCart,
+          deleteUser,
      };
 }

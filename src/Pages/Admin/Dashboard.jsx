@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "./components/common/Navbar";
 import Table from "./components/OrderTable";
 
 const Dashboard = () => {

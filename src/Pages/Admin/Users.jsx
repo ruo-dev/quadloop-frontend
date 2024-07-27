@@ -3,10 +3,12 @@ import UserForm from "./components/UserForm";
 import { useLocation } from "react-router-dom";
 import UserTable from "./components/UserTable";
 import { useUsers } from "../../context/UserContext";
+import { useRoles } from "../../context/RoleContext";
 
-const Users = ({ tab, action, roles }) => {
+const Users = ({ tab, action }) => {
      const { search } = useLocation();
-     const { users } = useUsers();
+     const { users, fetchUsers } = useUsers();
+     const { roles } = useRoles();
      const [currentAction, setCurrentAction] = useState(action);
      const [component, setComponent] = useState(null);
 
@@ -31,7 +33,9 @@ const Users = ({ tab, action, roles }) => {
                     setComponent(<UserTable users={users} />);
                     break;
                case Actions.create:
-                    setComponent(<UserForm roles={roles} />);
+                    setComponent(
+                         <UserForm roles={roles} fetchUsers={fetchUsers} />
+                    );
 
                     break;
                default:
