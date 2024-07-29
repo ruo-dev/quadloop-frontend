@@ -76,50 +76,54 @@ const Footer = () => {
                               </li>
                          </ul>
                     </div>
-
-                    <div className="flex space-x-4 justify-center items-center lg:self-start lg:basis-2/12">
-                         <a
-                              href="https://www.facebook.com/quadloopcreations/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                         >
-                              <img
-                                   src={fb}
-                                   alt="Facebook"
-                                   className="w-6"
-                                   loading="lazy"
-                                   width="24"
-                                   height="auto"
-                              />
-                         </a>
-                         <a
-                              href="https://www.instagram.com/quadloopcreate/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                         >
-                              <img
-                                   src={insta}
-                                   alt="Instagram"
-                                   className="w-6"
-                                   loading="lazy"
-                                   width="24"
-                                   height="auto"
-                              />
-                         </a>
-                         <a
-                              href="https://www.linkedin.com/company/quadloop-creations/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                         >
-                              <img
-                                   src={linkedin}
-                                   alt="LinkedIn"
-                                   className="w-6"
-                                   loading="lazy"
-                                   width="24"
-                                   height="auto"
-                              />
-                         </a>
+                    <div className="flex flex-col items-center justify-center lg:self-start lg:basis-3/12">
+                         <h1 className="text-2xl mb-4 text-center">
+                              Social Media
+                         </h1>
+                         <div className="flex space-x-4 justify-center items-center  lg:basis-2/12 text-center">
+                              <a
+                                   href="https://www.facebook.com/quadloopcreations/"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                              >
+                                   <img
+                                        src={fb}
+                                        alt="Facebook"
+                                        className="w-6"
+                                        loading="lazy"
+                                        width="24"
+                                        height="auto"
+                                   />
+                              </a>
+                              <a
+                                   href="https://www.instagram.com/quadloopcreate/"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                              >
+                                   <img
+                                        src={insta}
+                                        alt="Instagram"
+                                        className="w-6"
+                                        loading="lazy"
+                                        width="24"
+                                        height="auto"
+                                   />
+                              </a>
+                              <a
+                                   href="https://www.linkedin.com/company/quadloop-creations/"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                              >
+                                   <img
+                                        src={linkedin}
+                                        alt="LinkedIn"
+                                        className="w-6"
+                                        loading="lazy"
+                                        width="24"
+                                        height="auto"
+                                   />
+                              </a>
+                         </div>
                     </div>
                </footer>
           </div>

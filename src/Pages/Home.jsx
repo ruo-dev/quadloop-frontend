@@ -101,7 +101,7 @@ const Home = ({ products }) => {
 
                {/*Hero*/}
                <section
-                    className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
+                    className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60"
                     style={{
                          backgroundImage: `url(${hero})`,
                     }}
