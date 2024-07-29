@@ -14,6 +14,13 @@ const Cart = ({ cartItems, getCartItems }) => {
      const { handlePaystackPayment } = useCheckoutPayment();
      const auth = useAuthContext();
      const navigate = useNavigate();
+     const user = JSON.parse(localStorage.getItem("user"));
+     const last_referrer = localStorage.getItem("last_referrer");
+     const referrer = localStorage.getItem("referrer");
+     const referred_product = localStorage.getItem("referred_product");
+     const last_referred_product = localStorage.getItem(
+          "last_referred_product"
+     );
 
      const [itemIds, setItemIds] = useState([]);
 
@@ -63,17 +70,28 @@ const Cart = ({ cartItems, getCartItems }) => {
      useEffect(() => {
           const ids = cartItems.map((item) => item.id);
           setItemIds(ids);
-     }, []);
+     }, [cartItems]);
 
      const onCheckout = async () => {
-          const user = JSON.parse(localStorage.getItem("user"));
-          const payload = {
-               email: user?.email,
-               amount: getTotalPrice(),
-               items_id: itemIds,
-          };
-          const result = await handlePaystackPayment(payload);
-          window.location.href = result.authorization_url;
+          try {
+               const payload = {
+                    email: user?.email,
+                    amount: getTotalPrice(),
+                    items_id: itemIds,
+                    referrer: referrer !== last_referrer ? referrer : null,
+                    referred_product:
+                         referred_product !== last_referred_product
+                              ? referred_product
+                              : null,
+               };
+               console.log("payload: ", payload);
+               const result = await handlePaystackPayment(payload);
+               localStorage.setItem("last_referrer", referrer);
+               localStorage.setItem("last_referred_product", referred_product);
+               window.location.href = result.authorization_url;
+          } catch (error) {
+               console.log(error);
+          }
      };
 
      return (

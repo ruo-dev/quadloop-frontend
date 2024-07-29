@@ -9,20 +9,16 @@ export default function useCheckoutPayment() {
      const env = defaultEnvOptions();
 
      const handlePaystackPayment = useCallback(
-          async ({ email, amount, items_id }) => {
+          async (payload) => {
                const toastId = toast.loading("Initializing payment...");
                const url = `${env.PAYMENT_URL}/paystack/pay`;
 
                try {
-                    const response = await axios.post(
-                         url,
-                         { email, amount, items_id },
-                         {
-                              headers: {
-                                   Authorization: `Bearer ${token}`,
-                              },
-                         }
-                    );
+                    const response = await axios.post(url, payload, {
+                         headers: {
+                              Authorization: `Bearer ${token}`,
+                         },
+                    });
 
                     toast.update(toastId, {
                          render: "Redirecting to Paystack...",

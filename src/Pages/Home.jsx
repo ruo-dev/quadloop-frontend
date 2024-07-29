@@ -57,6 +57,7 @@ import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
 import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
+import { NewsSlider } from "../Components/NewsSlider";
 
 const imageSources = [
      hinckley,
@@ -434,7 +435,13 @@ const Home = ({ products }) => {
                               text="View All"
                          />
                     </div>
-
+                    {/* News Blogs */}
+                    <div className="">
+                         <NewsSlider
+                              images={imageSources}
+                              style={{ height: "500px" }}
+                         />
+                    </div>
                     {/*Partners*/}
                     <div className=" " id="partners">
                          <h2 className="text-teal-600 font-bold text-4xl">

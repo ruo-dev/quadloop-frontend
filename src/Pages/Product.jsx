@@ -27,11 +27,23 @@ export const ProductDetails = ({ products, getCartItems }) => {
 
      const queryParam = new URLSearchParams(search);
      const referrer = queryParam.get("referrer");
+     console.log("id :", id);
+
+     if (
+          referrer &&
+          referrer !== user.id &&
+          localStorage.getItem("referrer") !== referrer
+     ) {
+          localStorage.setItem("referrer", referrer);
+     }
+
+     if (id && localStorage.getItem("referred_product") !== id) {
+          localStorage.setItem("referred_product", product?.id);
+     }
 
      const payload = {
-          product_id: product?.id ?? "",
+          product_id: product?.id,
           quantity: 1,
-          referrer: referrer ?? "",
      };
 
      const handleModalChange = () => {

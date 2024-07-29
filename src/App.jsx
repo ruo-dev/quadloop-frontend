@@ -49,24 +49,20 @@ const App = () => {
                          <Route
                               path="/login"
                               element={
-                                   auth.isTokenExpired(token) ? (
+                                   auth.isTokenExpired(token) && (
                                         <Layout cartItems={data}>
                                              <Login />
                                         </Layout>
-                                   ) : (
-                                        <Navigate to={"/"} />
                                    )
                               }
                          />
                          <Route
                               path="/register"
                               element={
-                                   auth.isTokenExpired(token) ? (
+                                   auth.isTokenExpired(token) && (
                                         <Layout cartItems={data}>
                                              <Register />
                                         </Layout>
-                                   ) : (
-                                        <Navigate to={"/"} />
                                    )
                               }
                          />
