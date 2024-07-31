@@ -58,6 +58,7 @@ import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
 import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 import { NewsSlider } from "../Components/NewsSlider";
+import { TestimonialSlider } from "../Components/TestimonialSlider";
 
 const imageSources = [
      hinckley,
@@ -106,7 +107,7 @@ const Home = ({ products }) => {
                          backgroundImage: `url(${hero})`,
                     }}
                >
-                    <div className="flex flex-col lg:flex-row justify-center mx-4 lg:mx-20 xl:mx-48 ">
+                    <div className="flex flex-col gap-4 lg:flex-row justify-center mx-4 lg:mx-20 xl:mx-48 ">
                          <div className="lg:basis-10/12">
                               <h1 className="text-3xl md:text-5xl text-gray-800 ">
                                    Pioneering{" "}
@@ -441,6 +442,13 @@ const Home = ({ products }) => {
                               images={imageSources}
                               style={{ height: "500px" }}
                          />
+                    </div>
+                    {/* Testimonial */}
+                    <div className="">
+                         <h2 className="text-teal-600 font-bold text-4xl">
+                              Testimonials
+                         </h2>
+                         <TestimonialSlider style={{ height: "450px" }} />
                     </div>
                     {/*Partners*/}
                     <div className=" " id="partners">

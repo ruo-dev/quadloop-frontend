@@ -26,14 +26,14 @@ const Distributor = () => {
                {/* Our Flagship Product */}
                <section className="mb-12">
                     <h2 className="text-3xl font-bold text-teal-600 mb-4">
-                         Our Flagship Product: The "Idunnu" Lantern
+                         Our Flagship Product: The "IDunnu" Solar Lantern
                     </h2>
                     <p className="text-gray-700 mb-4">
-                         Introduce your customers to the Idunnu lantern – a
-                         product that truly lives up to its name, meaning "joy"
-                         in Yoruba. This isn't just another solar lantern; it's
-                         a beacon of hope and sustainability that your customers
-                         will love.
+                         Introduce your customers to the IDunnu solar lantern –
+                         a product that truly lives up to its name, meaning
+                         "joy" in Yoruba. This isn't just another solar lantern;
+                         it's a beacon of hope and sustainability that your
+                         customers will love.
                     </p>
                     <ul className="list-disc list-inside text-gray-700">
                          <li>
