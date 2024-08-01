@@ -4,7 +4,7 @@ import useAddCategory from "../../../hooks/Categories/useAddCategory";
 
 const CreateCategoryForm = () => {
      const { addCategory } = useAddCategory();
-     const { getCategories } = useCategories();
+     const { fetchData: getCategories } = useCategories();
      const [name, setName] = useState("");
      const [description, setDescription] = useState("");
 
