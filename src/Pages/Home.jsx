@@ -107,8 +107,8 @@ const Home = ({ products }) => {
                          backgroundImage: `url(${hero})`,
                     }}
                >
-                    <div className="flex flex-col gap-4 lg:flex-row justify-center mx-4 lg:mx-20 xl:mx-48 ">
-                         <div className="lg:basis-10/12">
+                    <div className="flex flex-col gap-4 lg:gap-8 lg:flex-row justify-between px-4 lg:mx-20 xl:mx-48 max-w-screen-xl mx-auto">
+                         <div className="flex-1 md:justify-self-start">
                               <h1 className="text-3xl md:text-5xl text-gray-800 ">
                                    Pioneering{" "}
                                    <span className="text-teal-600 font-bold">
@@ -121,7 +121,7 @@ const Home = ({ products }) => {
                                    stream.
                               </h1>
                          </div>
-                         <div>
+                         <div className="md:justify-self-start flex-1 grid place-items-center px-5">
                               <img
                                    src={bgquadlood03}
                                    alt="Solar Lamp"

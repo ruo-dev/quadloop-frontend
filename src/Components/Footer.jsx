@@ -80,7 +80,7 @@ const Footer = () => {
                          <h1 className="text-2xl mb-4 text-center">
                               Social Media
                          </h1>
-                         <div className="flex space-x-4 justify-center items-center  lg:basis-2/12 text-center">
+                         <div className="flex flex-col space-y-4 justify-center items-center  lg:basis-2/12 text-center">
                               <a
                                    href="https://www.facebook.com/quadloopcreations/"
                                    target="_blank"
