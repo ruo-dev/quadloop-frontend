@@ -1,11 +1,12 @@
 import React from "react";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useDeleteProduct from "../../../hooks/Products/useDeleteProduct";
 import { useProducts } from "../../../context/ProductContext";
 
 const ProductTable = ({ products }) => {
+     const navigate = useNavigate();
      const { deleteProduct } = useDeleteProduct();
      const { fetchData: getProducts } = useProducts();
 
@@ -74,7 +75,14 @@ const ProductTable = ({ products }) => {
                                         {product.rating}
                                    </td>
                                    <td className="py-3 px-6 text-center">
-                                        <button className=" py-1 px-3 rounded text-xs">
+                                        <button
+                                             onClick={() => {
+                                                  navigate(
+                                                       `/admin?tab=products&action=edit&product_id=${product.id}`
+                                                  );
+                                             }}
+                                             className=" py-1 px-3 rounded text-xs"
+                                        >
                                              <MdEdit />
                                         </button>
                                         <button

@@ -54,6 +54,14 @@ const Sidebar = () => {
                                    Categories
                               </Link>
                          </li>
+                         <li className="hover:bg-gray-700">
+                              <Link
+                                   className="w-full h-full block p-4"
+                                   to="/admin?tab=rewards&action=list"
+                              >
+                                   Rewards
+                              </Link>
+                         </li>
                          {/* <li className="hover:bg-gray-700">
                               <Link
                                    className="w-full h-full block p-4"

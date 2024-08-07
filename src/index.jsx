@@ -8,6 +8,7 @@ import { CategoriesProvider } from "./context/CategoryContext";
 import { ProductsProvider } from "./context/ProductContext";
 import { UserProvider } from "./context/UserContext";
 import { RolesProvider } from "./context/RoleContext";
+import { RewardsProvider } from "./context/RewardContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,9 +18,11 @@ root.render(
                     <RolesProvider>
                          <CategoriesProvider>
                               <ProductsProvider>
-                                   <BrowserRouter>
-                                        <App />
-                                   </BrowserRouter>
+                                   <RewardsProvider>
+                                        <BrowserRouter>
+                                             <App />
+                                        </BrowserRouter>
+                                   </RewardsProvider>
                               </ProductsProvider>
                          </CategoriesProvider>
                     </RolesProvider>

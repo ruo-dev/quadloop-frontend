@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ProductForm } from "./components/ProductForm";
+import { EditProductForm } from "./components/EditProductForm";
 import { useLocation } from "react-router-dom";
 import ProductTable from "./components/ProductTable";
 import { useProducts } from "../../context/ProductContext";
@@ -15,6 +16,7 @@ const Products = ({ tab, action }) => {
      const Actions = {
           list: "list",
           create: "create",
+          edit: "edit",
      };
 
      useEffect(() => {
@@ -35,6 +37,14 @@ const Products = ({ tab, action }) => {
                case Actions.create:
                     setComponent(
                          <ProductForm
+                              categories={categories}
+                              getProducts={getProducts}
+                         />
+                    );
+                    break;
+               case Actions.edit:
+                    setComponent(
+                         <EditProductForm
                               categories={categories}
                               getProducts={getProducts}
                          />

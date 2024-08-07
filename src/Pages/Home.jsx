@@ -14,10 +14,7 @@ import {
      EnergyCost,
      Footprint,
      Homes,
-     IdunnuPro,
-     LampSolar,
      Mass,
-     PowerGenerator,
      Recycling,
      Reuse,
      SDGs,
@@ -56,6 +53,8 @@ import quadlood01 from "../Assets/products/quadlood01.jpeg";
 import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
+import allon from "../Assets/allon.svg";
+
 import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 import { NewsSlider } from "../Components/NewsSlider";
 import { TestimonialSlider } from "../Components/TestimonialSlider";
@@ -72,6 +71,7 @@ const imageSources = [
      nextexplo,
      wef,
      cv,
+     allon,
 ];
 
 const Home = ({ products }) => {
@@ -98,8 +98,6 @@ const Home = ({ products }) => {
 
      return (
           <div>
-               <ScrollToHashElement />
-
                {/*Hero*/}
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60"
@@ -260,12 +258,10 @@ const Home = ({ products }) => {
                          <div className="gap-8 flex flex-col lg:flex-row p-4">
                               <div className="lg:w-1/2">
                                    <p>
-                                        Contributing to fight climate change
-                                        while improving energy access across the
-                                        continent, we are a passionate mission –
-                                        driven organization eagerly looking for
-                                        innovative ways to Reduce Recycle and
-                                        Reuse E-waste generated in Africa.
+                                        To be the leading provider of affordable
+                                        and innovative eco-feiendly products
+                                        that support the global transition
+                                        towards clean energy.
                                    </p>
                               </div>
                               <div className="lg:w-1/2 flex flex-wrap lg:flex-nowrap lg:flex-row gap-4 justify-center items-center">
@@ -548,7 +544,10 @@ const Home = ({ products }) => {
                                              className="text-amber-500"
                                              size={24}
                                         />
-                                        <span>hello@quadloop.africa</span>
+                                        <span>
+                                             hello@quadloop.africa <b>&</b>{" "}
+                                             support@quadloop.africa
+                                        </span>
                                    </a>
                               </div>
                          </div>

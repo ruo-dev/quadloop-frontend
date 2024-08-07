@@ -8,6 +8,7 @@ import Orders from "../Orders";
 import Transactions from "../Transactions";
 import Analytics from "../Analytics";
 import Categories from "../Categories";
+import Rewards from "../Rewards";
 
 const Content = ({
      categories,
@@ -30,6 +31,7 @@ const Content = ({
           roles: "roles",
           transactions: "transactions",
           categories: "categories",
+          rewards: "rewards",
      };
 
      useEffect(() => {
@@ -63,6 +65,9 @@ const Content = ({
                               getRoles={getRoles}
                          />
                     );
+                    break;
+               case Tabs.rewards:
+                    setActiveTab(<Rewards />);
                     break;
                case Tabs.categories:
                     setActiveTab(<Categories categories={categories} />);

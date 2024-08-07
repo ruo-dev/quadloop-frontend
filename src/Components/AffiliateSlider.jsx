@@ -32,7 +32,7 @@ const AffiliateSlider = ({ images, style }) => {
                     {images?.concat(images)?.map((image, index) => (
                          <div
                               key={index}
-                              className="flex-shrink-0 px-1 w-25 h-10"
+                              className="flex-shrink-0 px-1 w-25 h-12"
                          >
                               {" "}
                               <img

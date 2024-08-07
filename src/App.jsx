@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { BackTop } from "antd";
 import { Cart, Home, NoPage, Products } from "./Pages";
 import Login from "./Pages/Login";
@@ -15,12 +15,23 @@ import { useProducts } from "./context/ProductContext";
 import { Layout } from "./Components/Layout";
 import Distributor from "./Pages/Distributor";
 import { ToastContainer } from "react-toastify";
+import ResetPassword from "./Pages/ResetPassword";
 
 const App = () => {
      const token = Cookies.get("jwt");
+     const navigate = useNavigate();
      const auth = useAuthContext();
      const { data: products, fetchData: getProducts } = useProducts();
      const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
+
+     useEffect(() => {
+          // Check token on app load
+          const token = localStorage.getItem("jwt");
+          if (token && auth.isTokenExpired(token)) {
+               localStorage.removeItem("jwt"); // Remove expired token
+               navigate("/login"); // Redirect to login
+          }
+     }, [navigate]);
 
      return (
           <>
@@ -71,6 +82,14 @@ const App = () => {
                               element={
                                    <Layout cartItems={data}>
                                         <Recover />
+                                   </Layout>
+                              }
+                         />
+                         <Route
+                              path="/reset-password/:userId"
+                              element={
+                                   <Layout cartItems={data}>
+                                        <ResetPassword />
                                    </Layout>
                               }
                          />

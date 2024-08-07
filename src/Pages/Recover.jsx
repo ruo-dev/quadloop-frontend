@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { hero } from "../Assets";
 import { Link } from "react-router-dom";
+import useForgotPassword from "../hooks/Authentication/useForgotPassword";
+import { ToastContainer } from "react-toastify";
 
 const Recover = () => {
+     const { forgotPassword } = useForgotPassword();
+     const [email, setEmail] = useState("");
+
+     const onSubmit = async (e) => {
+          e.preventDefault();
+          try {
+               const payload = {
+                    email,
+               };
+               const result = await forgotPassword(payload);
+               if (result) {
+                    setEmail("");
+               }
+          } catch (error) {
+               console.error("Failed to recover", error);
+          }
+     };
      return (
           <div>
                {/*Register*/}
+               <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+               />
                <section
                     className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60 "
                     style={{
@@ -17,13 +48,17 @@ const Recover = () => {
                               <div className="text-center">
                                    <div className="mt-5 space-y-2">
                                         <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-                                             Reset your Password
+                                             Forgot Password
                                         </h3>
                                    </div>
                               </div>
-                              <form onSubmit={(e) => e.preventDefault()}>
+                              <form onSubmit={onSubmit}>
                                    <div>
                                         <input
+                                             value={email}
+                                             onChange={(e) =>
+                                                  setEmail(e.target.value)
+                                             }
                                              type="email"
                                              required
                                              placeholder="Your email"

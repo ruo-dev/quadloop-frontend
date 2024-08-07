@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { hero } from "../Assets";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ErrorBoundary from "../Components/ErrorBoundry";
 import { useRegister } from "../hooks/Authentication";
 import { ToastContainer } from "react-toastify";
 
 const Register = () => {
-     // const navigate = useNavigate();
      const { register } = useRegister();
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
@@ -104,14 +103,14 @@ const Register = () => {
                                         Sign Up
                                    </button>
                               </form>
-                              <div className="relative">
+                              {/* <div className="relative">
                                    <span className="block w-full h-px bg-gray-300"></span>
                                    <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
                                         Or continue with
                                    </p>
-                              </div>
-                              <div className="space-y-4 text-sm font-medium">
-                                   <button className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
+                              </div> */}
+                              {/*  <div className="space-y-4 text-sm font-medium">
+                                  <button className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
                                         <svg
                                              className="w-5 h-5"
                                              viewBox="0 0 48 48"
@@ -147,8 +146,8 @@ const Register = () => {
                                              </defs>
                                         </svg>
                                         Continue with Google
-                                   </button>
-                              </div>
+                                   </button> 
+                              </div>*/}
                               <div className="text-center">
                                    <Link
                                         to="../recover"

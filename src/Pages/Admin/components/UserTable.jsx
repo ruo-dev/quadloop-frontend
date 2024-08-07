@@ -9,6 +9,8 @@ const UserTable = () => {
      const { deleteUser } = useDeleteUser();
      const { users, fetchUsers } = useUsers();
 
+     console.log("users: ", users);
+
      useEffect(() => {
           if (users.length === 0) {
                fetchUsers();

@@ -7,5 +7,6 @@ export const defaultEnvOptions = () => {
           PAYMENT_URL: `${import.meta.env?.VITE_API_URL}/api/v1/payments`,
           CATEGORIES_URL: `${import.meta.env?.VITE_API_URL}/api/v1/categories`,
           ROLES_URL: `${import.meta.env?.VITE_API_URL}/api/v1/roles`,
+          REWARDS_URL: `${import.meta.env?.VITE_API_URL}/api/v1/rewards`,
      };
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Logo } from "../Assets";
+import Logo from "../Assets/quadloop.svg";
 import ButtonYellow from "./ButtonYellow";
 import { Cart } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -24,7 +24,6 @@ const Navbar = ({ cartItems }) => {
      ];
 
      useEffect(() => {
-          console.log("Component refreshed!");
           const user = JSON.parse(localStorage.getItem("user"));
           if (user?.userRole?.role?.role_name === "admin") {
                setIsAdmin(true);
