@@ -55,7 +55,6 @@ import quadlood03 from "../Assets/products/quadlood03.jpeg";
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
 import allon from "../Assets/allon.svg";
 
-import ScrollToHashElement from "@cascadia-code/scroll-to-hash-element";
 import { NewsSlider } from "../Components/NewsSlider";
 import { TestimonialSlider } from "../Components/TestimonialSlider";
 

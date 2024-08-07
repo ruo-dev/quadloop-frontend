@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
           Cookies.remove("jwt", { path: "/" });
           localStorage.removeItem("user");
           setToken(null);
-          window.location.reload();
+          window.location.href = "/login";
      };
 
      const isTokenExpired = (token) => {

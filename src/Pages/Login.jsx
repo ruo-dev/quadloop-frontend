@@ -16,9 +16,14 @@ const Login = () => {
           try {
                const result = await login(payload);
                if (result) {
-                    setTimeout(() => {
-                         navigate(-1);
-                    }, 3000);
+                    if (result?.userRole?.role?.role_name === "admin") {
+                         setTimeout(() => {
+                              navigate("/admin?tab=dashboard");
+                         }, 3000);
+                    } else
+                         setTimeout(() => {
+                              navigate(-1);
+                         }, 3000);
                }
           } catch (error) {
                console.log({ error: error });
