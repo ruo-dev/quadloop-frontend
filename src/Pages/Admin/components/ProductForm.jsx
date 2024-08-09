@@ -2,9 +2,11 @@ import React, { useState, useRef } from "react";
 import TagInput from "./TagInput";
 import useAddProduct from "../../../hooks/Products/useAddProduct";
 import { Circles } from "react-loader-spinner";
+import { useAnalytics } from "../../../context/AnalyticsContext";
 
 export const ProductForm = ({ categories, getProducts }) => {
      const { addProduct } = useAddProduct();
+     const { fetchData: getAnalytics } = useAnalytics();
      const [loading, setLoading] = useState(false);
      const [productName, setProductName] = useState("");
      const [description, setDescription] = useState("");
@@ -59,8 +61,9 @@ export const ProductForm = ({ categories, getProducts }) => {
                };
                const result = await addProduct(payload);
                if (result) {
-                    getProducts();
                     clearFormFields();
+                    getAnalytics();
+                    getProducts();
                }
           } catch (error) {
                console.log(error);

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import useCreateUser from "../../../hooks/users/useCreateUser";
 import { useRoles } from "../../../context/RoleContext";
+import { useAnalytics } from "../../../context/AnalyticsContext";
 
 const UserForm = ({ formName, fetchUsers }) => {
      const { roles } = useRoles();
+     const { fetchData: getAnalytics } = useAnalytics();
      const { createUser } = useCreateUser();
      const [form, setForm] = useState({
           firstName: "",
@@ -32,7 +34,6 @@ const UserForm = ({ formName, fetchUsers }) => {
           };
           const result = await createUser(payload);
           if (result) {
-               fetchUsers();
                setForm({
                     firstName: "",
                     lastName: "",
@@ -40,6 +41,8 @@ const UserForm = ({ formName, fetchUsers }) => {
                     phoneNumber: "",
                     role: "",
                });
+               fetchUsers();
+               getAnalytics();
           }
           console.log("Form submitted:", form);
      };

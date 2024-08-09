@@ -5,6 +5,7 @@ import useGetProductById from "../../../hooks/Products/useGetProductById";
 import { Circles } from "react-loader-spinner";
 import useUpdateProduct from "../../../hooks/Products/useUpdateProduct";
 import { useProducts } from "../../../context/ProductContext";
+import { useAnalytics } from "../../../context/AnalyticsContext";
 
 export const EditProductForm = ({ categories }) => {
      const { search } = useLocation();
@@ -26,6 +27,7 @@ export const EditProductForm = ({ categories }) => {
           id: productId,
      });
      const { fetchData: getProducts } = useProducts();
+     const { fetchData: getAnalytics } = useAnalytics();
      const { updateProduct } = useUpdateProduct({ id: productId });
 
      const [images, setImages] = useState([]);
@@ -94,9 +96,10 @@ export const EditProductForm = ({ categories }) => {
                };
                const result = await updateProduct(payload);
                if (result) {
-                    getProducts();
-                    getProduct();
                     clearFormFields();
+                    getProduct();
+                    getAnalytics();
+                    getProducts();
                }
           } catch (error) {
                console.log(error);
