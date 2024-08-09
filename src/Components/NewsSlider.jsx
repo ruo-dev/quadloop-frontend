@@ -38,6 +38,13 @@ const items = [
           title: "Spring Wise",
           link: "https://springwise.com/innovation/computing-tech/turning-e-waste-into-solar-lamps/",
      },
+     {
+          type: "image",
+          imageUrl:
+               "https://i0.wp.com/www.preo.org/wp-content/uploads/2023/08/Fan-Milk-Hinckley-Associates.jpg?resize=768%2C480&ssl=1",
+          title: "P R E O",
+          link: "https://www.preo.org/projects/hinckley/",
+     },
 ];
 
 export const NewsSlider = ({ newsItems = items, style }) => {
@@ -68,7 +75,10 @@ export const NewsSlider = ({ newsItems = items, style }) => {
      };
 
      return (
-          <div className="relative overflow-x-hidden" style={{ ...style }}>
+          <div
+               className="relative max-w-screen-xl w-full overflow-x-hidden"
+               style={{ ...style }}
+          >
                <Slider {...settings}>
                     {newsItems.map((item, index) => (
                          <div key={index} className="p-4">

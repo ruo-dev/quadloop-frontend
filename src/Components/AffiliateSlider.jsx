@@ -17,7 +17,7 @@ const AffiliateSlider = ({ images, style }) => {
                     slider.scrollLeft = 0;
                     scrollAmount = 0;
                }
-          }, 20);
+          }, 30);
 
           return () => clearInterval(scrollInterval);
      }, []);
