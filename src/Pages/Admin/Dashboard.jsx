@@ -9,7 +9,7 @@ const Dashboard = () => {
      const { data: orders } = useOrders();
      const { data: analytics } = useAnalytics();
      console.log("orders: ", orders);
-     console.log("analytics: ", analytics);
+     console.log("analytics: ", analytics.totalOrderAmountPerMonth);
 
      return (
           <main className="">
@@ -20,7 +20,7 @@ const Dashboard = () => {
                                    Total Revenue
                               </h2>
                               <p className="text-gray-600">
-                                   N {analytics?.totalRevenue ?? 10000}
+                                   N {analytics?.totalRevenue}
                               </p>
                          </div>
                          <div className="bg-white flex-1 p-4 rounded-lg shadow">
