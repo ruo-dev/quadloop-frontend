@@ -61,7 +61,7 @@ const Dashboard = () => {
                          </div>
                     </section>
                </section>
-               <Table orders={analytics?.totalOrderAmountPerMonth} />
+               <Table orders={orders} />
           </main>
      );
 };
