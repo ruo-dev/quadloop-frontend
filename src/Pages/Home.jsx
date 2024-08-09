@@ -64,13 +64,13 @@ const imageSources = [
      qualcomm,
      Footprint,
      Mass,
+     allon,
      nci,
      ifair,
      Startup,
      nextexplo,
      wef,
      cv,
-     allon,
 ];
 
 const Home = ({ products }) => {
