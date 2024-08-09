@@ -20,7 +20,7 @@ const Dashboard = () => {
                                    Total Revenue
                               </h2>
                               <p className="text-gray-600">
-                                   N {analytics.totalRevenue ?? 10000}
+                                   N {analytics?.totalRevenue ?? 10000}
                               </p>
                          </div>
                          <div className="bg-white flex-1 p-4 rounded-lg shadow">
@@ -28,7 +28,7 @@ const Dashboard = () => {
                                    Total products
                               </h2>
                               <p className="text-gray-600">
-                                   {analytics.productCount ?? 5}
+                                   {analytics?.productCount ?? 5}
                               </p>
                          </div>
                          <div className="bg-white flex-1 p-4 rounded-lg shadow">
@@ -36,13 +36,13 @@ const Dashboard = () => {
                                    Total Orders
                               </h2>
                               <p className="text-gray-600">
-                                   {analytics.orderCount ?? 30}
+                                   {analytics?.orderCount ?? 30}
                               </p>
                          </div>
                          <div className="bg-white flex-1 p-4 rounded-lg shadow">
                               <h2 className="text-xl font-bold">Total Users</h2>
                               <p className="text-gray-600">
-                                   {analytics.userCount ?? 10}
+                                   {analytics?.userCount ?? 10}
                               </p>
                          </div>
                     </header>
@@ -61,7 +61,7 @@ const Dashboard = () => {
                          </div>
                     </section>
                </section>
-               <Table orders={analytics.totalOrderAmountPerMonth} />
+               <Table orders={analytics?.totalOrderAmountPerMonth} />
           </main>
      );
 };

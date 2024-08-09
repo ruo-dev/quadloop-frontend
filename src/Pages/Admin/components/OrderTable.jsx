@@ -1,15 +1,16 @@
 import React from "react";
 
-function Table({ orders = [] }) {
+function Table({ orders }) {
      const data = orders.map((order) => {
           return {
-               id: order.id ?? 1,
-               date: order.order_date ?? "2023-01-01",
+               id: order?.id ?? 1,
+               date: order?.order_date ?? "2023-01-01",
                status: order.status ?? "Pending",
                price: order.total_amount ?? "$10",
                customer:
-                    `${order.user.first_name + " " + order.user.last_name}` ??
-                    "Customer A",
+                    `${
+                         order?.user?.first_name + " " + order?.user?.last_name
+                    }` ?? "Customer A",
           };
      });
      return (
