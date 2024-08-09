@@ -4,6 +4,7 @@ import TagInput from "./TagInput";
 import useGetProductById from "../../../hooks/Products/useGetProductById";
 import { Circles } from "react-loader-spinner";
 import useUpdateProduct from "../../../hooks/Products/useUpdateProduct";
+import { useProducts } from "../../../context/ProductContext";
 
 export const EditProductForm = ({ categories }) => {
      const { search } = useLocation();
@@ -24,6 +25,7 @@ export const EditProductForm = ({ categories }) => {
      const { product, fetchData: getProduct } = useGetProductById({
           id: productId,
      });
+     const { fetchData: getProducts } = useProducts();
      const { updateProduct } = useUpdateProduct({ id: productId });
 
      const [images, setImages] = useState([]);
@@ -93,6 +95,7 @@ export const EditProductForm = ({ categories }) => {
                const result = await updateProduct(payload);
                if (result) {
                     getProduct();
+                    getProducts();
                     clearFormFields();
                }
           } catch (error) {
