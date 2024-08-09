@@ -29,10 +29,6 @@ export default function useUpdateProduct({ id }) {
 
                     // Append images
                     payload.product_images.forEach((image, index) => {
-                         if (image.url.startsWith("https://"))
-                              throw new Error(
-                                   "Clear recent to update with new images"
-                              );
                          formData.append(`product_image`, image.file);
                     });
 

@@ -140,10 +140,10 @@ export const ProductDetails = ({ products, getCartItems }) => {
                               />
                          </div>
                     ) : (
-                         <section className="mt-[120px] flex flex-col lg:flex-row items-center justify-between max-w-screen-xl mx-auto py-6">
+                         <section className="mt-[120px] flex flex-col lg:flex-row items-center justify-between max-w-screen-xl mx-auto py-3">
                               <div className="p-4 lg:flex-1 w-full">
                                    <img
-                                        className="h-[30rem] md:h-[40rem] aspect-square rounded-3xl m-auto"
+                                        className="h-[25rem] md:h-[30rem] aspect-square rounded-3xl m-auto"
                                         src={
                                              product?.product_image_url ??
                                              quadloop03

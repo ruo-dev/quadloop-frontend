@@ -1,7 +1,5 @@
 import React, { useMemo } from "react";
 import quadloop01 from "../Assets/products/quadlood01.jpeg";
-// import quadloop02 from "../Assets/products/quadlood02.jpeg";
-// import quadloop03 from "../Assets/products/quadlood03.jpeg";
 import { ProductCard } from "../Components/ProductCard";
 
 const Products = ({ products, getCartItems }) => {
@@ -31,7 +29,7 @@ const Products = ({ products, getCartItems }) => {
 
      return (
           <main className="min-h-screen">
-               <section className="mt-[120px] h-[250px] bg-teal-600 flex items-center justify-center">
+               <section className="mt-[120px] h-[150px] bg-teal-600 flex items-center justify-center">
                     <h1 className="text-5xl flex-1 text-center font-extrabold text-white">
                          Quadloop Product Listings
                     </h1>

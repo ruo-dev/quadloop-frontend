@@ -45,6 +45,7 @@ export const EditProductForm = ({ categories }) => {
                          url: image,
                     }))
                     .filter((image) => image.url !== null);
+               console.log({ images: product.product_images });
                setImages(productImages);
           }
      }, [product]);
@@ -104,12 +105,14 @@ export const EditProductForm = ({ categories }) => {
      return (
           <div className="relative">
                {loading && (
-                    <main className="absolute top-0 left-0 right-0 bottom-0 bg-gray-200 flex justify-center items-center">
+                    <main className="absolute top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 bg-gray-200 max-w-[550px] w-full max-h-[550px] h-full m-auto grid place-items-center">
                          <Circles
                               height="80"
                               width="80"
                               color="#0d9488"
                               ariaLabel="circles-loading"
+                              wrapperStyle={{}}
+                              wrapperClass=""
                               visible={true}
                          />
                     </main>
@@ -165,31 +168,39 @@ export const EditProductForm = ({ categories }) => {
                               <h2 className="text-xl font-semibold text-gray-700">
                                    Product Media
                               </h2>
-                              <div className="flex justify-between flex-wrap gap-4">
-                                   <div className="flex gap-4">
-                                        {images.map((image, index) => (
-                                             <div
-                                                  key={index}
-                                                  className="relative w-20 h-20"
-                                             >
-                                                  <img
-                                                       src={image.url}
-                                                       alt={`Upload ${index}`}
-                                                       className="w-full h-full object-cover rounded-md"
-                                                  />
-                                                  <button
-                                                       type="button"
-                                                       onClick={() =>
-                                                            handleRemoveImage(
-                                                                 index
-                                                            )
-                                                       }
-                                                       className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                              <div className="flex flex-col justify-between flex-wrap gap-4">
+                                   <div className="flex flex-col">
+                                        <div className="flex gap-4 h-25">
+                                             {images.map((image, index) => (
+                                                  <div
+                                                       key={index}
+                                                       className="relative w-20 h-20"
                                                   >
-                                                       &times;
-                                                  </button>
-                                             </div>
-                                        ))}
+                                                       <img
+                                                            src={image.url}
+                                                            alt={`Upload ${index}`}
+                                                            className="w-full h-full object-cover rounded-md"
+                                                       />
+                                                       <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                 handleRemoveImage(
+                                                                      index
+                                                                 )
+                                                            }
+                                                            className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
+                                                       >
+                                                            &times;
+                                                       </button>
+                                                  </div>
+                                             ))}
+                                        </div>
+                                        {images.length > 0 && (
+                                             <small className="my-3 text-gray-600">
+                                                  Remove all images to upload
+                                                  new images
+                                             </small>
+                                        )}
                                         <input
                                              type="file"
                                              multiple
@@ -198,13 +209,17 @@ export const EditProductForm = ({ categories }) => {
                                              ref={imageRef}
                                         />
                                    </div>
-                                   <button
-                                        type="button"
-                                        onClick={() => imageRef.current.click()}
-                                        className="self-end py-2 px-4 border border-gray-500 text-gray-500 rounded-md"
-                                   >
-                                        Add Images
-                                   </button>
+                                   <div className="self-end flex gap-2">
+                                        <button
+                                             type="button"
+                                             onClick={() =>
+                                                  imageRef.current.click()
+                                             }
+                                             className=" py-2 px-4 border border-gray-500 text-gray-500 rounded-md"
+                                        >
+                                             Add Images
+                                        </button>
+                                   </div>
                               </div>
                          </div>
                     </div>

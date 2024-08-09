@@ -25,11 +25,10 @@ const App = () => {
      const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
 
      useEffect(() => {
-          // Check token on app load
           const token = localStorage.getItem("jwt");
           if (token && auth.isTokenExpired(token)) {
-               localStorage.removeItem("jwt"); // Remove expired token
-               navigate("/login"); // Redirect to login
+               localStorage.removeItem("jwt");
+               navigate("/login");
           }
      }, [navigate]);
 
