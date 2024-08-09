@@ -13,7 +13,7 @@ const Products = ({ products, getCartItems }) => {
                     getCartItems={getCartItems}
                />
           ));
-     }, [products]);
+     }, [products, getCartItems]);
 
      const renderList = () => {
           return (
