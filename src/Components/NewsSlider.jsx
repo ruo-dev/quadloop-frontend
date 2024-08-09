@@ -41,7 +41,7 @@ const items = [
      {
           type: "image",
           imageUrl:
-               "https://i0.wp.com/www.preo.org/wp-content/uploads/2023/08/Fan-Milk-Hinckley-Associates.jpg?resize=768%2C480&ssl=1",
+               "https://www.preo.org/wp-content/uploads/2020/06/PREO-logo-6.svg",
           title: "P R E O",
           link: "https://www.preo.org/projects/hinckley/",
      },
