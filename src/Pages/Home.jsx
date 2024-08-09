@@ -544,7 +544,7 @@ const Home = ({ products }) => {
                                              size={24}
                                         />
                                         <span>
-                                             hello@quadloop.africa <b>&</b>{" "}
+                                             hello@quadloop.africa <br />{" "}
                                              support@quadloop.africa
                                         </span>
                                    </a>
