@@ -7,10 +7,7 @@ function Table({ orders }) {
                date: order?.order_date ?? "2023-01-01",
                status: order.status ?? "Pending",
                price: order.total_amount ?? "$10",
-               customer:
-                    `${
-                         order?.user?.first_name + " " + order?.user?.last_name
-                    }` ?? "Customer A",
+               customer: `${order?.user?.email}` ?? "Customer A",
           };
      });
      return (
