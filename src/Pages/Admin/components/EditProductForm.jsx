@@ -94,8 +94,8 @@ export const EditProductForm = ({ categories }) => {
                };
                const result = await updateProduct(payload);
                if (result) {
-                    getProduct();
                     getProducts();
+                    getProduct();
                     clearFormFields();
                }
           } catch (error) {
