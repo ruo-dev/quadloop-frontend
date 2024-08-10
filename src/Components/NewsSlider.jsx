@@ -45,6 +45,12 @@ const items = [
           title: "P R E O",
           link: "https://www.preo.org/projects/hinckley/",
      },
+     {
+          type: "image",
+          imageUrl: "https://cdn.jwplayer.com/thumbs/sXR93rUP-1920.jpg",
+          title: "World Economic Forum",
+          link: "https://www.weforum.org/videos/this-nigerian-company-turns-electronic-waste-into-solar-powered-lamps/",
+     },
 ];
 
 export const NewsSlider = ({ newsItems = items, style }) => {

@@ -1,5 +1,6 @@
 import React from "react";
-import { Logo, fb, insta, linkedin } from "../Assets/";
+import { fb, insta, linkedin } from "../Assets/";
+import Logo from "../Assets/quadloop.svg";
 import { Link } from "react-router-dom";
 
 const current = new Date();
@@ -72,7 +73,12 @@ const Footer = () => {
                                    <Link to={"/"}>Terms and Condition</Link>
                               </li>
                               <li>
-                                   <Link to={"/"}>User Manual</Link>
+                                   <a
+                                        href="/IDUNNU PORTABLE SOLAR WALL LANTERN (USER MANUAL) FFF.pdf"
+                                        download="IDUNNU PORTABLE SOLAR WALL LANTERN (USER MANUAL) FFF.pdf"
+                                   >
+                                        User Manual
+                                   </a>
                               </li>
                          </ul>
                     </div>
