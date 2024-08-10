@@ -57,7 +57,9 @@ const Dashboard = () => {
                          </div>
                          <div className="flex-[2] bg-white p-4 rounded-lg shadow">
                               {/* Pie chart */}
-                              <PieChart />
+                              <PieChart
+                                   data={analytics?.totalOrderPerDay ?? []}
+                              />
                          </div>
                     </section>
                </section>

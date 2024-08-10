@@ -209,9 +209,7 @@ const Cart = ({ cartItems, getCartItems }) => {
                          </div>
                          <button
                               onClick={() => {
-                                   auth.isTokenExpired(Cookies.get("jwt"))
-                                        ? navigate("/login")
-                                        : cartItems?.length === 0
+                                   cartItems?.length === 0
                                         ? navigate("/products")
                                         : onCheckout();
                               }}

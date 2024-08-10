@@ -39,7 +39,7 @@ export const RolesProvider = ({ children }) => {
           } finally {
                setIsLoading(false);
           }
-     }, [token, url]);
+     }, []);
 
      useEffect(() => {
           fetchData();

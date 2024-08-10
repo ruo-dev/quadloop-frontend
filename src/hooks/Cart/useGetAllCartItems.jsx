@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import Cookies from "js-cookie";
 
 export default function useGetAllCartItems({
      category = "",
@@ -9,7 +8,6 @@ export default function useGetAllCartItems({
      limit = 10,
 } = {}) {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
      const url = `${env.CART_URL}`;
 
      const [data, setData] = useState([]);
@@ -19,11 +17,7 @@ export default function useGetAllCartItems({
      const fetchData = useCallback(async () => {
           setIsLoading(true);
           try {
-               const response = await api().get(url, {
-                    headers: {
-                         Authorization: `Bearer ${token}`,
-                    },
-               });
+               const response = await api().get(url);
                console.log({ response });
                if (response.status === 200) {
                     setData(response.data.data);
@@ -35,7 +29,7 @@ export default function useGetAllCartItems({
           } finally {
                setIsLoading(false);
           }
-     }, [url, token]);
+     }, [url]);
 
      useEffect(() => {
           fetchData();

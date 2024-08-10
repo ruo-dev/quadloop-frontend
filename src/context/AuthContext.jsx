@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useLogin } from "../hooks/Authentication";
+import useLogout from "../hooks/Authentication/useLogout";
 
 const AuthContext = createContext(null);
 
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
      const [token, setToken] = useState(null);
      const [isLoading, setIsLoading] = useState(true);
      const { login: loginApi } = useLogin();
+     const { logout: logoutApi } = useLogout();
 
      useEffect(() => {
           const token = Cookies.get("jwt");
@@ -28,11 +30,9 @@ export const AuthProvider = ({ children }) => {
           try {
                const data = await loginApi({ email, password });
                if (data) {
-                    Cookies.set("jwt", data.token, {
-                         expires: 1 / 24,
-                         path: "/",
-                    });
-                    setToken(data.token);
+                    Cookies.set("jwt", data.accessToken);
+                    Cookies.set("refreshToken", data.refreshToken);
+                    setToken(data.accessToken);
                     localStorage.setItem("user", JSON.stringify(data));
                }
                return data;
@@ -42,11 +42,15 @@ export const AuthProvider = ({ children }) => {
           }
      };
 
-     const logout = () => {
-          Cookies.remove("jwt", { path: "/" });
-          localStorage.removeItem("user");
-          setToken(null);
-          window.location.href = "/login";
+     const logout = async () => {
+          try {
+               await logoutApi();
+               Cookies.remove("jwt");
+               localStorage.removeItem("user");
+               setToken(null);
+          } catch (error) {
+               console.error("Logout failed:", error);
+          }
      };
 
      const isTokenExpired = (token) => {

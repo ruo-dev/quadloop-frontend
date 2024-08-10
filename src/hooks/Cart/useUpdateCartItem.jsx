@@ -2,11 +2,9 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import Cookies from "js-cookie";
 
 export default function useUpdateCartItem() {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
 
      const updateCartItem = useCallback(
           async (itemId, payload) => {
@@ -16,11 +14,7 @@ export default function useUpdateCartItem() {
                     const {
                          data: { data },
                          status,
-                    } = await api().put(url, payload, {
-                         headers: {
-                              Authorization: `Bearer ${token}`,
-                         },
-                    });
+                    } = await api().put(url, payload);
 
                     if (status !== 200)
                          throw new Error("Failed to update cart item");
@@ -44,7 +38,7 @@ export default function useUpdateCartItem() {
                     return false;
                }
           },
-          [env.CART_URL, token]
+          [env.CART_URL]
      );
 
      return {

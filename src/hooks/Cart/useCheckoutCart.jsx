@@ -1,11 +1,9 @@
 import { useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
 export default function useCheckoutPayment() {
-     const token = Cookies.get("jwt");
      const env = defaultEnvOptions();
 
      const handlePaystackPayment = useCallback(
@@ -14,11 +12,7 @@ export default function useCheckoutPayment() {
                const url = `${env.PAYMENT_URL}/paystack/pay`;
 
                try {
-                    const response = await axios.post(url, payload, {
-                         headers: {
-                              Authorization: `Bearer ${token}`,
-                         },
-                    });
+                    const response = await axios.post(url, payload);
 
                     toast.update(toastId, {
                          render: "Redirecting to Paystack...",
@@ -40,7 +34,7 @@ export default function useCheckoutPayment() {
                     return null;
                }
           },
-          [token, env.PAYMENT_URL]
+          [env.PAYMENT_URL]
      );
 
      return {

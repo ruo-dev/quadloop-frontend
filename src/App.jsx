@@ -19,18 +19,9 @@ import ResetPassword from "./Pages/ResetPassword";
 
 const App = () => {
      const token = Cookies.get("jwt");
-     const navigate = useNavigate();
      const auth = useAuthContext();
      const { data: products, fetchData: getProducts } = useProducts();
      const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
-
-     useEffect(() => {
-          const token = localStorage.getItem("jwt");
-          if (token && auth.isTokenExpired(token)) {
-               localStorage.removeItem("jwt");
-               navigate("/login");
-          }
-     }, [navigate]);
 
      return (
           <>

@@ -2,11 +2,9 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import Cookies from "js-cookie";
 
 export default function useAddToCart() {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
      const addToCart = useCallback(
           async (payload) => {
                const toastId = toast.loading("Setting site data...");
@@ -18,11 +16,7 @@ export default function useAddToCart() {
                     const {
                          data: { data },
                          status,
-                    } = await api().post(url, payload, {
-                         headers: {
-                              Authorization: `Bearer ${token}`,
-                         },
-                    });
+                    } = await api().post(url, payload);
 
                     if (status !== 201)
                          throw new Error("Failed to add to cart");
@@ -46,7 +40,7 @@ export default function useAddToCart() {
                     return false;
                }
           },
-          [env.CART_URL, token]
+          [env.CART_URL]
      );
 
      return {

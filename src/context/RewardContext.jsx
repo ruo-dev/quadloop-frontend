@@ -40,7 +40,7 @@ export const RewardsProvider = ({ children }) => {
           } finally {
                setIsLoading(false);
           }
-     }, [url]);
+     }, []);
 
      useEffect(() => {
           fetchData();

@@ -2,11 +2,9 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import Cookies from "js-cookie";
 
 export default function useUpdateProduct({ id }) {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
 
      const updateProduct = useCallback(
           async (payload) => {
@@ -37,7 +35,6 @@ export default function useUpdateProduct({ id }) {
                          status,
                     } = await api().put(url, formData, {
                          headers: {
-                              Authorization: `Bearer ${token}`,
                               "Content-Type": "multipart/form-data",
                          },
                     });
@@ -67,7 +64,7 @@ export default function useUpdateProduct({ id }) {
                     return false;
                }
           },
-          [env.PRODUCTS_URL, token]
+          [env.PRODUCTS_URL]
      );
 
      return {

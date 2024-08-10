@@ -38,7 +38,7 @@ export const CategoriesProvider = ({ children }) => {
           } finally {
                setIsLoading(false);
           }
-     }, [token]);
+     }, []);
 
      useEffect(() => {
           fetchData();

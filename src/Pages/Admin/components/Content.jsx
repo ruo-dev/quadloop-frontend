@@ -9,6 +9,8 @@ import Transactions from "../Transactions";
 import Analytics from "../Analytics";
 import Categories from "../Categories";
 import Rewards from "../Rewards";
+import { useAnalytics } from "../../../context/AnalyticsContext";
+import { useOrders } from "../../../context/OrderContext";
 
 const Content = ({
      categories,
@@ -21,7 +23,8 @@ const Content = ({
      const [tab, setTab] = useState("");
      const [action, setAction] = useState("");
      const [activeTab, setActiveTab] = useState(null);
-
+     const { fetchData: getAnalytics } = useAnalytics();
+     const { fetchData: getOrders } = useOrders();
      const Tabs = {
           products: "products",
           dashboard: "dashboard",
@@ -33,6 +36,14 @@ const Content = ({
           categories: "categories",
           rewards: "rewards",
      };
+
+     useEffect(() => {
+          getOrders();
+     }, [getOrders]);
+
+     useEffect(() => {
+          getAnalytics();
+     }, [getAnalytics]);
 
      useEffect(() => {
           const searchParams = new URLSearchParams(search);

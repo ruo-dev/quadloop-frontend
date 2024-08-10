@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
           } finally {
                setIsLoading(false);
           }
-     }, [url, token]);
+     }, []);
 
      useEffect(() => {
           fetchUsers();

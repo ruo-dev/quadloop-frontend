@@ -1,13 +1,10 @@
-// src/hooks/Cart/useDeleteProduct.js
 import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
 export default function useDeleteProduct() {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
 
      const deleteProduct = useCallback(
           async (itemId) => {
@@ -15,11 +12,7 @@ export default function useDeleteProduct() {
                try {
                     const url = `${env.PRODUCTS_URL}/${itemId}`;
 
-                    const { status } = await api().delete(url, {
-                         headers: {
-                              Authorization: `Bearer ${token}`,
-                         },
-                    });
+                    const { status } = await api().delete(url);
 
                     if (status !== 200)
                          throw new Error("Failed to delete product item");
@@ -43,7 +36,7 @@ export default function useDeleteProduct() {
                     return false;
                }
           },
-          [env.PRODUCTS_URL, token]
+          [env.PRODUCTS_URL]
      );
 
      return {

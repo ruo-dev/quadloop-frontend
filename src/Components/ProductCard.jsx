@@ -19,15 +19,12 @@ export const ProductCard = ({ image, style, product, getCartItems }) => {
 
      const addItemToCart = async () => {
           try {
-               if (!auth.isTokenExpired(Cookies.get("jwt"))) {
-                    const success = await addToCart(payload);
-                    if (success) {
-                         getCartItems();
-                         console.log("Added to cart");
-                         return;
-                    }
+               const success = await addToCart(payload);
+               if (success) {
+                    getCartItems();
+                    console.log("Added to cart");
+                    return;
                }
-               return navigate("/login");
           } catch (error) {
                console.log("Error", error);
           }

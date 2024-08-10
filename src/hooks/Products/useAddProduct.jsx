@@ -2,11 +2,9 @@ import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
-import Cookies from "js-cookie";
 
 export default function useAddProduct() {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
 
      const addProduct = useCallback(
           async (payload) => {
@@ -37,7 +35,6 @@ export default function useAddProduct() {
                          status,
                     } = await api().post(url, formData, {
                          headers: {
-                              Authorization: `Bearer ${token}`,
                               "Content-Type": "multipart/form-data",
                          },
                     });

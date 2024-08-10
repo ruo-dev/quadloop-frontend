@@ -42,7 +42,7 @@ export const OrderProvider = ({ children }) => {
           } finally {
                setIsLoading(false);
           }
-     }, [token]);
+     }, []);
 
      useEffect(() => {
           fetchData();

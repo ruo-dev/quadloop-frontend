@@ -2,12 +2,10 @@
 import { useCallback } from "react";
 import api from "../../utils/api";
 import { toast } from "react-toastify";
-import Cookies from "js-cookie";
 import { defaultEnvOptions } from "../../utils/defaultEnvOptions";
 
 export default function useDeleteCartItem() {
      const env = defaultEnvOptions();
-     const token = Cookies.get("jwt");
 
      const deleteCartItem = useCallback(
           async (itemId) => {
@@ -15,11 +13,7 @@ export default function useDeleteCartItem() {
                try {
                     const url = `${env.CART_URL}/${itemId}`;
 
-                    const { status } = await api().delete(url, {
-                         headers: {
-                              Authorization: `Bearer ${token}`,
-                         },
-                    });
+                    const { status } = await api().delete(url);
 
                     console.log({ status });
 
@@ -45,7 +39,7 @@ export default function useDeleteCartItem() {
                     return false;
                }
           },
-          [env.CART_URL, token]
+          [env.CART_URL]
      );
 
      return {
