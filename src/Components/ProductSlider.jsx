@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import quadlood01 from "../Assets/products/quadlood01.jpeg";
 import quadlood02 from "../Assets/products/quadlood02.jpeg";
 import quadlood03 from "../Assets/products/quadlood03.jpeg";
+
 const items = [
      {
           product_name: "Product One",
@@ -47,6 +48,11 @@ const items = [
 
 const ProductSlider = ({ style }) => {
      const { data: products } = useProducts();
+
+     const memoizedProducts = useMemo(() => {
+          return products.length > 0 ? products.slice(0, 4) : items;
+     }, [products]);
+
      const settings = {
           dots: true,
           infinite: true,
@@ -79,35 +85,31 @@ const ProductSlider = ({ style }) => {
                style={{ ...style }}
           >
                <Slider {...settings}>
-                    {(products.length > 0 ? products.slice(0, 4) : items).map(
-                         (product, index) => (
-                              <div key={index} className="p-4">
-                                   <div className="bg-white rounded-lg shadow-md">
-                                        <div className="h-[300px]">
-                                             <img
-                                                  src={
-                                                       product?.product_image_url
-                                                  }
-                                                  alt={product?.product_name}
-                                                  className="w-full h-full object-cover aspect-square rounded-t-lg"
-                                             />
-                                        </div>
+                    {memoizedProducts.map((product, index) => (
+                         <div key={index} className="p-4">
+                              <div className="bg-white rounded-lg shadow-md">
+                                   <div className="h-[300px]">
+                                        <img
+                                             src={product?.product_image_url}
+                                             alt={product?.product_name}
+                                             className="w-full h-full object-cover aspect-square rounded-t-lg"
+                                        />
+                                   </div>
 
-                                        <div className="p-4">
-                                             <h3 className="text-xl font-bold">
-                                                  {product?.product_name}
-                                             </h3>
-                                             <Link
-                                                  to={`/products/${product?.id}`}
-                                                  className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-                                             >
-                                                  View Detail
-                                             </Link>
-                                        </div>
+                                   <div className="p-4">
+                                        <h3 className="text-xl font-bold">
+                                             {product?.product_name}
+                                        </h3>
+                                        <Link
+                                             to={`/products/${product?.id}`}
+                                             className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                                        >
+                                             View Details
+                                        </Link>
                                    </div>
                               </div>
-                         )
-                    )}
+                         </div>
+                    ))}
                </Slider>
           </div>
      );
