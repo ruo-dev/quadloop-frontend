@@ -347,6 +347,7 @@ const Home = ({ products }) => {
                                         ? productImages
                                         : testProducts
                               }
+                              style={{ height: "500px" }}
                          />
                     </div>
 

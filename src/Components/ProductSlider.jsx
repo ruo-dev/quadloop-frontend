@@ -23,6 +23,16 @@ const items = [
           product_image_url: quadlood03,
           id: "3",
      },
+     {
+          product_name: "Product Four",
+          product_image_url: quadlood03,
+          id: "4",
+     },
+     {
+          product_name: "Product Five",
+          product_image_url: quadlood03,
+          id: "5",
+     },
 ];
 
 const ProductSlider = ({ style }) => {
@@ -55,7 +65,7 @@ const ProductSlider = ({ style }) => {
 
      return (
           <div
-               className="relative max-w-screen-xl w-full overflow-y-hidden overflow-x-scroll h-[550px]"
+               className="relative max-w-screen-xl w-full overflow-x-hidden"
                style={{ ...style }}
           >
                <Slider {...settings}>
