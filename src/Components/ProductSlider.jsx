@@ -75,11 +75,11 @@ const ProductSlider = ({ style }) => {
 
      return (
           <div
-               className="relative max-w-screen-xl w-full overflow-x-hidden"
+               className="relative max-w-screen-xl w-full overflow-x-hidden mx-auto"
                style={{ ...style }}
           >
                <Slider {...settings}>
-                    {(products.length > 0 ? products : items).map(
+                    {(products.length > 0 ? products.slice(0, 4) : items).map(
                          (product, index) => (
                               <div key={index} className="p-4">
                                    <div className="bg-white rounded-lg shadow-md">
