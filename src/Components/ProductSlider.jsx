@@ -101,7 +101,7 @@ const ProductSlider = ({ style }) => {
                                                   to={`/products/${product?.id}`}
                                                   className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
                                              >
-                                                  View Details
+                                                  View Detail
                                              </Link>
                                         </div>
                                    </div>
