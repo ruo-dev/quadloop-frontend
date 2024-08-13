@@ -81,9 +81,9 @@ const ProductSlider = ({ style }) => {
                <Slider {...settings}>
                     {(products.length > 0 ? products : items).map(
                          (product, index) => (
-                              <div key={index} className="p-4 my-8">
+                              <div key={index} className="p-4">
                                    <div className="bg-white rounded-lg shadow-md">
-                                        <div className="h-64">
+                                        <div className="h-[300px]">
                                              <img
                                                   src={
                                                        product?.product_image_url
@@ -101,7 +101,7 @@ const ProductSlider = ({ style }) => {
                                                   to={`/products/${product?.id}`}
                                                   className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
                                              >
-                                                  Read More
+                                                  View Details
                                              </Link>
                                         </div>
                                    </div>
