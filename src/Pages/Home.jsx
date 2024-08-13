@@ -57,6 +57,7 @@ import allon from "../Assets/allon.svg";
 
 import { NewsSlider } from "../Components/NewsSlider";
 import { TestimonialSlider } from "../Components/TestimonialSlider";
+import { useProducts } from "../context/ProductContext";
 
 const imageSources = [
      hinckley,
@@ -73,7 +74,9 @@ const imageSources = [
      cv,
 ];
 
-const Home = ({ products }) => {
+const Home = () => {
+     const { data: products, fetchData: getProducts } = useProducts();
+
      const settings = {
           dots: true,
           infinite: true,
@@ -82,29 +85,19 @@ const Home = ({ products }) => {
           slidesToScroll: 1,
      };
 
-     const testProducts = [
-          { id: 1, image: quadlood01 },
-          { id: 2, image: quadlood02 },
-          { id: 3, image: quadlood03 },
-     ];
-
-     const productImages = (products ?? testProducts).map((product) => ({
-          id: product?.id,
-          image: !products
-               ? product.image
-               : product?.product_image_url ?? quadlood01,
-     }));
+  
+   
 
      return (
           <div>
                {/*Hero*/}
                <section
-                    className=" bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60"
+                    className="bg-no-repeat bg-cover bg-top space-y-40 pt-60 pb-10 lg:py-60"
                     style={{
                          backgroundImage: `url(${hero})`,
                     }}
                >
-                    <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row  justify-center mx-4 lg:mx-20 xl:mx-48">
+                    <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row max-w-screen-xl justify-center mx-4 lg:mx-20 xl:mx-auto">
                          <div className="lg:basis-10/12">
                               <h1 className="text-3xl md:text-5xl text-gray-800 ">
                                    Pioneering{" "}
@@ -329,25 +322,25 @@ const Home = ({ products }) => {
                {/*Solutions*/}
                <section
                     id="solutions"
-                    className=" bg-no-repeat bg-cover bg-center space-y-12 py-24 px-4 lg:mx-20 xl:mx-48"
+                    className=" bg-no-repeat bg-cover max-w-screen-xl bg-center space-y-12 py-24 px-4 lg:mx-20 xl:mx-auto"
                     style={{
                          backgroundImage: `url(${solutionsbg})`,
                     }}
                >
-                    <div className=" ">
+                    <div className="">
                          <h2 className="text-teal-600 font-bold text-4xl">
                               Our Solutions
                          </h2>
                     </div>
 
-                    <div >
+                    <div className="">
                          <ProductSlider
-                              images={
-                                   productImages.length > 0
-                                        ? productImages
-                                        : testProducts
+                              products={
+                                   products
+                                   // []
                               }
-                              style={{ height: "500px" }}
+                              getProducts={getProducts}
+                              style={{ height: "650px", border: "2px solid #333" }}
                          />
                     </div>
 

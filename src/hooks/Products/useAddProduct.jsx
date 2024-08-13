@@ -62,7 +62,7 @@ export default function useAddProduct() {
                     return false;
                }
           },
-          [env.PRODUCTS_URL, token]
+          [env.PRODUCTS_URL]
      );
 
      return {
