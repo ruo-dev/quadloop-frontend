@@ -55,7 +55,7 @@ const ProductSlider = ({ style }) => {
 
      return (
           <div
-               className="relative max-w-screen-xl w-full overflow-x-hidden h-[550px]"
+               className="relative max-w-screen-xl w-full overflow-x-scroll h-[550px]"
                style={{ ...style }}
           >
                <Slider {...settings}>
