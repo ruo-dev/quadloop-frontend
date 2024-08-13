@@ -340,7 +340,7 @@ const Home = ({ products }) => {
                          </h2>
                     </div>
 
-                    <div className="py-4">
+                    <div >
                          <ProductSlider
                               images={
                                    productImages.length > 0

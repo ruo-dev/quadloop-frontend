@@ -33,6 +33,16 @@ const items = [
           product_image_url: quadlood03,
           id: "5",
      },
+     {
+          product_name: "Product Six",
+          product_image_url: quadlood03,
+          id: "6",
+     },
+     {
+          product_name: "Product Seven",
+          product_image_url: quadlood03,
+          id: "7",
+     },
 ];
 
 const ProductSlider = ({ style }) => {
