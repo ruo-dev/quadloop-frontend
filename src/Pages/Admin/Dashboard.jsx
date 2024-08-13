@@ -51,7 +51,8 @@ const Dashboard = () => {
                               {/* Line chart */}
                               <LineChart
                                    data={
-                                        analytics.totalOrderAmountPerMonth ?? []
+                                        analytics?.totalOrderAmountPerMonth ??
+                                        []
                                    }
                               />
                          </div>

@@ -70,7 +70,7 @@ const Cart = ({ cartItems, getCartItems }) => {
      useEffect(() => {
           const ids = cartItems.map((item) => item.id);
           setItemIds(ids);
-     }, [cartItems]);
+     }, [cartItems, getCartItems]);
 
      const onCheckout = async () => {
           try {

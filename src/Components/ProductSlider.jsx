@@ -1,67 +1,94 @@
-import React, { useState } from "react";
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useProducts } from "../context/ProductContext";
 import { Link } from "react-router-dom";
+import quadlood01 from "../Assets/products/quadlood01.jpeg";
+import quadlood02 from "../Assets/products/quadlood02.jpeg";
+import quadlood03 from "../Assets/products/quadlood03.jpeg";
+const items = [
+     {
+          product_name: "Product One",
+          product_image_url: quadlood01,
+          id: "1",
+     },
+     {
+          product_name: "Product Two",
+          product_image_url: quadlood02,
+          id: "2",
+     },
+     {
+          product_name: "Product Three",
+          product_image_url: quadlood03,
+          id: "3",
+     },
+];
 
-const ProductSlider = ({ images, style }) => {
-     const [currentIndex, setCurrentIndex] = useState(0);
-
-     const nextSlide = () => {
-          setCurrentIndex((prevIndex) =>
-               prevIndex === images.length - 1 ? 0 : prevIndex + 1
-          );
-     };
-
-     const prevSlide = () => {
-          setCurrentIndex((prevIndex) =>
-               prevIndex === 0 ? images.length - 1 : prevIndex - 1
-          );
+const ProductSlider = ({ style }) => {
+     const { data: products } = useProducts();
+     const settings = {
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          responsive: [
+               {
+                    breakpoint: 1024,
+                    settings: {
+                         slidesToShow: 2,
+                         slidesToScroll: 1,
+                         infinite: true,
+                         dots: true,
+                    },
+               },
+               {
+                    breakpoint: 600,
+                    settings: {
+                         slidesToShow: 1,
+                         slidesToScroll: 1,
+                    },
+               },
+          ],
      };
 
      return (
           <div
-               className="relative w-full max-w-[650px] mx-auto border rounded-md"
+               className="relative max-w-screen-xl w-full overflow-x-hidden h-[550px]"
                style={{ ...style }}
           >
-               <div className="overflow-hidden relative w-full h-[350px]">
-                    {images?.map((item, index) => (
-                         <div
-                              key={item.id}
-                              className={`p-6 absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                                   index === currentIndex
-                                        ? "opacity-100"
-                                        : "opacity-0"
-                              }`}
-                         >
-                              <img
-                                   src={item.image}
-                                   alt={`Product Image ${index + 1}`}
-                                   className="w-full h-full aspect-video rounded-md"
-                                   loading="lazy"
-                              />
-                         </div>
-                    ))}
+               <Slider {...settings}>
+                    {(products.length > 0 ? products : items).map(
+                         (product, index) => (
+                              <div key={index} className="p-4 my-8">
+                                   <div className="bg-white rounded-lg shadow-md">
+                                        <div className="h-64">
+                                             <img
+                                                  src={
+                                                       product?.product_image_url
+                                                  }
+                                                  alt={product?.product_name}
+                                                  className="w-full h-full object-cover aspect-square rounded-t-lg"
+                                             />
+                                        </div>
 
-                    <button
-                         className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
-                         onClick={prevSlide}
-                    >
-                         ‹
-                    </button>
-                    <button
-                         className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2"
-                         onClick={nextSlide}
-                    >
-                         ›
-                    </button>
-
-                    {images[currentIndex] && (
-                         <Link
-                              to={`/products/${images[currentIndex].id}`}
-                              className="absolute left-1/2 bottom-1/2 translate-y-1/2 transform -translate-x-1/2 bg-teal-500 text-white py-2 px-4 rounded"
-                         >
-                              Order Now
-                         </Link>
+                                        <div className="p-4">
+                                             <h3 className="text-xl font-bold">
+                                                  {product?.product_name}
+                                             </h3>
+                                             <Link
+                                                  to={`/products/${product?.id}`}
+                                                  className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                                             >
+                                                  Read More
+                                             </Link>
+                                        </div>
+                                   </div>
+                              </div>
+                         )
                     )}
-               </div>
+               </Slider>
           </div>
      );
 };

@@ -15,7 +15,10 @@ export default function useUpdateProduct({ id }) {
                     // update FormData and append fields
                     const formData = new FormData();
                     formData.append("product_name", payload.product_name);
-                    formData.append("product_description", payload.description);
+                    formData.append(
+                         "product_description",
+                         `${payload.description}`
+                    );
                     formData.append("regular_price", payload.regular_price);
                     formData.append("discount_price", payload.discount_price);
                     formData.append("category_id", payload.category);
