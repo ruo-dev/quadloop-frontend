@@ -49,9 +49,11 @@ import {
 import AffiliateSlider from "../Components/AffiliateSlider";
 import ProductSlider from "../Components/ProductSlider";
 
-import quadlood01 from "../Assets/products/quadlood01.jpeg";
-import quadlood02 from "../Assets/products/quadlood02.jpeg";
-import quadlood03 from "../Assets/products/quadlood03.jpeg";
+import about01 from "../Assets/about01.jpeg";
+import about03 from "../Assets/about03.jpeg";
+import about06 from "../Assets/about06.jpeg";
+import about07 from "../Assets/about07.jpeg";
+
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
 import allon from "../Assets/allon.svg";
 
@@ -184,22 +186,14 @@ const Home = () => {
                                    design and development by applying a 0 –
                                    mining policy by sourcing 70% of our
                                    materials entirely from Electronic waste.
-                                   <br></br>
-                                   <br></br>
-                                   Our entire operation is based around
-                                   principles of circular economy which close
-                                   the loop on battery production. We commit on
-                                   employing all of our technical capabilities
-                                   to innovate on production methods that reduce
-                                   waste production and properly dispose of all
-                                   materials employed.
+                                   
                               </p>
                          </div>
                          <div className="slider-container  lg:w-1/2">
                               <Slider {...settings}>
                                    <img
                                         loading="lazy"
-                                        src={About1}
+                                        src={about01}
                                         alt=""
                                         className="object-cover object-top h-96 rounded-xl w-full"
                                    />
@@ -211,7 +205,7 @@ const Home = () => {
                                    />
                                    <img
                                         loading="lazy"
-                                        src={About3}
+                                        src={about03}
                                         alt=""
                                         className="object-cover object-top h-96 rounded-xl w-full"
                                    />
@@ -229,13 +223,13 @@ const Home = () => {
                                    />
                                    <img
                                         loading="lazy"
-                                        src={About6}
+                                        src={about06}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
                                    />
                                    <img
                                         loading="lazy"
-                                        src={About7}
+                                        src={about07}
                                         alt=""
                                         className="object-cover object-bottom h-96 rounded-xl w-full"
                                    />

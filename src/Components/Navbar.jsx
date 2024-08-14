@@ -170,6 +170,12 @@ const Navbar = ({ cartItems }) => {
                                                             text="Shop"
                                                        />
                                                   </li>
+                                                  <li>
+                                                       <ButtonYellow
+                                                            link="../profile"
+                                                            text="Profile"
+                                                       />
+                                                  </li>
                                              </>
                                         )}
                                    </div>

@@ -16,9 +16,10 @@ import { Layout } from "./Components/Layout";
 import Distributor from "./Pages/Distributor";
 import { ToastContainer } from "react-toastify";
 import ResetPassword from "./Pages/ResetPassword";
+import UserProfile from "./Pages/UserProfile";
 
 const App = () => {
-     const token = Cookies.get("jwt");
+     const token = Cookies.get("accessToken");
      const auth = useAuthContext();
      const { data: products, fetchData: getProducts } = useProducts();
      const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
@@ -115,6 +116,15 @@ const App = () => {
                                              getCartItems={getCartItems}
                                              setICartItems={setData}
                                         />
+                                   </Layout>
+                              }
+                         />
+                          <Route
+                              path="/profile"
+                              element={
+                                   <Layout cartItems={data}>
+                                        <UserProfile
+                                         />
                                    </Layout>
                               }
                          />
