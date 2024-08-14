@@ -411,6 +411,7 @@ const Home = () => {
                               src="https://371881b455594e5f9a575a2a8e27d4b6.elf.site"
                               width="100%"
                               height="460"
+                              loading="lazy"
                          ></iframe>
                     </div>
                     <div className="flex justify-center items-center mx-auto">
