@@ -63,7 +63,7 @@ export const TestimonialSlider = ({ newsItems, style }) => {
      };
 
      return (
-          <div className="relative overflow-x-hidden" style={{ ...style }}>
+          <div className="relative overflow-x-hidden mx-auto" style={{ ...style }}>
                <Slider {...settings}>
                     <TestimonialCard {...testimonialData} />
                     <TestimonialCard {...testimonialData} />

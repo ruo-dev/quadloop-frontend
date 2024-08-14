@@ -13,14 +13,14 @@ const getToken = () => Cookies.get("jwt");
 const getUserId = () => JSON.parse(localStorage.getItem("user")).id;
 
 // Function to set the token in cookies
-const setToken = (token) => Cookies.set("jwt", token);
+const setToken = (token) => Cookies.set("jwt", token, {sameSite: "Lax"});
 
 // Function to get the refresh token from cookies
 const getRefreshToken = () => Cookies.get("refreshToken");
 
 // Function to set the refresh token in cookies
 const setRefreshToken = (refreshToken) =>
-     Cookies.set("refreshToken", refreshToken);
+     Cookies.set("refreshToken", refreshToken, {sameSite: "Lax"});
 
 axiosInstance.interceptors.request.use(
      (config) => {

@@ -19,10 +19,11 @@ import ResetPassword from "./Pages/ResetPassword";
 import UserProfile from "./Pages/UserProfile";
 
 const App = () => {
-     const token = Cookies.get("accessToken");
+     const token = Cookies.get("jwt");
      const auth = useAuthContext();
      const { data: products, fetchData: getProducts } = useProducts();
      const { data, fetchData: getCartItems, setData } = useGetAllCartItems();
+
 
      return (
           <>

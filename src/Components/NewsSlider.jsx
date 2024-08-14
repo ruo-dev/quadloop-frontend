@@ -82,7 +82,7 @@ export const NewsSlider = ({ newsItems = items, style }) => {
 
      return (
           <div
-               className="relative max-w-screen-xl w-full overflow-x-hidden"
+               className="relative max-w-screen-xl w-full overflow-x-hidden mx-auto"
                style={{ ...style }}
           >
                <Slider {...settings}>

@@ -48,6 +48,7 @@ const items = [
 ];
 
 const ProductSlider = ({ products = [] }) => {
+    const length = products.length;
     const displayProducts = products.length > 0 ? products : items;
 
     return (
@@ -55,7 +56,7 @@ const ProductSlider = ({ products = [] }) => {
             <Swiper
                 modules={[FreeMode, Pagination, Autoplay]}
                 spaceBetween={30}
-                slidesPerView={3}
+                slidesPerView={length > 3 ? 3 : length}
                 navigation
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 3000 }}

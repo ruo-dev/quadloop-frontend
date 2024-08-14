@@ -15,6 +15,7 @@ const Login = () => {
           e.preventDefault();
           try {
                const result = await login(payload);
+               console.log({result})
                if (result) {
                     if (result?.userRole?.role?.role_name === "admin") {
                          setTimeout(() => {
