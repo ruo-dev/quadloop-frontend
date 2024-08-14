@@ -48,15 +48,15 @@ const UserProfile = () => {
             {/* Referral Reward Section */}
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
                 <h3 className="text-xl font-bold mb-4">Referral Rewards</h3>
-                <p className="text-gray-600">
+                {/* <p className="text-gray-600">
                     Referral Code: <span className="font-bold">{userData.referralCode}</span>
-                </p>
+                </p> */}
                 <p className="text-gray-600 mt-2">
                     Reward Earned: <span className="font-bold">{userData.referralReward}</span>
                 </p>
-                <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
+                {/* <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
                     Share Referral Code
-                </button>
+                </button> */}
             </div>
 
             {/* Purchase History Section */}
