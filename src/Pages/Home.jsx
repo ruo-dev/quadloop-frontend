@@ -99,8 +99,8 @@ const Home = () => {
                          backgroundImage: `url(${hero})`,
                     }}
                >
-                    <div className="flex flex-col gap-6 lg:gap-8 lg:flex-row max-w-screen-xl justify-center mx-4 lg:mx-20 xl:mx-auto">
-                         <div className="lg:basis-10/12">
+                    <div className="border flex flex-col gap-6 lg:gap-8 lg:flex-row max-w-screen-xl justify-center items-center mx-8 lg:mx-20 xl:mx-auto">
+                         <div className="lg:basis-10/12 md:px-4">
                               <h1 className="text-3xl md:text-5xl text-gray-800 ">
                                    Pioneering{" "}
                                    <span className="text-teal-600 font-bold">
@@ -117,7 +117,7 @@ const Home = () => {
                               <img
                                    src={bgquadlood03}
                                    alt="Solar Lamp"
-                                   className="lg:-ml-24 w-30 justify-self-start"
+                                   className="lg:-ml-8 w-30 justify-self-start"
                                    loading="lazy"
                               />
                          </div>

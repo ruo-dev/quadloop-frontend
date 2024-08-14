@@ -33,7 +33,7 @@ const Navbar = ({ cartItems }) => {
      return (
           <>
                <nav className="bg-opacity-0 -mb-32 w-full md:static md:border-none py-4 bg-white">
-                    <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
+                    <div className="items-center p-4 max-w-screen-xl mx-auto md:flex md:px-4">
                          <div className="flex items-center justify-between py-3 md:py-5 md:block">
                               <Link to={"../"}>
                                    <img
@@ -41,6 +41,7 @@ const Navbar = ({ cartItems }) => {
                                         width={200}
                                         alt="Quadloop"
                                         loading="lazy"
+                                        className=""
                                    />
                               </Link>
                               <div className="md:hidden">
