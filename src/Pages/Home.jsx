@@ -51,7 +51,7 @@ import ProductSlider from "../Components/ProductSlider";
 
 import about01 from "../Assets/about01.jpeg";
 import about03 from "../Assets/about03.jpeg";
-import about06 from "../Assets/about06.jpeg";
+import about6 from "../Assets/about6.jpeg";
 import about07 from "../Assets/about07.jpeg";
 
 import bgquadlood03 from "../Assets/products/quadlood03.jpeg.png";
@@ -203,7 +203,7 @@ const Home = () => {
               />
               <img
                 loading="lazy"
-                src={About7}
+                src={about6}
                 alt=""
                 className="object-cover object-bottom h-72 md:h-96 rounded-xl w-full"
               />
