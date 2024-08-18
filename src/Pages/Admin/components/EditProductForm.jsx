@@ -109,7 +109,7 @@ export const EditProductForm = ({ categories }) => {
 
   return (
     <div className="relative">
-      {!loading && (
+      {loading && (
         <main className="absolute shadow top-[50%] left-[50%] transform -translate-y-1/2 -translate-x-1/2 bg-gray-200 max-w-screen-sm w-full max-h-screen h-full m-auto grid place-items-center">
           <Loader style={{ height: "100%" }} />
         </main>
