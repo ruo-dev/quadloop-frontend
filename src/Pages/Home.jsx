@@ -203,7 +203,7 @@ const Home = () => {
               />
               <img
                 loading="lazy"
-                src={about06}
+                src={About7}
                 alt=""
                 className="object-cover object-bottom h-72 md:h-96 rounded-xl w-full"
               />
@@ -393,7 +393,7 @@ const Home = () => {
           <TestimonialSlider style={{ height: "450px" }} />
         </div>
         {/* Affiliates */}
-        <div className="py-24 px-4 lg:px-20 xl:px-48 bg-gray-100">
+        <div className="py-24 px-4 lg:px-20 xl:px-48">
           <div className="flex flex-col gap-8">
             <h2 className="text-teal-600 font-bold text-4xl text-center">
               Our Affiliates
